@@ -4,7 +4,7 @@ project(ZPG)
 set(CMAKE_CXX_STANDARD 17)
 
 
-link_directories(${CMAKE_BINARY_DIR}/lib)
+#link_directories(${CMAKE_BINARY_DIR}/lib)
 #target_include_directories(ZPG PUBLIC /home/rc_marty/_Škola/5_Semestr/ZPG/lib/)
 
 
@@ -42,11 +42,13 @@ add_executable(ZPG
 find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
+find_package(glm REQUIRED)
 
 
 target_link_libraries(ZPG GLEW::glew)
 target_link_libraries(ZPG glfw)
 target_link_libraries(ZPG OpenGL::GL)
+target_link_libraries(ZPG glm)
 
 
 
