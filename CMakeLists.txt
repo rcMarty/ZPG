@@ -19,7 +19,11 @@ set(OUTPUT_DIR "${CMAKE_BINARY_DIR}")
 
 
 add_executable(ZPG
-        main.cpp)
+        main.cpp
+        engine/engine.cpp
+        shader/shader.cpp
+
+)
 
 
 
