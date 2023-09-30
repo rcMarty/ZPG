@@ -22,6 +22,11 @@ add_executable(ZPG
         main.cpp
         engine/engine.cpp
         shader/shader.cpp
+        render/scene.cpp
+        object/mesh.cpp
+        object/renderable_object.cpp
+        object/renderable_object.h
+
 
 )
 

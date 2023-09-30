@@ -50,49 +50,6 @@ static void button_callback(GLFWwindow* window, int button, int action, int mode
 //glfwSetCursorPosCallback(window, [](GLFWwindow* window, double mouseXPos, double mouseYPos)-> void {Application::getInstance()->cursor_pos_callback(window, mouseXPos, mouseYPos); });
 
 
-float points[] = {
-        0.0f, 0.5f, 0.0f,
-        0.5f, -0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f
-};
-
-//upravte si model na pozici a barvu a zprovozněte prosím (nápovědu vidíte)
-
-struct point
-{
-    float pos[4];
-    float color[4];
-};
-
-const point b[] = {
-        { { -.5f, -.5f, .5f, 1 }, { 1, 0, 0, 1 } },
-        { { -.5f, .5f, .5f, 1 }, { 0, 1, 0, 1 } },
-        { { .5f, .5f, .5f, 1 }, { 0, 0, 1, 1 } },
-        { { .5f, -.5f, .5f, 1 }, { 1, 1, 1, 1 } },
-};
-
-
-char* vertex_shader =
-        "#version 330\n"
-        "layout(location=0) in vec4 position;"
-        "layout(location=1) in vec4 vertex_Color;"
-        "out vec4 colorInput;"
-        "void main () {"
-        "     gl_Position = position;"
-        "     colorInput = vertex_Color;"
-        "}";
-
-
-char* fragment_shader =
-        "#version 330\n"
-        "in vec4 colorInput;"
-        "out vec4 color;"
-        "void main () {"
-        "     color = colorInput;"
-        "}";
-
-
-
 
 int main()
 {
@@ -139,7 +96,7 @@ int main()
 //    glViewport(0, 0, width, height);
 
 
-//    //vertex buffer object (VBO)
+//    //vertex buffer mesh (VBO)
 //    GLuint VBO = 0;
 //    glGenBuffers(1, &VBO); // generate the VBO
 //    glBindBuffer(GL_ARRAY_BUFFER, VBO);

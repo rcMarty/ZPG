@@ -4,6 +4,14 @@
 
 #include "engine.h"
 #include "../shader/shader.h"
+#include "../resources/models/square.h"
+#include "../resources/models/suzi_flat.h"
+#include "../object/mesh.h"
+#include "../object/renderable_object.h"
+#include "stdio.h"
+#include "stdlib.h"
+#include <memory>
+#include <vector>
 
 static void error_callback(int error, const char *description) { fputs(description, stderr); }
 
@@ -18,7 +26,7 @@ void engine::init()
     }
 
     // this->window = std::make_shared<GLFWwindow>(glfwCreateWindow(600, 600, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
-    this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(600, 600, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
+    this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(1000, 1000, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
 
     if (!window)
     {
@@ -32,6 +40,7 @@ void engine::init()
     // start GLEW extension handler
     glewExperimental = GL_TRUE;
     glewInit();
+    glEnable(GL_DEPTH_TEST);
 
     // get version info
     printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
@@ -50,57 +59,24 @@ void engine::init()
 
 void engine::run()
 {
+    //todo scene
 
-    //todo create objects and loading
-    // replace all this with objects
+    //Shader_ID shader = Shader::create_shader("../shader/vertex_shader/flat.vert","../shader/fragment_shader/flat.frag");
+    Shader_ID suzie_shader = Shader::create_shader("../shader/vertex_shader/flat_v3.vert","../shader/fragment_shader/flat_v3.frag");
+    //Renderable_object square = Renderable_object(Mesh(square_vertices), shader);
+    Renderable_object suzie = Renderable_object(Mesh(suziFlat,17424), suzie_shader);
 
-    struct point
-    {
-        float pos[4];
-        float color[4];
-    };
-
-    const point b[] = {
-            { { -.5f, -.5f, .5f, 1 }, { 1, 0, 0, 1 } },
-            { { -.5f, .5f, .5f, 1 }, { 0, 1, 0, 1 } },
-            { { .5f, .5f, .5f, 1 }, { 0, 0, 1, 1 } },
-            { { .5f, -.5f, .5f, 1 }, { 1, 1, 1, 1 } },
-    };
-
-
-
-
-    //vertex buffer object (VBO)
-    GLuint VBO = 0;
-    glGenBuffers(1, &VBO); // generate the VBO
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(b), b, GL_STATIC_DRAW);
-
-
-    //Vertex Array Object (VAO)
-    GLuint VAO = 0;
-    glGenVertexArrays(1, &VAO); //generate the VAO
-    glBindVertexArray(VAO); //bind the VAO
-    glEnableVertexAttribArray(0); //enable vertex attributes
-    glEnableVertexAttribArray(1); //enable vertex attributes
-    glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, sizeof(b[0]), (GLvoid*)0);
-    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(b[0]), (GLvoid*)16);
-
-    auto shader = Shader::create_shader("../shader/vertex_shader/flat.vert","../shader/fragment_shader/flat.frag");
+    //square.init();
+    suzie.init();
 
     while (!glfwWindowShouldClose(window.get()))
     {
-
         //todo scene
 
-        // clear color and depth buffer
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glUseProgram(shader);
-        glBindVertexArray(VAO);
-        // draw triangles
-        glDrawArrays(GL_POLYGON, 0, 4); // mode,first,count
-        // update other events like input handling
+        //square.render();
+        suzie.render();
+
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display
         glfwSwapBuffers(window.get());

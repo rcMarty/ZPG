@@ -10,6 +10,12 @@
 const char *Shader::load_shader(const std::string &vertex_shader_path)
 {
     std::ifstream file(vertex_shader_path);
+    //check if file exists
+    if (!file.is_open())
+    {
+        fprintf(stderr, "Could not open file %s\n", vertex_shader_path.c_str());
+        return nullptr;
+    }
     std::string str;
     std::string file_contents;
     while (std::getline(file, str))
@@ -62,6 +68,10 @@ GLuint Shader::create_shader(const std::string &vertex_shader_path,const std::st
     printf("fragment_shader : %s\n",fragment_shader);
     GLuint vertex = compile_shader(GL_VERTEX_SHADER, vertex_shader);
     GLuint fragment = compile_shader(GL_FRAGMENT_SHADER, fragment_shader);
+
+    delete[] vertex_shader;
+    delete[] fragment_shader;
+
     return link_shader(vertex,fragment);
 }
 
