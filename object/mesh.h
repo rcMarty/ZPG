@@ -25,7 +25,6 @@ private:
     static void claculate_indices(Mesh &mesh);
 
 public:
-    //todo loading objects from .obj files
 
     Mesh(std::vector<GLfloat> vertices,uint vertices_describe_count = 3, uint color_describe_count=3);
     explicit Mesh(std::string path);

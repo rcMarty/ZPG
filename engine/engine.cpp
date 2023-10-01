@@ -25,6 +25,7 @@ void Engine::init()
         fprintf(stderr, "ERROR: could not start GLFW3\n");
         exit(EXIT_FAILURE);
     }
+    //todo refactoring window and use
 
     // this->window = std::make_shared<GLFWwindow>(glfwCreateWindow(600, 600, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
     this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(1000, 1000, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
@@ -60,7 +61,7 @@ void Engine::init()
 
 void Engine::run()
 {
-    //todo scene
+    //todo refactoring shaders one more time
 
 //    Shader_handler shaders;
 //    shaders.add_shader(Shader_wrapper("../shader/vertex_shader/flat.vert","../shader/fragment_shader/flat.frag","flat4x4_point"))
@@ -72,8 +73,6 @@ void Engine::run()
 
     while (!glfwWindowShouldClose(window.get()))
     {
-        //todo scene
-
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         scene.render();
         glfwPollEvents();
