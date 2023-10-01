@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.27)
 project(ZPG)
 
+
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra ")
@@ -25,7 +26,11 @@ add_executable(ZPG
         render/scene.cpp
         object/mesh.cpp
         object/renderable_object.cpp
-        object/renderable_object.h
+        shader/shader_handler.cpp
+        shader/shader_wrapper.cpp
+        render/window.cpp
+
+
 
 
 )
@@ -36,11 +41,16 @@ find_package(glfw3 3.3 REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glm REQUIRED)
+find_package(assimp REQUIRED)
+
+
+
 
 
 target_link_libraries(ZPG GLEW::glew)
 target_link_libraries(ZPG glfw)
 target_link_libraries(ZPG OpenGL::GL)
 target_link_libraries(ZPG glm)
+target_link_libraries(ZPG assimp)
 
 

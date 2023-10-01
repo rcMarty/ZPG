@@ -30,9 +30,12 @@ const char *Shader::load_shader(const std::string &vertex_shader_path)
 
 GLuint Shader::compile_shader( GLenum shaderType, const char *shaderSource)
 {
+    printf("[DEBUG] Compiling shader\n");
+    printf("_________________________\n");
     GLuint shader_ptr = glCreateShader(shaderType);
     glShaderSource(shader_ptr, 1, &shaderSource, NULL);
     glCompileShader(shader_ptr);
+
     return shader_ptr;
 }
 

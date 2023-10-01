@@ -11,7 +11,7 @@
 #include <memory>
 
 
-class engine {
+class Engine {
 protected:
     //shared pointer na okno
     std::shared_ptr<GLFWwindow>  window;

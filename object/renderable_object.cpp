@@ -19,4 +19,18 @@ void Renderable_object::render() {
 
 }
 
+Renderable_object Renderable_object::set_name(std::string name) {
+    this->name = name;
+    return *this;
+}
+
+Renderable_object Renderable_object::set_shader(Shader_ID shader) {
+    this->shader = shader;
+    return *this;
+}
+
+Renderable_object Renderable_object::set_mesh(Mesh mesh) {
+    this->mesh = std::make_shared<Mesh>(mesh);
+    return *this;
+}
 

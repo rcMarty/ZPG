@@ -5,7 +5,20 @@
 #pragma once
 
 
-class scene {
+#include <vector>
+#include "../object/renderable_object.h"
+
+class Scene {
+private:
+    std::vector<Renderable_object> objects;
+    void set_scene();
+public:
+    Scene() = default;
+    Scene add_object(Renderable_object object);
+    Renderable_object find_object(std::string name);
+    void init();
+    void render();
+
 
 };
 

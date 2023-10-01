@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="ZPG" targetName="ZPG" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+      <configuration PROFILE_NAME="Release" ENABLED="true" CONFIG_NAME="Release" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene&#10;added class for window">
+      <change afterPath="$PROJECT_DIR$/render/window.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/render/window.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/models/pyramid.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shader/shader_handler.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shader/shader_handler.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shader/shader_wrapper.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shader/shader_wrapper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/mesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/mesh.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/mesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/mesh.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/renderable_object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/renderable_object.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/models/square.h" beforeDir="false" afterPath="$PROJECT_DIR$/resources/models/square.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/flat_v3.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/flat_v3.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" beforeDir="false" afterPath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="DarkyenusTimeTracker">
+    <option name="totalTimeSeconds" value="38662" />
+    <option name="idleThresholdMs" value="30000" />
+    <option name="autoCountIdleSeconds" value="10" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file:///usr/include/GL/glew.h" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="OCResolveContextSettings">
+    <option name="configuration" value="0-Debug-ZPG" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="2.2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2W2cds56Wvj3oIUE3mJi3KFL4O4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/home/rc_marty/5_Semestr/ZPG",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "CMakeSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="" />
+      <created>1695934206413</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695934206413</updated>
+      <workItem from="1695934208601" duration="90000" />
+      <workItem from="1695934533494" duration="641000" />
+      <workItem from="1696003227988" duration="585000" />
+      <workItem from="1696003818891" duration="2844000" />
+      <workItem from="1696006677024" duration="314000" />
+      <workItem from="1696006999458" duration="10570000" />
+      <workItem from="1696020096916" duration="2165000" />
+      <workItem from="1696022342853" duration="3882000" />
+      <workItem from="1696026856620" duration="1000" />
+      <workItem from="1696064984679" duration="8762000" />
+      <workItem from="1696080802084" duration="110000" />
+      <workItem from="1696080913584" duration="22000" />
+      <workItem from="1696080941957" duration="14673000" />
+      <workItem from="1696150283760" duration="5673000" />
+      <workItem from="1696162365831" duration="166000" />
+      <workItem from="1696162532396" duration="17781000" />
+      <workItem from="1696182246895" duration="6543000" />
+    </task>
+    <task id="LOCAL-00001" summary="its working">
+      <option name="closed" value="true" />
+      <created>1695935126900</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1695935126900</updated>
+    </task>
+    <task id="LOCAL-00002" summary="converted roughly into objects &#10;needs some cleaning and new scene class">
+      <option name="closed" value="true" />
+      <created>1696087637237</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1696087637237</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="its working" />
+    <MESSAGE value="converted roughly into objects &#10;needs some cleaning and new scene class" />
+    <MESSAGE value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene" />
+    <option name="LAST_COMMIT_MESSAGE" value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene" />
+  </component>
+  <component name="XDebuggerManager">
+    <watches-manager>
+      <configuration name="CMakeRunConfiguration">
+        <watch expression="suzie.mesh._M_ptr-&gt;color_describe_count" />
+      </configuration>
+    </watches-manager>
+  </component>
+</project>

@@ -3,19 +3,20 @@
 //
 
 #include "engine.h"
-#include "../shader/shader.h"
 #include "../resources/models/square.h"
 #include "../resources/models/suzi_flat.h"
 #include "../object/mesh.h"
 #include "../object/renderable_object.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include "../render/scene.h"
 #include <memory>
 #include <vector>
+#include "../shader/shader_handler.h"
 
 static void error_callback(int error, const char *description) { fputs(description, stderr); }
 
-void engine::init()
+void Engine::init()
 {
 
     glfwSetErrorCallback(error_callback);
@@ -57,33 +58,31 @@ void engine::init()
     glViewport(0, 0, width, height);
 }
 
-void engine::run()
+void Engine::run()
 {
     //todo scene
 
-    //Shader_ID shader = Shader::create_shader("../shader/vertex_shader/flat.vert","../shader/fragment_shader/flat.frag");
-    Shader_ID suzie_shader = Shader::create_shader("../shader/vertex_shader/flat_v3.vert","../shader/fragment_shader/flat_v3.frag");
-    //Renderable_object square = Renderable_object(Mesh(square_vertices), shader);
-    Renderable_object suzie = Renderable_object(Mesh(suziFlat,17424), suzie_shader);
+//    Shader_handler shaders;
+//    shaders.add_shader(Shader_wrapper("../shader/vertex_shader/flat.vert","../shader/fragment_shader/flat.frag","flat4x4_point"))
+//            .add_shader(Shader_wrapper("../shader/vertex_shader/flat_v3.vert","../shader/fragment_shader/flat_v3.frag","flat3x3"));
 
-    //square.init();
-    suzie.init();
+    Scene scene;
+    scene.init();
+
 
     while (!glfwWindowShouldClose(window.get()))
     {
         //todo scene
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        //square.render();
-        suzie.render();
-
+        scene.render();
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display
         glfwSwapBuffers(window.get());
     }
 }
 
-void engine::destroy() {
+void Engine::destroy() {
     glfwDestroyWindow(window.get());
     glfwTerminate();
     exit(EXIT_SUCCESS);
