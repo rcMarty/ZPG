@@ -4,6 +4,8 @@
 
 #include "renderable_object.h"
 
+#include <utility>
+
 Renderable_object::Renderable_object(Mesh mesh, Shader shader) {
     this->mesh = std::make_shared<Mesh>(mesh);
     this->shader = std::make_shared<Shader>(shader);
@@ -14,24 +16,32 @@ void Renderable_object::init() {
 }
 
 void Renderable_object::render() {
-    mesh->render();
     shader->use_shader();
-    //glUniformMatrix3x4fv(mesh, 1, GL_FALSE, Matrix); //todo pajdíče
+    shader->set_variable("modelMatrix", Matrix);
+    mesh->render();
 
 }
 
-Renderable_object Renderable_object::set_name(std::string name) {
-    this->name = name;
+Renderable_object Renderable_object::set_name(std::string render_name) {
+    this->name = std::move(render_name);
     return *this;
 }
 
-Renderable_object Renderable_object::set_shader(Shader shader) {
-    this->shader = std::make_shared<Shader>(shader);
+Renderable_object Renderable_object::set_shader(Shader input_shader) {
+    this->shader = std::make_shared<Shader>(input_shader);
     return *this;
 }
 
-Renderable_object Renderable_object::set_mesh(Mesh mesh) {
-    this->mesh = std::make_shared<Mesh>(mesh);
+Renderable_object Renderable_object::set_mesh(const Mesh &input_mesh) {
+    this->mesh = std::make_shared<Mesh>(input_mesh);
     return *this;
 }
+
+Renderable_object
+Renderable_object::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations) {
+    this->transform_operations = transform_operations;
+    Matrix = transform_operations->get_matrix(Matrix);
+    return *this;
+}
+
 

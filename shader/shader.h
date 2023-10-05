@@ -5,6 +5,7 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <glm/glm.hpp>
 
 #include <memory>
 #include <string>
@@ -25,5 +26,5 @@ public:
 
     void use_shader();
 
-    void transform(void *matrix); //todo matrix
+    void set_variable(std::string variable, glm::mat4 value);
 };

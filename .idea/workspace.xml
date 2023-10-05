@@ -21,21 +21,28 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene&#10;added class for window&#10;added loading .obj files">
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="working composite pattern for translations">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/rotation.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/rotation.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/scale.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/scale.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/transform.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/transform.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/transform_node.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/transform_node.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/translation.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/transform/translation.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/mesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/mesh.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/renderable_object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/renderable_object.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shader/shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shader/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader_handler.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader_handler.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader_wrapper.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader_wrapper.h" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" beforeDir="false" afterPath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,13 +54,16 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="42740" />
+    <option name="totalTimeSeconds" value="54655" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
     <option name="naggedAbout" value="1" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -62,6 +72,20 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "rcMarty"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="ecc3217c-a0ab-43ed-a494-f7ff3fd5319c" />
+        <option name="url" value="git@github.com:rcMarty/ZPG.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file:///usr/include/GL/glew.h" root0="SKIP_INSPECTION" />
   </component>
@@ -69,7 +93,7 @@
     <option name="configuration" value="0-Debug-ZPG" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
@@ -100,7 +124,8 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "CMakeSettings",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C/C++",
+    "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -150,7 +175,9 @@
       <workItem from="1696193146605" duration="972000" />
       <workItem from="1696323521793" duration="4252000" />
       <workItem from="1696454150053" duration="369000" />
-      <workItem from="1696490984615" duration="5220000" />
+      <workItem from="1696490984615" duration="22145000" />
+      <workItem from="1696521213390" duration="19000" />
+      <workItem from="1696521239895" duration="5779000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -184,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696190366553</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="working after shader refactoring &#10;ready to transformation">
+      <option name="closed" value="true" />
+      <created>1696497388586</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1696497388586</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +259,9 @@
     <MESSAGE value="converted roughly into objects &#10;needs some cleaning and new scene class" />
     <MESSAGE value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene" />
     <MESSAGE value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene&#10;added class for window&#10;added loading .obj files" />
-    <option name="LAST_COMMIT_MESSAGE" value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene&#10;added class for window&#10;added loading .obj files" />
+    <MESSAGE value="working after shader refactoring &#10;ready to transformation" />
+    <MESSAGE value="working composite pattern for translations" />
+    <option name="LAST_COMMIT_MESSAGE" value="working composite pattern for translations" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -234,5 +271,9 @@
         <watch expression="suzie.mesh._M_ptr-&gt;color_describe_count" />
       </configuration>
     </watches-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

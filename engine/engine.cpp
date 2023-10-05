@@ -15,12 +15,10 @@
 
 static void error_callback(int error, const char *description) { fputs(description, stderr); }
 
-void Engine::init()
-{
+void Engine::init() {
 
     glfwSetErrorCallback(error_callback);
-    if (!glfwInit())
-    {
+    if (!glfwInit()) {
         fprintf(stderr, "ERROR: could not start GLFW3\n");
         exit(EXIT_FAILURE);
     }
@@ -29,8 +27,7 @@ void Engine::init()
     // this->window = std::make_shared<GLFWwindow>(glfwCreateWindow(600, 600, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
     this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(1000, 1000, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
 
-    if (!window)
-    {
+    if (!window) {
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
@@ -58,20 +55,12 @@ void Engine::init()
     glViewport(0, 0, width, height);
 }
 
-void Engine::run()
-{
-    //todo refactoring shaders one more time
-
-//    Shader_handler shaders;
-//    shaders.add_shader(Shader_wrapper("../shader/vertex_shader/flat.vert","../shader/fragment_shader/flat.frag","flat4x4_point"))
-//            .add_shader(Shader_wrapper("../shader/vertex_shader/flat_v3.vert","../shader/fragment_shader/flat_v3.frag","flat3x3"));
-
+void Engine::run() {
     Scene scene;
     scene.init();
 
 
-    while (!glfwWindowShouldClose(window.get()))
-    {
+    while (!glfwWindowShouldClose(window.get())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         scene.render();
         glfwPollEvents();

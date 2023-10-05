@@ -7,19 +7,16 @@
 #include <string>
 #include <cstring>
 
-const char *Shader::load_shader(const std::string &vertex_shader_path)
-{
+const char *Shader::load_shader(const std::string &vertex_shader_path) {
     std::ifstream file(vertex_shader_path);
     //check if file exists
-    if (!file.is_open())
-    {
+    if (!file.is_open()) {
         fprintf(stderr, "Could not open file %s\n", vertex_shader_path.c_str());
         return nullptr;
     }
     std::string str;
     std::string file_contents;
-    while (std::getline(file, str))
-    {
+    while (std::getline(file, str)) {
         file_contents += str;
         file_contents.push_back('\n');
     }
@@ -28,8 +25,7 @@ const char *Shader::load_shader(const std::string &vertex_shader_path)
     return shader;
 }
 
-GLuint Shader::compile_shader( GLenum shaderType, const char *shaderSource)
-{
+GLuint Shader::compile_shader(GLenum shaderType, const char *shaderSource) {
     printf("[DEBUG] Compiling shader\n");
     printf("_________________________\n");
     GLuint shader_ptr = glCreateShader(shaderType);
@@ -39,8 +35,7 @@ GLuint Shader::compile_shader( GLenum shaderType, const char *shaderSource)
     return shader_ptr;
 }
 
-GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_str)
-{
+GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_str) {
     GLuint shader_program = glCreateProgram();
     glAttachShader(shader_program, vertex_shader_str);
     glAttachShader(shader_program, fragment_shader_str);
@@ -49,8 +44,7 @@ GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_st
     // check for errors
     GLint status;
     glGetProgramiv(shader_program, GL_LINK_STATUS, &status);
-    if (status == GL_FALSE)
-    {
+    if (status == GL_FALSE) {
         GLint infoLogLength;
         glGetProgramiv(shader_program, GL_INFO_LOG_LENGTH, &infoLogLength);
         GLchar *strInfoLog = new GLchar[infoLogLength + 1];
@@ -67,8 +61,8 @@ Shader::Shader(const std::string &vertex_shader_path, const std::string &fragmen
     printf("_________________________\n");
     auto vertex_shader = load_shader(vertex_shader_path);
     auto fragment_shader = load_shader(fragment_shader_path);
-    printf("vertex_shader : %s\n",vertex_shader);
-    printf("fragment_shader : %s\n",fragment_shader);
+    printf("vertex_shader : %s\n", vertex_shader);
+    printf("fragment_shader : %s\n", fragment_shader);
     GLuint vertex = compile_shader(GL_VERTEX_SHADER, vertex_shader);
     GLuint fragment = compile_shader(GL_FRAGMENT_SHADER, fragment_shader);
 
@@ -79,15 +73,16 @@ Shader::Shader(const std::string &vertex_shader_path, const std::string &fragmen
 
 }
 
-void Shader::transform(void *matrix) {
-    GLint idModelTransform = glGetUniformLocation(shader_id, "modelMatrix");
+void Shader::set_variable(std::string variable, glm::mat4 matrix) {
+    GLint idModelTransform = glGetUniformLocation(shader_id, variable.c_str());
+
     if (idModelTransform == -1) {
         fprintf(stderr, "Could not bind uniform modelMatrix\n");
         return;
     }
 
-    //glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, &matrix[0][0]); //todo fix this
-
+    glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, &matrix[0][0]);
+    return;
 }
 
 void Shader::use_shader() {

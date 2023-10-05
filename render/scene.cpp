@@ -3,34 +3,39 @@
 //
 
 #include "scene.h"
-#include "../resources/models/suzi_flat.h"
+#include "../object/transform/transform.h"
+#include "../object/transform/transform_node.h"
+#include "../object/transform/translation.h"
+#include "../object/transform/rotation.h"
+#include "../object/transform/scale.h"
 
-
-Scene Scene::add_object(Renderable_object object) {
+Scene Scene::add_object(const Renderable_object &object) {
     objects.push_back(object);
     return *this;
 }
 
 void Scene::init() {
     set_scene();
-    for (auto &object : objects) {
+    for (auto &object: objects) {
         object.init();
     }
 }
 
 void Scene::render() {
-    for (auto &object : objects) {
+    for (auto &object: objects) {
         object.render();
     }
 }
 
-Renderable_object Scene::find_object(std::string name) {
-    for (auto &object : objects) {
+Renderable_object Scene::find_object(const std::string &name) {
+    for (auto &object: objects) {
         if (object.name == name) {
             return object;
         }
     }
-    return Renderable_object();
+    //printf("[ERROR] Object with name %s not found\n", name.c_str());
+    fprintf(stderr, "[ERROR] Object with name %s not found\n", name.c_str());
+    return {};
 }
 
 void Scene::set_scene() {
@@ -43,6 +48,31 @@ void Scene::set_scene() {
 
 
     Renderable_object suzie4k = Renderable_object(Mesh("../resources/models/suzi.obj"), shader).set_name("opice4k");
+
+    suzie4k.set_transform_operations(
+            std::make_shared<Transforms::Transform_node>()->add({
+                                                                        std::make_shared<Transforms::Rotation>(180, 0, 1, 0),
+                                                                        std::make_shared<Transforms::Scale>(0.3),
+                                                                        std::make_shared<Transforms::Transform_node>()->add(
+                                                                                {
+                                                                                        std::make_shared<Transforms::Translation>(2, 0, 0),
+                                                                                        std::make_shared<Transforms::Translation>(0, 1, 0),
+                                                                                        std::make_shared<Transforms::Transform_node>()->add(
+                                                                                                std::make_shared<Transforms::Rotation>(-20, 1, 0, 0)
+                                                                                        ),
+                                                                                        std::make_shared<Transforms::Transform_node>()->add(
+                                                                                                {
+                                                                                                        std::make_shared<Transforms::Translation>(-3, 0, 0),
+                                                                                                        std::make_shared<Transforms::Translation>(0, -2, 0),
+                                                                                                        std::make_shared<Transforms::Transform_node>()->add(
+                                                                                                                std::make_shared<Transforms::Rotation>(-5, 0, 0, 1)
+                                                                                                        )
+
+                                                                                                }
+                                                                                        )
+                                                                                }
+                                                                        )
+                                                                }));
     add_object(suzie4k);
 
 }

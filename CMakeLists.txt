@@ -11,10 +11,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -pedantic -flto -mar
 add_compile_definitions(ZPG_SAFE_PIXEL_ACCESS)
 add_compile_definitions(ZPG_PERF)
 
-if(CMAKE_BUILD_TYPE MATCHES Debug)
+if (CMAKE_BUILD_TYPE MATCHES Debug)
     add_compile_definitions(ZPG_DEBUG)
     message("BUILDING WITH DEBUG MODE")
-endif()
+endif ()
 
 set(OUTPUT_DIR "${CMAKE_BINARY_DIR}")
 
@@ -27,12 +27,19 @@ add_executable(ZPG
         object/mesh.cpp
         object/renderable_object.cpp
         render/window.cpp
-
-
+        object/transform/transform.cpp
+        object/transform/transform.h
+        object/transform/translation.cpp
+        object/transform/translation.h
+        object/transform/rotation.cpp
+        object/transform/rotation.h
+        object/transform/scale.cpp
+        object/transform/scale.h
+        object/transform/transform_node.cpp
+        object/transform/transform_node.h
 
 
 )
-
 
 
 find_package(glfw3 3.3 REQUIRED)
@@ -40,9 +47,6 @@ find_package(OpenGL REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glm REQUIRED)
 find_package(assimp REQUIRED)
-
-
-
 
 
 target_link_libraries(ZPG GLEW::glew)
