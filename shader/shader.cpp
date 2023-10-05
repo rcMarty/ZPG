@@ -62,7 +62,7 @@ GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_st
     return shader_program;
 }
 
-GLuint Shader::create_shader(const std::string &vertex_shader_path,const std::string &fragment_shader_path) {
+Shader::Shader(const std::string &vertex_shader_path, const std::string &fragment_shader_path) {
     printf("Creating shader\n");
     printf("_________________________\n");
     auto vertex_shader = load_shader(vertex_shader_path);
@@ -75,7 +75,23 @@ GLuint Shader::create_shader(const std::string &vertex_shader_path,const std::st
     delete[] vertex_shader;
     delete[] fragment_shader;
 
-    return link_shader(vertex,fragment);
+    shader_id = link_shader(vertex, fragment);
+
+}
+
+void Shader::transform(void *matrix) {
+    GLint idModelTransform = glGetUniformLocation(shader_id, "modelMatrix");
+    if (idModelTransform == -1) {
+        fprintf(stderr, "Could not bind uniform modelMatrix\n");
+        return;
+    }
+
+    //glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, &matrix[0][0]); //todo fix this
+
+}
+
+void Shader::use_shader() {
+    glUseProgram(shader_id);
 }
 
 

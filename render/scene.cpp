@@ -34,7 +34,7 @@ Renderable_object Scene::find_object(std::string name) {
 }
 
 void Scene::set_scene() {
-    Shader_ID shader = Shader::create_shader("../shader/vertex_shader/flat_v3.vert","../shader/fragment_shader/flat_v3.frag");
+    Shader shader = Shader("../shader/vertex_shader/flat_v3.vert", "../shader/fragment_shader/flat_v3.frag");
 
 #include "../resources/models/sphere.h"
 

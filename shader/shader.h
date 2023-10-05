@@ -12,11 +12,18 @@
 
 class Shader
 {
+    GLint shader_id;
+
+    static const char *load_shader(const std::string &vertex_shader_path);
+
+    static GLuint compile_shader(GLenum shader_type, const char *shader_source);
+
+    static GLuint link_shader(GLuint &vertex_shader, GLuint &fragment_shader);
 public:
 
-    static GLuint create_shader(const std::string &vertex_shader_path,const std::string &fragment_shader_path);
-    static const char *load_shader(const std::string &vertex_shader_path);
-    static GLuint compile_shader( GLenum shader_type, const char*shader_source);
-    static GLuint link_shader(GLuint &vertex_shader, GLuint &fragment_shader);
+    Shader(const std::string &vertex_shader_path, const std::string &fragment_shader_path);
 
+    void use_shader();
+
+    void transform(void *matrix); //todo matrix
 };

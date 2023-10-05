@@ -26,8 +26,6 @@ add_executable(ZPG
         render/scene.cpp
         object/mesh.cpp
         object/renderable_object.cpp
-        shader/shader_handler.cpp
-        shader/shader_wrapper.cpp
         render/window.cpp
 
 

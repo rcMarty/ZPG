@@ -12,7 +12,6 @@
 #include "../render/scene.h"
 #include <memory>
 #include <vector>
-#include "../shader/shader_handler.h"
 
 static void error_callback(int error, const char *description) { fputs(description, stderr); }
 

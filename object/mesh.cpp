@@ -29,14 +29,14 @@ Mesh::Mesh(const point vertices[], uint count) {
     //convert vertices to vector
     std::vector<GLfloat> vertices_vec;
     printf("size of: %d\n", count   );
-    printf("size of verticies: %d\n", sizeof(vertices));
+    printf("size of vertices: %ld\n", sizeof(vertices));
 
-    for (int i = 0; i < count; i++) {
-        for (int j = 0; j < 4; ++j) {
-            vertices_vec.push_back(vertices[i].pos[j]);
+    for (size_t i = 0; i < count; i++) {
+        for (float po: vertices[i].pos) {
+            vertices_vec.push_back(po);
         }
-        for (int j = 0; j < 4; ++j) {
-            vertices_vec.push_back(vertices[i].color[j]);
+        for (float j: vertices[i].color) {
+            vertices_vec.push_back(j);
         }
     }
     this->vertices = vertices_vec;
@@ -90,7 +90,7 @@ Mesh::Mesh(const float *vertices, uint count ) {
 //    printf("size of verticies: %d\n", count);
 
     std::vector<GLfloat> vertices_vec;
-    for (int i = 0; i < count;++i) {
+    for (size_t i = 0; i < count; ++i) {
         vertices_vec.push_back(vertices[i]);
     }
     //printf("size of vertices_vec: %d\n", vertices_vec.size());
@@ -140,8 +140,8 @@ Mesh::Mesh(std::string path) {
 
     }
 
-    printf("\tno of vertices: %d\n", this->vertices.size()/6);
-    printf("\tno of indices: %d\n", this->indices.size());
+    printf("\tno of vertices: %ld\n", this->vertices.size() / 6);
+    printf("\tno of indices: %ld\n", this->indices.size());
 
     this->vertices_describe_count = 3;
     this->color_describe_count= 3;
