@@ -22,28 +22,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="working composite pattern for translations">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/rotation.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/rotation.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/scale.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/scale.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/transform.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/transform.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/transform_node.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/transform_node.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/translation.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/translation.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/renderable_object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/renderable_object.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" beforeDir="false" afterPath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/transform/rotation.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/transform/scale.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/transform/transform.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/transform/transform_node.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/transform/transform_node.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/transform/transform_node.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/transform/translation.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/transform/translation.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/transform/translation.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +41,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="54655" />
+    <option name="totalTimeSeconds" value="55060" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -177,7 +164,7 @@
       <workItem from="1696454150053" duration="369000" />
       <workItem from="1696490984615" duration="22145000" />
       <workItem from="1696521213390" duration="19000" />
-      <workItem from="1696521239895" duration="5779000" />
+      <workItem from="1696521239895" duration="8074000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -219,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696497388586</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="working composite pattern for translations">
+      <option name="closed" value="true" />
+      <created>1696530013079</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1696530013079</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

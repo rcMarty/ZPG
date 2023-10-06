@@ -17,13 +17,13 @@ namespace Transforms {
     public:
 
         std::shared_ptr<Transform_node> add(std::shared_ptr<Transform> child) {
-            printf("Adding child\n");
+            
             this->children.push_back(child);
             return std::make_shared<Transform_node>(*this);
         }
 
         std::shared_ptr<Transform_node> add(std::vector<std::shared_ptr<Transform>> child) {
-            printf("Adding children\n");
+
             this->children.insert(children.end(), child.begin(), child.end());
             return std::make_shared<Transform_node>(*this);
         }

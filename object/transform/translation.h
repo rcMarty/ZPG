@@ -28,7 +28,6 @@ namespace Transforms {
         }
 
         virtual glm::mat4x4 get_matrix(glm::mat4x4 input_matrix) override {
-            printf("Translation: \n");
             print_matrix(input_matrix);
             return glm::translate(input_matrix, translation);
 

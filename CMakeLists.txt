@@ -27,18 +27,6 @@ add_executable(ZPG
         object/mesh.cpp
         object/renderable_object.cpp
         render/window.cpp
-        object/transform/transform.cpp
-        object/transform/transform.h
-        object/transform/translation.cpp
-        object/transform/translation.h
-        object/transform/rotation.cpp
-        object/transform/rotation.h
-        object/transform/scale.cpp
-        object/transform/scale.h
-        object/transform/transform_node.cpp
-        object/transform/transform_node.h
-
-
 )
 
 
