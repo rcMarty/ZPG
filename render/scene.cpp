@@ -23,6 +23,7 @@ void Scene::init() {
 
 void Scene::render() {
     for (auto &object: objects) {
+        object.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(std::make_shared<Transforms::Rotation>(2, 0, 1, 0)));
         object.render();
     }
 }
@@ -65,7 +66,7 @@ void Scene::set_scene() {
                                                                                                         std::make_shared<Transforms::Translation>(-3, 0, 0),
                                                                                                         std::make_shared<Transforms::Translation>(0, -2, 0),
                                                                                                         std::make_shared<Transforms::Transform_node>()->add(
-                                                                                                                std::make_shared<Transforms::Rotation>(-5, 0, 0, 1)
+                                                                                                                std::make_shared<Transforms::Rotation>(-15, 0, 0, 1)
                                                                                                         )
 
                                                                                                 }
@@ -74,5 +75,11 @@ void Scene::set_scene() {
                                                                         )
                                                                 }));
     add_object(suzie4k);
+
+    Renderable_object rat = Renderable_object(Mesh("../resources/models/rat.obj"), shader).set_name("rat");
+    rat.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
+            std::make_shared<Transforms::Scale>(0.7)
+    ));
+    add_object(rat);
 
 }

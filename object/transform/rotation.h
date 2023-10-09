@@ -15,16 +15,16 @@ namespace Transforms {
         glm::vec3 axis;
     public:
 
-        Rotation(float angle, glm::vec3 axis) : angle(angle * M_PI / 180), axis(axis) {}
+        Rotation(float angle, glm::vec3 axis) : angle(glm::radians(angle)), axis(axis) {}
 
-        Rotation(float angle, float x, float y, float z) : angle(angle * M_PI / 180), axis(x, y, z) {}
+        Rotation(float angle, float x, float y, float z) : angle(glm::radians(angle)), axis(x, y, z) {}
 
-        Rotation(float angle) : angle(angle * M_PI / 180), axis(0, 0, 0) {}
+        Rotation(float angle) : angle(glm::radians(angle)), axis(0, 0, 0) {}
 
         Rotation() : angle(0), axis(0, 0, 0) {}
 
         Rotation set_angle(float angle) {
-            this->angle = angle * M_PI / 180;
+            this->angle = glm::radians(angle);
             return *this;
         }
 
@@ -35,7 +35,7 @@ namespace Transforms {
 
         Rotation set_rotation(float angle, glm::vec3 axis) {
             //convert angle from degrees to radians
-            this->angle = angle * M_PI / 180;
+            this->angle = glm::radians(angle);
             this->axis = axis;
             return *this;
         }
