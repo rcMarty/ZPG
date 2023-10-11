@@ -23,6 +23,7 @@ void Scene::init() {
 
 void Scene::render() {
     for (auto &object: objects) {
+        //todo no allocation in render loop
         object.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(std::make_shared<Transforms::Rotation>(2, 0, 1, 0)));
         object.render();
     }
@@ -40,7 +41,9 @@ Renderable_object Scene::find_object(const std::string &name) {
 }
 
 void Scene::set_scene() {
-    Shader shader = Shader("../shader/vertex_shader/flat_v3.vert", "../shader/fragment_shader/flat_v3.frag");
+    std::shared_ptr<Camera> cam = std::make_shared<Camera>();
+
+    Shader shader = Shader(cam, "../shader/vertex_shader/flat_v3.vert", "../shader/fragment_shader/flat_v3.frag");
 
 #include "../resources/models/sphere.h"
 

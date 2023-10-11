@@ -56,7 +56,8 @@ GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_st
     return shader_program;
 }
 
-Shader::Shader(const std::string &vertex_shader_path, const std::string &fragment_shader_path) {
+Shader::Shader(std::shared_ptr<Camera> camera, const std::string &vertex_shader_path, const std::string &fragment_shader_path) {
+    this->camera = camera;
     printf("Creating shader\n");
     printf("_________________________\n");
     auto vertex_shader = load_shader(vertex_shader_path);
@@ -77,7 +78,7 @@ void Shader::set_variable(std::string variable, glm::mat4 matrix) {
     GLint idModelTransform = glGetUniformLocation(shader_id, variable.c_str());
 
     if (idModelTransform == -1) {
-        fprintf(stderr, "Could not bind uniform modelMatrix\n");
+        fprintf(stderr, "Could not bind uniform %s\n", variable.c_str());
         return;
     }
 

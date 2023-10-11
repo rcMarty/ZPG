@@ -18,7 +18,7 @@ class Renderable_object {
 private:
     std::shared_ptr<Mesh> mesh;
     std::shared_ptr<Shader> shader;
-    glm::mat4 Matrix = glm::mat4(1.0f);
+    glm::mat4 Matrix = glm::mat4(1.0f); //todo this should be in transform_node not here
     std::shared_ptr<Transforms::Transform> transform_operations;
     //Shader_ID shader;
 

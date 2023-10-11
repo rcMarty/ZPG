@@ -21,14 +21,14 @@ void Mesh::claculate_indices(Mesh &mesh) {
 Mesh::Mesh(std::vector<GLfloat> vertices, uint vertices_describe_count, uint color_describe_count) {
     this->vertices = vertices;
     this->vertices_describe_count = vertices_describe_count;
-    this->color_describe_count= color_describe_count;
+    this->color_describe_count = color_describe_count;
     Mesh::claculate_indices(*this);
 }
 
 Mesh::Mesh(const point vertices[], uint count) {
     //convert vertices to vector
     std::vector<GLfloat> vertices_vec;
-    printf("size of: %d\n", count   );
+    printf("size of: %d\n", count);
     printf("size of vertices: %ld\n", sizeof(vertices));
 
     for (size_t i = 0; i < count; i++) {
@@ -41,7 +41,7 @@ Mesh::Mesh(const point vertices[], uint count) {
     }
     this->vertices = vertices_vec;
     this->vertices_describe_count = 4;
-    this->color_describe_count= 4;
+    this->color_describe_count = 4;
 
     Mesh::claculate_indices(*this);
 }
@@ -62,9 +62,9 @@ void Mesh::init() {
 
 
     // set vertex attributes
-    glVertexAttribPointer(0, vertices_describe_count, GL_FLOAT, GL_FALSE, (vertices_describe_count + color_describe_count) * sizeof(GLfloat), (GLvoid*) nullptr);
+    glVertexAttribPointer(0, vertices_describe_count, GL_FLOAT, GL_FALSE, (vertices_describe_count + color_describe_count) * sizeof(GLfloat), (GLvoid *) nullptr);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, color_describe_count, GL_FLOAT, GL_FALSE, (vertices_describe_count + color_describe_count) * sizeof(GLfloat), (GLvoid*)(vertices_describe_count * sizeof(GLfloat)));
+    glVertexAttribPointer(1, color_describe_count, GL_FLOAT, GL_FALSE, (vertices_describe_count + color_describe_count) * sizeof(GLfloat), (GLvoid *) (vertices_describe_count * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
 
     // create ebo
@@ -79,11 +79,10 @@ void Mesh::render() {
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
-
-
 }
 
-Mesh::Mesh(const float *vertices, uint count ) {
+
+Mesh::Mesh(const float *vertices, uint count) {
     //convert vertices to vector
 
 //    printf("size of: %d\n", count);
@@ -96,7 +95,7 @@ Mesh::Mesh(const float *vertices, uint count ) {
     //printf("size of vertices_vec: %d\n", vertices_vec.size());
     this->vertices = vertices_vec;
     this->vertices_describe_count = 3;
-    this->color_describe_count= 3;
+    this->color_describe_count = 3;
 
     Mesh::claculate_indices(*this);
 
@@ -144,7 +143,7 @@ Mesh::Mesh(std::string path) {
     printf("\tno of indices: %ld\n", this->indices.size());
 
     this->vertices_describe_count = 3;
-    this->color_describe_count= 3;
+    this->color_describe_count = 3;
 
 }
 

@@ -27,6 +27,8 @@ add_executable(ZPG
         object/mesh.cpp
         object/renderable_object.cpp
         render/window.cpp
+        camera/camera.cpp
+        camera/camera.h
 )
 
 
