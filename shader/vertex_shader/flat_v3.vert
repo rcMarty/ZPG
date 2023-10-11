@@ -7,6 +7,7 @@ uniform mat4 projectionMatrix;
 out vec3 colorInput;
 void main() {
     gl_Position = projectionMatrix * viewMatrix * modelMatrix * vec4(position, 1.0f);
+    //gl_Position = modelMatrix * vec4(position, 1.0f);
     //gl_Position = vec4(position, 1.0f);
     colorInput = vertex_Color;
 }

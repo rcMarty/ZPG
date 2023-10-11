@@ -58,6 +58,8 @@ GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_st
 
 Shader::Shader(std::shared_ptr<Camera> camera, const std::string &vertex_shader_path, const std::string &fragment_shader_path) {
     this->camera = camera;
+    this->camera->attach_shader(std::shared_ptr<Shader>(this));
+
     printf("Creating shader\n");
     printf("_________________________\n");
     auto vertex_shader = load_shader(vertex_shader_path);
@@ -71,23 +73,34 @@ Shader::Shader(std::shared_ptr<Camera> camera, const std::string &vertex_shader_
     delete[] fragment_shader;
 
     shader_id = link_shader(vertex, fragment);
-
+    printf("[DEBUG] Linked shader\n");
 }
 
 void Shader::set_variable(std::string variable, glm::mat4 matrix) {
-    GLint idModelTransform = glGetUniformLocation(shader_id, variable.c_str());
 
-    if (idModelTransform == -1) {
+    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
+    if (idUniform == -1) {
         fprintf(stderr, "Could not bind uniform %s\n", variable.c_str());
         return;
     }
+    glUniformMatrix4fv(idUniform, 1, GL_FALSE, &matrix[0][0]);
 
-    glUniformMatrix4fv(idModelTransform, 1, GL_FALSE, &matrix[0][0]);
-    return;
 }
 
+
 void Shader::use_shader() {
+    //printf("[DEBUG] Using shader: %d\n", shader_id);
     glUseProgram(shader_id);
+}
+
+void Shader::update_camera() {
+
+    use_shader();
+    set_variable("viewMatrix", camera->get_view_matrix());
+    set_variable("projectionMatrix", camera->get_projection_matrix());
+
+    printf("[DEBUG] Camera updated in shader: %d\n", shader_id);
+
 }
 
 

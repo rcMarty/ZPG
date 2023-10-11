@@ -6,8 +6,33 @@
 #include "../shader/shader.h"
 #include "glm/gtc/matrix_transform.hpp"
 
-glm::mat4 Camera::getCamera() {
-    //return glm::lookAt(eye, eye+target, up);
-    return glm::lookAt(glm::vec3(0, 0, 0), glm::vec3(0, 0, 1), glm::vec3(0, 1, 0));
-    //mat4 projection=glm::perspective(glm::radians(45.0f), 4.0f / 3.0f, 0.1f, 100.0f);
+
+void Camera::attach_shader(std::shared_ptr<Shader> shader) {
+    this->shaders.push_back(shader);
 }
+
+void Camera::notify_shaders() {
+    for (auto &shader: shaders) {
+        shader->update_camera();
+    }
+}
+
+glm::mat4x4 Camera::get_projection_matrix() {
+    return glm::perspective(glm::radians(fov), 4.0f / 3.0f, near, far);
+    //return glm::mat4x4(1.0f);
+}
+
+glm::mat4x4 Camera::get_view_matrix() {
+    return glm::lookAt(eye, eye + target, up);
+    //return glm::mat4x4(1.0f);
+}
+
+Camera::Camera(glm::vec3 eye, glm::vec3 target, glm::vec3 up, float fov, float near, float far) {
+    this->eye = eye;
+    this->target = target;
+    this->up = up;
+    this->fov = fov;
+    this->near = near;
+    this->far = far;
+}
+

@@ -19,6 +19,8 @@ class Shader {
 private:
     GLint shader_id;
     std::shared_ptr<Camera> camera;
+
+
     static const char *load_shader(const std::string &vertex_shader_path);
 
     static GLuint compile_shader(GLenum shader_type, const char *shader_source);
@@ -31,6 +33,8 @@ public:
     Shader(std::shared_ptr<Camera> camera, const std::string &vertex_shader_path, const std::string &fragment_shader_path);
 
     void use_shader();
+
+    void update_camera();
 
     void set_variable(std::string variable, glm::mat4 value);
 };

@@ -41,9 +41,11 @@ Renderable_object Scene::find_object(const std::string &name) {
 }
 
 void Scene::set_scene() {
-    std::shared_ptr<Camera> cam = std::make_shared<Camera>();
 
+    std::shared_ptr<Camera> cam = std::make_shared<Camera>();
     Shader shader = Shader(cam, "../shader/vertex_shader/flat_v3.vert", "../shader/fragment_shader/flat_v3.frag");
+    cam->attach_shader(std::make_shared<Shader>(shader));
+    cam->notify_shaders();
 
 #include "../resources/models/sphere.h"
 
