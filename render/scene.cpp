@@ -49,8 +49,8 @@ void Scene::set_scene() {
 
 #include "../resources/models/sphere.h"
 
-    //Renderable_object pyramid = Renderable_object(Mesh(sphere,17280), shader).set_name("jehlan");
-    //add_object(pyramid);
+    Renderable_object pyramid = Renderable_object(Mesh(sphere, 17280), shader).set_name("jehlan");
+    add_object(pyramid);
 
 
     Renderable_object suzie4k = Renderable_object(Mesh("../resources/models/suzi.obj"), shader).set_name("opice4k");

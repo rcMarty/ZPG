@@ -21,14 +21,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="working composite pattern for translations">
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="observer camera">
+      <change afterPath="$PROJECT_DIR$/input_handle/input_handler.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/input_handle/input_handler.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camera/camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/camera/camera.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camera/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/camera/camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" beforeDir="false" afterPath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="64413" />
+    <option name="totalTimeSeconds" value="68453" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -171,7 +170,10 @@
       <workItem from="1697036457544" duration="7000" />
       <workItem from="1697039360388" duration="2723000" />
       <workItem from="1697042085002" duration="17000" />
-      <workItem from="1697042107753" duration="895000" />
+      <workItem from="1697042107753" duration="7623000" />
+      <workItem from="1697056925079" duration="125000" />
+      <workItem from="1697057050935" duration="7000" />
+      <workItem from="1697057064102" duration="1519000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -221,7 +223,15 @@
       <option name="project" value="LOCAL" />
       <updated>1696530013079</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="observer camera">
+      <option name="closed" value="true" />
+      <created>1697043233225</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1697043233225</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +273,8 @@
     <MESSAGE value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene&#10;added class for window&#10;added loading .obj files" />
     <MESSAGE value="working after shader refactoring &#10;ready to transformation" />
     <MESSAGE value="working composite pattern for translations" />
-    <option name="LAST_COMMIT_MESSAGE" value="working composite pattern for translations" />
+    <MESSAGE value="observer camera" />
+    <option name="LAST_COMMIT_MESSAGE" value="observer camera" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

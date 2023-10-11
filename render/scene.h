@@ -10,6 +10,7 @@
 
 class Scene {
 private:
+
     std::vector<Renderable_object> objects;
 
     void set_scene();

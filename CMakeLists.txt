@@ -28,7 +28,8 @@ add_executable(ZPG
         object/renderable_object.cpp
         render/window.cpp
         camera/camera.cpp
-        camera/camera.h
+        input_handle/input_handler.cpp
+
 )
 
 
@@ -44,5 +45,4 @@ target_link_libraries(ZPG glfw)
 target_link_libraries(ZPG OpenGL::GL)
 target_link_libraries(ZPG glm)
 target_link_libraries(ZPG assimp)
-
 

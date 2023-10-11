@@ -10,6 +10,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "../render/scene.h"
+#include "../input_handle/input_handler.h"
 #include <memory>
 #include <vector>
 
@@ -34,6 +35,13 @@ void Engine::init() {
 
     glfwMakeContextCurrent(window.get());
     glfwSwapInterval(1);
+
+    // set input handler
+    auto handler = std::make_shared<input::Input_handler>();
+    glfwSetWindowUserPointer(window.get(), handler.get());
+
+
+
 
     // start GLEW extension handler
     glewExperimental = GL_TRUE;
@@ -62,6 +70,7 @@ void Engine::run() {
 
     while (!glfwWindowShouldClose(window.get())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
         scene.render();
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display
