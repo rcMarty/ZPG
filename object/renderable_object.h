@@ -27,7 +27,7 @@ public:
 
     Renderable_object() = default;
 
-    Renderable_object(Mesh mesh, Shader shader);
+    Renderable_object(Mesh mesh, std::shared_ptr<Shader> &shader);
 
     void init();
 

@@ -30,7 +30,7 @@ private:
 
 public:
 
-    Shader(std::shared_ptr<Camera> camera, const std::string &vertex_shader_path, const std::string &fragment_shader_path);
+    Shader(std::shared_ptr<Camera> &camera, const std::string &vertex_shader_path, const std::string &fragment_shader_path);
 
     void use_shader();
 

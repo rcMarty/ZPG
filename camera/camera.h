@@ -27,17 +27,9 @@ public:
 
     Camera(glm::vec3 eye, glm::vec3 target, glm::vec3 up, float fov, float near, float far);
 
-    void set_eye(glm::vec3 eye);
+    void go_forward(float distance);
 
-    void set_target(glm::vec3 target);
-
-    void set_up(glm::vec3 up);
-
-    void set_fov(float fov);
-
-    void set_near(float near);
-
-    void set_far(float far);
+    void go_sideways(float distance);
 
 
     glm::mat4x4 get_projection_matrix();
@@ -45,7 +37,7 @@ public:
     glm::mat4x4 get_view_matrix();
 
 
-    void attach_shader(std::shared_ptr<Shader> shader);
+    void attach_shader(std::shared_ptr<Shader> &shader);
 
     void notify_shaders();
 

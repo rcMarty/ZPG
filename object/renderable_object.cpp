@@ -6,9 +6,9 @@
 
 #include <utility>
 
-Renderable_object::Renderable_object(Mesh mesh, Shader shader) {
+Renderable_object::Renderable_object(Mesh mesh, std::shared_ptr<Shader> &shader) {
     this->mesh = std::make_shared<Mesh>(mesh);
-    this->shader = std::make_shared<Shader>(shader);
+    this->shader = shader;
 }
 
 void Renderable_object::init() {

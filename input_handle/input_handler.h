@@ -47,6 +47,10 @@ namespace input {
             mouse_btn_callbacks.push_back(callback);
         };
 
+        void subscribe(std::function<void(Key_event_data)> callback) {
+            key_callbacks.push_back(callback);
+        };
+
 
     };
 

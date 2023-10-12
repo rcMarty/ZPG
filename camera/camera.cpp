@@ -7,12 +7,13 @@
 #include "glm/gtc/matrix_transform.hpp"
 
 
-void Camera::attach_shader(std::shared_ptr<Shader> shader) {
+void Camera::attach_shader(std::shared_ptr<Shader> &shader) {
     this->shaders.push_back(shader);
 }
 
 void Camera::notify_shaders() {
     for (auto &shader: shaders) {
+        printf("[DEBUG] Notifying shader\n");
         shader->update_camera();
     }
 }
@@ -23,6 +24,7 @@ glm::mat4x4 Camera::get_projection_matrix() {
 }
 
 glm::mat4x4 Camera::get_view_matrix() {
+    printf("[DEBUG] eye: %f, %f, %f\n", eye.x, eye.y, eye.z);
     return glm::lookAt(eye, eye + target, up);
     //return glm::mat4x4(1.0f);
 }
@@ -34,5 +36,16 @@ Camera::Camera(glm::vec3 eye, glm::vec3 target, glm::vec3 up, float fov, float n
     this->fov = fov;
     this->near = near;
     this->far = far;
+}
+
+void Camera::go_forward(float distance) {
+    this->eye += this->target * distance;
+    //printf("[DEBUG] go_forward eye: %f, %f, %f\n", eye.x, eye.y, eye.z);
+}
+
+void Camera::go_sideways(float distance) {
+    this->eye += glm::cross(this->target, this->up) * distance;
+    //printf("[DEBUG] go_sideways eye: %f, %f, %f\n", eye.x, eye.y, eye.z);
+
 }
 

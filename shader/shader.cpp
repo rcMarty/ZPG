@@ -56,9 +56,11 @@ GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_st
     return shader_program;
 }
 
-Shader::Shader(std::shared_ptr<Camera> camera, const std::string &vertex_shader_path, const std::string &fragment_shader_path) {
+Shader::Shader(std::shared_ptr<Camera> &camera, const std::string &vertex_shader_path, const std::string &fragment_shader_path) {
     this->camera = camera;
-    this->camera->attach_shader(std::shared_ptr<Shader>(this));
+    //this->camera->attach_shader(std::shared_ptr<Shader>(this));
+    auto shader = std::shared_ptr<Shader>(this);
+    this->camera->attach_shader(shader);
 
     printf("Creating shader\n");
     printf("_________________________\n");

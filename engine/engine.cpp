@@ -19,6 +19,8 @@ static void error_callback(int error, const char *description) { fputs(descripti
 void Engine::init() {
 
     glfwSetErrorCallback(error_callback);
+
+
     if (!glfwInit()) {
         fprintf(stderr, "ERROR: could not start GLFW3\n");
         exit(EXIT_FAILURE);
@@ -33,12 +35,14 @@ void Engine::init() {
         exit(EXIT_FAILURE);
     }
 
+    glfwSetKeyCallback(this->window.get(), input::key_callback);
+
     glfwMakeContextCurrent(window.get());
     glfwSwapInterval(1);
 
     // set input handler
-    auto handler = std::make_shared<input::Input_handler>();
-    glfwSetWindowUserPointer(window.get(), handler.get());
+    this->input_handler = std::make_shared<input::Input_handler>();
+    glfwSetWindowUserPointer(window.get(), this->input_handler.get());
 
 
 
@@ -61,17 +65,17 @@ void Engine::init() {
     int width, height;
     glfwGetFramebufferSize(window.get(), &width, &height);
     glViewport(0, 0, width, height);
+    this->scene = std::make_shared<Scene>(input_handler);
+    scene->init();
 }
 
 void Engine::run() {
-    Scene scene;
-    scene.init();
 
 
     while (!glfwWindowShouldClose(window.get())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        scene.render();
+        this->scene->render();
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display
         glfwSwapBuffers(window.get());

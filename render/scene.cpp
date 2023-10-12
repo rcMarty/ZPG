@@ -22,6 +22,8 @@ void Scene::init() {
 }
 
 void Scene::render() {
+
+
     for (auto &object: objects) {
         //todo no allocation in render loop
         object.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(std::make_shared<Transforms::Rotation>(2, 0, 1, 0)));
@@ -42,15 +44,33 @@ Renderable_object Scene::find_object(const std::string &name) {
 
 void Scene::set_scene() {
 
-    std::shared_ptr<Camera> cam = std::make_shared<Camera>();
-    Shader shader = Shader(cam, "../shader/vertex_shader/flat_v3.vert", "../shader/fragment_shader/flat_v3.frag");
-    cam->attach_shader(std::make_shared<Shader>(shader));
-    cam->notify_shaders();
+    this->camera = std::make_shared<Camera>();
+    std::shared_ptr<Shader> shader = std::make_shared<Shader>(camera, "../shader/vertex_shader/flat_v3.vert", "../shader/fragment_shader/flat_v3.frag");
+    camera->attach_shader(shader);
+    camera->notify_shaders();
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_W) {
+            camera->go_forward(0.1f);
+        }
+        if (data.key == GLFW_KEY_S) {
+            camera->go_forward(-0.1f);
+        }
+        if (data.key == GLFW_KEY_A) {
+            camera->go_sideways(0.1f);
+        }
+        if (data.key == GLFW_KEY_D) {
+            camera->go_sideways(-0.1f);
+        }
+        printf("[DEBUG] key: %d, scancode: %d, action: %d, mods: %d\n", data.key, data.scancode, data.action, data.mods);
+        camera->notify_shaders();
+    });
+
 
 #include "../resources/models/sphere.h"
 
-    Renderable_object pyramid = Renderable_object(Mesh(sphere, 17280), shader).set_name("jehlan");
-    add_object(pyramid);
+//    Renderable_object pyramid = Renderable_object(Mesh(sphere, 17280), shader).set_name("jehlan");
+//    add_object(pyramid);
 
 
     Renderable_object suzie4k = Renderable_object(Mesh("../resources/models/suzi.obj"), shader).set_name("opice4k");
@@ -88,3 +108,4 @@ void Scene::set_scene() {
     add_object(rat);
 
 }
+
