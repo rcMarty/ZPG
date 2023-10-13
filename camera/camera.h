@@ -31,6 +31,12 @@ public:
 
     void go_sideways(float distance);
 
+    void go_vertical(float distance);
+
+    void look_sideways(float angle);
+
+    void look_up(float angle);
+
 
     glm::mat4x4 get_projection_matrix();
 

@@ -26,7 +26,10 @@ void Scene::render() {
 
     for (auto &object: objects) {
         //todo no allocation in render loop
-        object.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(std::make_shared<Transforms::Rotation>(2, 0, 1, 0)));
+        if (object.move != nullptr) {
+            object.move();
+        }
+        //object.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(std::make_shared<Transforms::Rotation>(2, 0, 1, 0)));
         object.render();
     }
 }
@@ -49,20 +52,75 @@ void Scene::set_scene() {
     camera->attach_shader(shader);
     camera->notify_shaders();
 
+    //todo fix more keys events down simultaneously
     input_handler->subscribe([&](input::Key_event_data data) {
         if (data.key == GLFW_KEY_W) {
             camera->go_forward(0.1f);
         }
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_A) {
+            camera->go_sideways(-0.1f);
+        }
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
         if (data.key == GLFW_KEY_S) {
             camera->go_forward(-0.1f);
         }
-        if (data.key == GLFW_KEY_A) {
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_D) {
             camera->go_sideways(0.1f);
         }
-        if (data.key == GLFW_KEY_D) {
-            camera->go_sideways(-0.1f);
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_Q) {
+            camera->go_vertical(0.1f);
         }
-        printf("[DEBUG] key: %d, scancode: %d, action: %d, mods: %d\n", data.key, data.scancode, data.action, data.mods);
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_E) {
+            camera->go_vertical(-0.1f);
+        }
+        camera->notify_shaders();
+    });
+
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_UP) {
+            camera->look_up(1.f);
+        }
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_DOWN) {
+            camera->look_up(-1.f);
+        }
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_LEFT) {
+            camera->look_sideways(1.f);
+        }
+        camera->notify_shaders();
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_RIGHT) {
+            camera->look_sideways(-1.f);
+        }
         camera->notify_shaders();
     });
 
@@ -100,6 +158,18 @@ void Scene::set_scene() {
                                                                         )
                                                                 }));
     add_object(suzie4k);
+
+    Renderable_object grid_down = Renderable_object(Mesh("../resources/models/grid.obj"), shader).set_name("grid_down");
+    grid_down.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
+            std::make_shared<Transforms::Translation>(0, -1, 0)
+    ));
+    add_object(grid_down); //todo remake api from add_object so i dont have to call add_object
+
+    Renderable_object grid_up = Renderable_object(Mesh("../resources/models/grid.obj"), shader).set_name("grid_up");
+    grid_up.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
+            std::make_shared<Transforms::Translation>(0, 1, 0)
+    ));
+    add_object(grid_up);
 
     Renderable_object rat = Renderable_object(Mesh("../resources/models/rat.obj"), shader).set_name("rat");
     rat.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(

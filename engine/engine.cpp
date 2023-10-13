@@ -28,7 +28,7 @@ void Engine::init() {
     //todo refactoring window and use
 
     // this->window = std::make_shared<GLFWwindow>(glfwCreateWindow(600, 600, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
-    this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(1000, 1000, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
+    this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(1000, 1000, "PoS", NULL, NULL), glfwDestroyWindow);
 
     if (!window) {
         glfwTerminate();

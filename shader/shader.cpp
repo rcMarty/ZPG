@@ -101,7 +101,7 @@ void Shader::update_camera() {
     set_variable("viewMatrix", camera->get_view_matrix());
     set_variable("projectionMatrix", camera->get_projection_matrix());
 
-    printf("[DEBUG] Camera updated in shader: %d\n", shader_id);
+    //printf("[DEBUG] Camera updated in shader: %d\n", shader_id);
 
 }
 

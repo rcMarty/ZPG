@@ -10,6 +10,7 @@
 #include <vector>
 #include <functional>
 
+
 namespace input {
 
     struct Mouse_btn_event_data {
@@ -23,6 +24,7 @@ namespace input {
         int action;
         int mods;
     };
+
 
     class Input_handler {
     private:
@@ -38,6 +40,7 @@ namespace input {
         };
 
         void notify(Key_event_data data) {
+            //printf("[DEBUG] notifying %d callbacks\n", key_callbacks.size());
             for (auto &callback: key_callbacks) {
                 callback(data);
             }

@@ -8,6 +8,7 @@
 #include <memory>
 #include <string>
 #include <glm/glm.hpp>
+#include <functional>
 #include "transform/transform_node.h"
 
 
@@ -20,10 +21,12 @@ private:
     std::shared_ptr<Shader> shader;
     glm::mat4 Matrix = glm::mat4(1.0f); //todo this should be in transform_node not here
     std::shared_ptr<Transforms::Transform> transform_operations;
+
     //Shader_ID shader;
 
 public:
     std::string name;
+    std::function<void()> move = nullptr; //todo tick functions for rotation and so on
 
     Renderable_object() = default;
 
