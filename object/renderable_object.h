@@ -19,14 +19,14 @@ class Renderable_object {
 private:
     std::shared_ptr<Mesh> mesh;
     std::shared_ptr<Shader> shader;
-    glm::mat4 Matrix = glm::mat4(1.0f); //todo this should be in transform_node not here
+    glm::mat4 Matrix = glm::mat4(1.0f);
     std::shared_ptr<Transforms::Transform> transform_operations;
-
+    bool animated = false;
     //Shader_ID shader;
 
 public:
     std::string name;
-    std::function<void()> move = nullptr; //todo tick functions for rotation and so on
+    //std::function<void()> move = nullptr; //todo tick functions for rotation and so on
 
     Renderable_object() = default;
 
@@ -38,7 +38,7 @@ public:
 
     Renderable_object set_name(std::string name);
 
-    Renderable_object set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations);
+    Renderable_object set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool animated);
 
     //void set_variable(std::string variable, glm::mat4 value);
     Renderable_object set_shader(Shader shader);

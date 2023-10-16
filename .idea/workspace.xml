@@ -21,17 +21,21 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="added callbacks for input handling&#10;working y-z movement of camera">
-      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Snímek obrazovky z 2023-10-01 00-05-20.png" beforeDir="false" afterPath="$PROJECT_DIR$/rectangle.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/camera/camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/camera/camera.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/camera/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/camera/camera.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/engine.h" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/input_handle/input_handler.h" beforeDir="false" afterPath="$PROJECT_DIR$/input_handle/input_handler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/renderable_object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/renderable_object.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shader/shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" beforeDir="false" afterPath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +46,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="82900" />
+    <option name="totalTimeSeconds" value="92920" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -115,7 +119,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C/C++&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -127,6 +131,11 @@
       </method>
     </configuration>
     <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -179,7 +188,12 @@
       <workItem from="1697100855203" duration="4558000" />
       <workItem from="1697138881249" duration="6128000" />
       <workItem from="1697211328368" duration="599000" />
-      <workItem from="1697212497862" duration="13945000" />
+      <workItem from="1697212497862" duration="14481000" />
+      <workItem from="1697234705893" duration="676000" />
+      <workItem from="1697379467614" duration="4575000" />
+      <workItem from="1697391055276" duration="10000" />
+      <workItem from="1697391072316" duration="5987000" />
+      <workItem from="1697482797437" duration="4027000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -261,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1697219515599</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme">
+      <option name="closed" value="true" />
+      <created>1697234432280</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1697234432280</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -321,7 +343,10 @@
     <MESSAGE value="observer camera" />
     <MESSAGE value="backbone for observer input handler" />
     <MESSAGE value="added callbacks for input handling&#10;working y-z movement of camera" />
-    <option name="LAST_COMMIT_MESSAGE" value="added callbacks for input handling&#10;working y-z movement of camera" />
+    <MESSAGE value="added callbacks for input handling" />
+    <MESSAGE value="added callbacks for input handling&#10;working y-z movement of camera&#10;&#10;Took 52 seconds" />
+    <MESSAGE value="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

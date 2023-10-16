@@ -36,6 +36,9 @@ void Engine::init() {
     }
 
     glfwSetKeyCallback(this->window.get(), input::key_callback);
+    glfwSetMouseButtonCallback(this->window.get(), input::mouse_btn_callback);
+    glfwSetCursorPosCallback(this->window.get(), input::cursor_callback);
+    glfwSetCursorPosCallback(this->window.get(), input::cursor_callback);
 
     glfwMakeContextCurrent(window.get());
     glfwSwapInterval(1);
@@ -43,6 +46,23 @@ void Engine::init() {
     // set input handler
     this->input_handler = std::make_shared<input::Input_handler>();
     glfwSetWindowUserPointer(window.get(), this->input_handler.get());
+
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        static bool locked_cursor = false;
+        if (data.key == GLFW_KEY_SPACE && data.action == GLFW_PRESS) {
+            printf("[DEBUG] space pressed, lock_cursor = %d\n", locked_cursor);
+            if (!locked_cursor) {
+                glfwSetInputMode(this->window.get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                printf("[DEBUG] cursor locked\n");
+                locked_cursor = true;
+            } else {
+                glfwSetInputMode(this->window.get(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                printf("[DEBUG] cursor unlocked\n");
+                locked_cursor = false;
+            }
+        }
+    });
 
 
 
@@ -65,7 +85,7 @@ void Engine::init() {
     int width, height;
     glfwGetFramebufferSize(window.get(), &width, &height);
     glViewport(0, 0, width, height);
-    this->scene = std::make_shared<Scene>(input_handler);
+    this->scene = std::make_shared<Scene>(input_handler, window);
     scene->init();
 }
 
@@ -80,6 +100,7 @@ void Engine::run() {
         // put the stuff we’ve been drawing onto the display
         glfwSwapBuffers(window.get());
     }
+    destroy();
 }
 
 void Engine::destroy() {

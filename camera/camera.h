@@ -22,6 +22,12 @@ private:
     float near = 0.1f;
     float far = 100.0f;
 
+    float mouse_sensitivity = 0.1f;
+    float yaw = -90.0f;
+    float pitch = 0.0f;
+
+    double last_x, last_y;
+
 public:
     explicit Camera() = default;
 
@@ -36,6 +42,8 @@ public:
     void look_sideways(float angle);
 
     void look_up(float angle);
+
+    void look_mouse(double x, double y);
 
 
     glm::mat4x4 get_projection_matrix();

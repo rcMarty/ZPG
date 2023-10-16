@@ -34,6 +34,10 @@ public:
 
     void destroy();
 
+    ~Engine() {
+        destroy();
+    };
+
 };
 
 

@@ -47,6 +47,10 @@ first attempt to draw objects in 3d space
 attemt to do animation with perspective camera
 <br><br><br>
 
+<img src="camera.gif">
+working camera moevement
+<br><br><br>
+
 ## Installation
 
 You must have installed these libraries:

@@ -32,6 +32,19 @@ GLuint Shader::compile_shader(GLenum shaderType, const char *shaderSource) {
     glShaderSource(shader_ptr, 1, &shaderSource, NULL);
     glCompileShader(shader_ptr);
 
+
+    GLint status;
+    glGetShaderiv(shader_ptr, GL_LINK_STATUS, &status);
+    if (status == GL_FALSE) {
+        GLint infoLogLength;
+        glGetShaderiv(shader_ptr, GL_INFO_LOG_LENGTH, &infoLogLength);
+        GLchar *strInfoLog = new GLchar[infoLogLength + 1];
+        glGetShaderInfoLog(shader_ptr, infoLogLength, NULL, strInfoLog);
+        fprintf(stderr, "Compiler failure: %s\n", strInfoLog);
+        delete[] strInfoLog;
+        exit(2);
+    }
+
     return shader_ptr;
 }
 
@@ -51,6 +64,7 @@ GLuint Shader::link_shader(GLuint &vertex_shader_str, GLuint &fragment_shader_st
         glGetProgramInfoLog(shader_program, infoLogLength, NULL, strInfoLog);
         fprintf(stderr, "Linker failure: %s\n", strInfoLog);
         delete[] strInfoLog;
+        exit(2);
     }
 
     return shader_program;

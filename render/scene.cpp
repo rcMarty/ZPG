@@ -22,14 +22,7 @@ void Scene::init() {
 }
 
 void Scene::render() {
-
-
     for (auto &object: objects) {
-        //todo no allocation in render loop
-        if (object.move != nullptr) {
-            object.move();
-        }
-        //object.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(std::make_shared<Transforms::Rotation>(2, 0, 1, 0)));
         object.render();
     }
 }
@@ -45,87 +38,91 @@ Renderable_object Scene::find_object(const std::string &name) {
     return {};
 }
 
+void Scene::set_inputs() {
+
+    if (input_handler == nullptr) {
+        fprintf(stderr, "[ERROR] Input handler not set\n");
+        return;
+    }
+
+    if (camera == nullptr) {
+        fprintf(stderr, "[ERROR] Camera not set\n");
+        return;
+    }
+
+
+    //todo fix more keys events down simultaneously
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_W)
+            camera->go_forward(0.1f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_A)
+            camera->go_sideways(-0.1f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_S)
+            camera->go_forward(-0.1f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_D)
+            camera->go_sideways(0.1f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_Q)
+            camera->go_vertical(0.1f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_E)
+            camera->go_vertical(-0.1f);
+    });
+
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_UP)
+            camera->look_up(1.f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_DOWN)
+            camera->look_up(-1.f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_LEFT)
+            camera->look_sideways(1.f);
+    });
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_RIGHT)
+            camera->look_sideways(-1.f);
+    });
+
+    static double last_x, last_y;
+    input_handler->subscribe([&](input::Cursor_event_data data) {
+        if (glfwGetInputMode(this->window.get(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED) {
+            camera->look_mouse(data.x - last_x, last_y - data.y);
+            last_y = data.y;
+            last_x = data.x;
+        }
+    });
+}
+
+
 void Scene::set_scene() {
 
     this->camera = std::make_shared<Camera>();
     std::shared_ptr<Shader> shader = std::make_shared<Shader>(camera, "../shader/vertex_shader/flat_v3.vert", "../shader/fragment_shader/flat_v3.frag");
     camera->attach_shader(shader);
     camera->notify_shaders();
-
-    //todo fix more keys events down simultaneously
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_W) {
-            camera->go_forward(0.1f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_A) {
-            camera->go_sideways(-0.1f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_S) {
-            camera->go_forward(-0.1f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_D) {
-            camera->go_sideways(0.1f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_Q) {
-            camera->go_vertical(0.1f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_E) {
-            camera->go_vertical(-0.1f);
-        }
-        camera->notify_shaders();
-    });
+    set_inputs();
 
 
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_UP) {
-            camera->look_up(1.f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_DOWN) {
-            camera->look_up(-1.f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_LEFT) {
-            camera->look_sideways(1.f);
-        }
-        camera->notify_shaders();
-    });
-
-    input_handler->subscribe([&](input::Key_event_data data) {
-        if (data.key == GLFW_KEY_RIGHT) {
-            camera->look_sideways(-1.f);
-        }
-        camera->notify_shaders();
-    });
-
-
-#include "../resources/models/sphere.h"
 
 //    Renderable_object pyramid = Renderable_object(Mesh(sphere, 17280), shader).set_name("jehlan");
 //    add_object(pyramid);
@@ -135,46 +132,39 @@ void Scene::set_scene() {
 
     suzie4k.set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add({
-                                                                        std::make_shared<Transforms::Rotation>(180, 0, 1, 0),
-                                                                        std::make_shared<Transforms::Scale>(0.3),
-                                                                        std::make_shared<Transforms::Transform_node>()->add(
-                                                                                {
-                                                                                        std::make_shared<Transforms::Translation>(2, 0, 0),
-                                                                                        std::make_shared<Transforms::Translation>(0, 1, 0),
-                                                                                        std::make_shared<Transforms::Transform_node>()->add(
-                                                                                                std::make_shared<Transforms::Rotation>(-20, 1, 0, 0)
-                                                                                        ),
-                                                                                        std::make_shared<Transforms::Transform_node>()->add(
-                                                                                                {
-                                                                                                        std::make_shared<Transforms::Translation>(-3, 0, 0),
-                                                                                                        std::make_shared<Transforms::Translation>(0, -2, 0),
-                                                                                                        std::make_shared<Transforms::Transform_node>()->add(
-                                                                                                                std::make_shared<Transforms::Rotation>(-15, 0, 0, 1)
-                                                                                                        )
+                                                                        std::make_shared<Transforms::Translation>(0, 0, 0),
+                                                                        std::make_shared<Transforms::Rotation>(0, 0, 1, 0),
+                                                                }), false);
 
-                                                                                                }
-                                                                                        )
-                                                                                }
-                                                                        )
-                                                                }));
-    add_object(suzie4k);
+    suzie4k.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
+                                                                                                 std::make_shared<Transforms::Translation>(2, 0, 0),
+                                                                                                 std::make_shared<Transforms::Rotation>(5, 0, 1, 0),
+                                                                                                 std::make_shared<Transforms::Translation>(-2, 0, 0),
+                                                                                         }), true);
+    add_object(suzie4k);//todo remake api from add_object so i dont have to call add_object
 
     Renderable_object grid_down = Renderable_object(Mesh("../resources/models/grid.obj"), shader).set_name("grid_down");
-    grid_down.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
-            std::make_shared<Transforms::Translation>(0, -1, 0)
-    ));
-    add_object(grid_down); //todo remake api from add_object so i dont have to call add_object
+    grid_down.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
+                                                                                                   std::make_shared<Transforms::Translation>(0, -2, 0),
+                                                                                                   std::make_shared<Transforms::Scale>(1.5),
+                                                                                           }), false);
+    add_object(grid_down);
+
 
     Renderable_object grid_up = Renderable_object(Mesh("../resources/models/grid.obj"), shader).set_name("grid_up");
-    grid_up.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
-            std::make_shared<Transforms::Translation>(0, 1, 0)
-    ));
+    grid_up.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
+                                                                                                 std::make_shared<Transforms::Translation>(0, 2, 0),
+                                                                                                 std::make_shared<Transforms::Scale>(1.5),
+                                                                                         }), false);
     add_object(grid_up);
 
     Renderable_object rat = Renderable_object(Mesh("../resources/models/rat.obj"), shader).set_name("rat");
     rat.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
             std::make_shared<Transforms::Scale>(0.7)
-    ));
+    ), false);
+    rat.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
+            std::make_shared<Transforms::Rotation>(2, 0, 1, 0)
+    ), true);
     add_object(rat);
 
 }

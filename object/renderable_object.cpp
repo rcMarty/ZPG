@@ -17,6 +17,10 @@ void Renderable_object::init() {
 
 void Renderable_object::render() {
     shader->use_shader();
+
+    if (animated)
+        Matrix = transform_operations->get_matrix(Matrix);
+
     shader->set_variable("modelMatrix", Matrix);
     mesh->render();
 
@@ -38,8 +42,9 @@ Renderable_object Renderable_object::set_mesh(const Mesh &input_mesh) {
 }
 
 Renderable_object
-Renderable_object::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations) {
+Renderable_object::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool animated) {
     this->transform_operations = transform_operations;
+    this->animated = animated;
     Matrix = transform_operations->get_matrix(Matrix);
     return *this;
 }
