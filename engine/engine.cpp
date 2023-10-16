@@ -10,34 +10,62 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "../render/scene.h"
+#include "../input_handle/input_handler.h"
 #include <memory>
 #include <vector>
-#include "../shader/shader_handler.h"
 
 static void error_callback(int error, const char *description) { fputs(description, stderr); }
 
-void Engine::init()
-{
+void Engine::init() {
 
     glfwSetErrorCallback(error_callback);
-    if (!glfwInit())
-    {
+
+
+    if (!glfwInit()) {
         fprintf(stderr, "ERROR: could not start GLFW3\n");
         exit(EXIT_FAILURE);
     }
     //todo refactoring window and use
 
     // this->window = std::make_shared<GLFWwindow>(glfwCreateWindow(600, 600, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
-    this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(1000, 1000, "oop ČVEREC", NULL, NULL), glfwDestroyWindow);
+    this->window = std::shared_ptr<GLFWwindow>(glfwCreateWindow(1000, 1000, "PoS", NULL, NULL), glfwDestroyWindow);
 
-    if (!window)
-    {
+    if (!window) {
         glfwTerminate();
         exit(EXIT_FAILURE);
     }
 
+    glfwSetKeyCallback(this->window.get(), input::key_callback);
+    glfwSetMouseButtonCallback(this->window.get(), input::mouse_btn_callback);
+    glfwSetCursorPosCallback(this->window.get(), input::cursor_callback);
+    glfwSetCursorPosCallback(this->window.get(), input::cursor_callback);
+
     glfwMakeContextCurrent(window.get());
     glfwSwapInterval(1);
+
+    // set input handler
+    this->input_handler = std::make_shared<input::Input_handler>();
+    glfwSetWindowUserPointer(window.get(), this->input_handler.get());
+
+
+    input_handler->subscribe([&](input::Key_event_data data) {
+        static bool locked_cursor = false;
+        if (data.key == GLFW_KEY_SPACE && data.action == GLFW_PRESS) {
+            printf("[DEBUG] space pressed, lock_cursor = %d\n", locked_cursor);
+            if (!locked_cursor) {
+                glfwSetInputMode(this->window.get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+                printf("[DEBUG] cursor locked\n");
+                locked_cursor = true;
+            } else {
+                glfwSetInputMode(this->window.get(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+                printf("[DEBUG] cursor unlocked\n");
+                locked_cursor = false;
+            }
+        }
+    });
+
+
+
 
     // start GLEW extension handler
     glewExperimental = GL_TRUE;
@@ -57,28 +85,22 @@ void Engine::init()
     int width, height;
     glfwGetFramebufferSize(window.get(), &width, &height);
     glViewport(0, 0, width, height);
+    this->scene = std::make_shared<Scene>(input_handler, window);
+    scene->init();
 }
 
-void Engine::run()
-{
-    //todo refactoring shaders one more time
-
-//    Shader_handler shaders;
-//    shaders.add_shader(Shader_wrapper("../shader/vertex_shader/flat.vert","../shader/fragment_shader/flat.frag","flat4x4_point"))
-//            .add_shader(Shader_wrapper("../shader/vertex_shader/flat_v3.vert","../shader/fragment_shader/flat_v3.frag","flat3x3"));
-
-    Scene scene;
-    scene.init();
+void Engine::run() {
 
 
-    while (!glfwWindowShouldClose(window.get()))
-    {
+    while (!glfwWindowShouldClose(window.get())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        scene.render();
+
+        this->scene->render();
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display
         glfwSwapBuffers(window.get());
     }
+    destroy();
 }
 
 void Engine::destroy() {

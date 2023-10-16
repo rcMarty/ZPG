@@ -11,10 +11,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O2 -pedantic -flto -mar
 add_compile_definitions(ZPG_SAFE_PIXEL_ACCESS)
 add_compile_definitions(ZPG_PERF)
 
-if(CMAKE_BUILD_TYPE MATCHES Debug)
+if (CMAKE_BUILD_TYPE MATCHES Debug)
     add_compile_definitions(ZPG_DEBUG)
     message("BUILDING WITH DEBUG MODE")
-endif()
+endif ()
 
 set(OUTPUT_DIR "${CMAKE_BINARY_DIR}")
 
@@ -26,15 +26,11 @@ add_executable(ZPG
         render/scene.cpp
         object/mesh.cpp
         object/renderable_object.cpp
-        shader/shader_handler.cpp
-        shader/shader_wrapper.cpp
         render/window.cpp
-
-
-
+        camera/camera.cpp
+        input_handle/input_handler.cpp
 
 )
-
 
 
 find_package(glfw3 3.3 REQUIRED)
@@ -44,13 +40,9 @@ find_package(glm REQUIRED)
 find_package(assimp REQUIRED)
 
 
-
-
-
 target_link_libraries(ZPG GLEW::glew)
 target_link_libraries(ZPG glfw)
 target_link_libraries(ZPG OpenGL::GL)
 target_link_libraries(ZPG glm)
 target_link_libraries(ZPG assimp)
-
 
