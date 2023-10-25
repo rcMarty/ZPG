@@ -23,6 +23,8 @@ private:
     float near = 0.1f;
     float far = 100.0f;
 
+    float aspect_ratio = 4.0f / 3.0f;
+
     float mouse_sensitivity = 0.1f;
     float yaw = -90.0f;
     float pitch = 0.0f;
@@ -46,6 +48,7 @@ public:
 
     void look_mouse(double x, double y);
 
+    void set_aspect_ratio(float aspect_ratio);
 
     glm::mat4x4 get_projection_matrix();
 

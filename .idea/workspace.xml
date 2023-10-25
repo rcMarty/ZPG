@@ -21,39 +21,16 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme">
-      <change afterPath="$PROJECT_DIR$/object/material.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/material.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/model.vert" afterDir="false" />
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="little bit of refactoring&#10;added material&#10;restructurated shaders&#10;&#10;Took 2 hours 40 minutes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/mesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/mesh.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/mesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/mesh.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/renderable_object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/renderable_object.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_handle/input_handler.h" beforeDir="false" afterPath="$PROJECT_DIR$/input_handle/input_handler.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/camera/camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/camera/camera.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/camera/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/camera/camera.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/window.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/window.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/window.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/window.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shader/base_shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/base_shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/blinn_shader.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/blinn_shader.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/constant_shader.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/constant_shader.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/lambert_shader.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/lambert_shader.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/phong_shader.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/phong_shader.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/blinn.vert" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/constant.vert" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/lambert.vert" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/phong.vert" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +41,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="122824" />
+    <option name="totalTimeSeconds" value="124957" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -235,7 +212,7 @@
       <workItem from="1698255855789" duration="6000" />
       <workItem from="1698255868120" duration="2907000" />
       <workItem from="1698258776377" duration="10000" />
-      <workItem from="1698258793862" duration="2461000" />
+      <workItem from="1698258793862" duration="5020000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -325,7 +302,23 @@
       <option name="project" value="LOCAL" />
       <updated>1697234432280</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="little bit of refactoring&#10;added material&#10;restructurated shaders">
+      <option name="closed" value="true" />
+      <created>1698261501737</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1698261501737</updated>
+    </task>
+    <task id="LOCAL-00013" summary="little bit of refactoring&#10;added material&#10;restructurated shaders&#10;&#10;Took 2 hours 40 minutes">
+      <option name="closed" value="true" />
+      <created>1698263457454</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1698263457454</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,7 +381,9 @@
     <MESSAGE value="added callbacks for input handling" />
     <MESSAGE value="added callbacks for input handling&#10;working y-z movement of camera&#10;&#10;Took 52 seconds" />
     <MESSAGE value="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme" />
+    <MESSAGE value="little bit of refactoring&#10;added material&#10;restructurated shaders" />
+    <MESSAGE value="little bit of refactoring&#10;added material&#10;restructurated shaders&#10;&#10;Took 2 hours 40 minutes" />
+    <option name="LAST_COMMIT_MESSAGE" value="little bit of refactoring&#10;added material&#10;restructurated shaders&#10;&#10;Took 2 hours 40 minutes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

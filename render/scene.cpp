@@ -115,6 +115,8 @@ void Scene::set_inputs() {
             last_x = data.x;
         }
     });
+
+
 }
 
 
@@ -122,6 +124,10 @@ void Scene::set_scene() {
 
     std::shared_ptr<Material> default_material = std::make_shared<Material>();
     this->camera = std::make_shared<Camera>();
+    input_handler->subscribe([&](input::Window_size_data data) {
+        camera->set_aspect_ratio((float) data.width / (float) data.height);
+        printf("[DEBUG] aspect ratio: %f\n", (float) data.width / (float) data.height);
+    });
     std::shared_ptr<Light> light = std::make_shared<Light>();
 
     set_inputs();

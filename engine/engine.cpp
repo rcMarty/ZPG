@@ -38,6 +38,7 @@ void Engine::init() {
     glfwSetKeyCallback(this->window.get(), input::key_callback);
     glfwSetMouseButtonCallback(this->window.get(), input::mouse_btn_callback);
     glfwSetCursorPosCallback(this->window.get(), input::cursor_callback);
+    glfwSetWindowSizeCallback(this->window.get(), input::window_size_callback);
 
     glfwMakeContextCurrent(window.get());
     glfwSwapInterval(1);
@@ -66,6 +67,7 @@ void Engine::init() {
 
 
 
+
     // start GLEW extension handler
     glewExperimental = GL_TRUE;
     glewInit();
@@ -84,6 +86,8 @@ void Engine::init() {
     int width, height;
     glfwGetFramebufferSize(window.get(), &width, &height);
     glViewport(0, 0, width, height);
+
+
     this->scene = std::make_shared<Scene>(input_handler, window);
     scene->init();
 }

@@ -31,17 +31,21 @@ namespace input {
         double y;
     };
 
+    struct Window_size_data {
+        int width;
+        int height;
+    };
+
 
     class Input_handler {
     private:
         std::vector<std::function<void(Mouse_btn_event_data)>> mouse_btn_callbacks;
         std::vector<std::function<void(Key_event_data)>> key_callbacks;
         std::vector<std::function<void(Cursor_event_data)>> cursor_callbacks;
+        std::vector<std::function<void(Window_size_data)>> window_size_callbacks;
 
 
     public:
-
-        bool pressed_keys[1024];
 
         void notify(Mouse_btn_event_data data) {
             for (auto &callback: mouse_btn_callbacks) {
@@ -63,6 +67,14 @@ namespace input {
             }
         };
 
+        void notify(Window_size_data data) {
+            //printf("[DEBUG] notifying %d callbacks\n", key_callbacks.size());
+            for (auto &callback: window_size_callbacks) {
+                callback(data);
+            }
+        };
+
+
         void subscribe(std::function<void(Mouse_btn_event_data)> callback) {
             mouse_btn_callbacks.push_back(callback);
         };
@@ -73,6 +85,10 @@ namespace input {
 
         void subscribe(std::function<void(Cursor_event_data)> callback) {
             cursor_callbacks.push_back(callback);
+        };
+
+        void subscribe(std::function<void(Window_size_data)> callback) {
+            window_size_callbacks.push_back(callback);
         };
 
     };
@@ -100,6 +116,8 @@ namespace input {
     static void window_size_callback(GLFWwindow *window, int width, int height) {
         printf("resize %d, %d \n", width, height);
         glViewport(0, 0, width, height);
+        auto aaa = static_cast<Input_handler *>( glfwGetWindowUserPointer(window));
+        aaa->notify(Window_size_data{width, height});
     }
 
     static void cursor_callback(GLFWwindow *window, double x, double y) {

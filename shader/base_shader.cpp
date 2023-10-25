@@ -91,7 +91,7 @@ void Base_shader::set_variable(std::string variable, glm::mat4 matrix) {
 
     GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
     if (idUniform == -1) {
-        fprintf(stderr, "Could not bind MAT4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        //fprintf(stderr, "Could not bind MAT4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
         return;
     }
     glUniformMatrix4fv(idUniform, 1, GL_FALSE, &matrix[0][0]);
@@ -102,7 +102,7 @@ void Base_shader::set_variable(std::string variable, glm::vec4 vec) {
 
     GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
     if (idUniform == -1) {
-        fprintf(stderr, "Could not bind VEC4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        //fprintf(stderr, "Could not bind VEC4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
         return;
     }
     glUniform4f(idUniform, vec.x, vec.y, vec.z, vec.w);
@@ -119,7 +119,7 @@ void Base_shader::use_shader() {
 void Base_shader::set_variable(std::string variable, glm::vec3 value) {
     GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
     if (idUniform == -1) {
-        fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
         return;
     }
     glUniform3f(idUniform, value.x, value.y, value.z);
@@ -131,7 +131,7 @@ void Base_shader::set_variable(std::string variable, glm::vec3 value) {
 void Base_shader::set_variable(std::string variable, float value) {
     GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
     if (idUniform == -1) {
-        fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
         return;
     }
     glUniform1f(idUniform, value);
@@ -146,7 +146,7 @@ void Base_shader::unuse_shader() {
 void Base_shader::set_variable(std::string variable, int value) {
     GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
     if (idUniform == -1) {
-        fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
         return;
     }
     glUniform1i(idUniform, value);

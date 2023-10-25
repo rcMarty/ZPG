@@ -20,7 +20,7 @@ void Camera::notify() {
 }
 
 glm::mat4x4 Camera::get_projection_matrix() {
-    return glm::perspective(glm::radians(fov), 4.0f / 3.0f, near, far);
+    return glm::perspective(glm::radians(fov), aspect_ratio, near, far);
     //return glm::mat4x4(1.0f);
 }
 
@@ -94,5 +94,12 @@ void Camera::look_mouse(double x, double y) {
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
     target = glm::normalize(front);
 
+    this->notify();
+}
+
+void Camera::set_aspect_ratio(float aspect_ratio) {
+    this->aspect_ratio = aspect_ratio;
+    this->fov = 90.0f / this->aspect_ratio;
+    printf("[DEBUG] camera notifying aspect_ratio: %f\n", this->aspect_ratio);
     this->notify();
 }

@@ -19,17 +19,28 @@ private:
     std::string title;
 public:
     Window() = default;
-    Window(int width, int height, std::string name);
+
+    Window(int width, int height, const std::string &name);
+
     void init();
+
     void destroy();
+
     void run();
+
     void set_width(int width);
+
     void set_height(int height);
+
     void set_name(std::string name);
+
     int get_width();
+
     int get_height();
+
     std::string get_name();
-    GLFWwindow* get_window();
+
+    GLFWwindow *get_window();
 };
 
 
