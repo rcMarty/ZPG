@@ -6,13 +6,12 @@
 #include "base_shader.h"
 #include "../object/light/light.h"
 
-class Phong_shader : public Base_shader {
+class Shader_wrapper : public Base_shader {
     //    uniform mat4 model;
     //    uniform mat4 view;
     //    uniform mat4 projection;
     //    uniform vec4 lightColor;
     //    uniform vec4 lightPosition;
-
 
 protected:
     std::shared_ptr<Camera> camera;
@@ -24,18 +23,13 @@ protected:
     void update_light();
 
 public:
+    Shader_wrapper(std::shared_ptr<Camera> camera_ptr, std::shared_ptr<Light> light, const std::string &vertex_shader_path, const std::string &fragment_shader_path);
 
-    Phong_shader(std::shared_ptr<Camera> &camera_ptr, std::shared_ptr<Light> &light, const std::string &vertex_shader_path, const std::string &fragment_shader_path);
+    virtual ~Shader_wrapper() = default;
 
-    virtual ~Phong_shader() = default;
-
-    virtual void update() override;;
+    virtual void update() override;
 
     void set_camera(std::shared_ptr<Camera> camera);
 
     void set_light(std::shared_ptr<Light> light);
-
-
 };
-
-

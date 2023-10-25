@@ -1,6 +1,8 @@
 #version 330
-in vec3 colorInput;
+
+uniform vec4 meshColor;
+
 out vec4 color;
 void main() {
-    color = vec4(colorInput, 1.0f);
+    color = meshColor;
 }
