@@ -34,6 +34,8 @@ public:
 
     void use_shader();
 
+    void unuse_shader();
+
     virtual void update() override = 0;
 
     void set_variable(std::string variable, glm::mat4 value);
@@ -41,4 +43,8 @@ public:
     void set_variable(std::string variable, glm::vec4 value);
 
     void set_variable(std::string variable, glm::vec3 value);
+
+    void set_variable(std::string variable, float value);
+
+    void set_variable(std::string variable, int value);
 };

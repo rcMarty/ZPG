@@ -17,15 +17,10 @@ if (CMAKE_BUILD_TYPE MATCHES Debug)
 endif ()
 
 set(OUTPUT_DIR "${CMAKE_BINARY_DIR}")
+
+#file(GLOB_RECURSE ZPG_src "src/*.cpp" "src/*.h")
+
 set(SOURCE_FILES
-        shader/base_shader.h
-        shader/base_shader.cpp
-        shader/constant_shader.h
-        shader/constant_shader.cpp
-        shader/lambert_shader.h
-        shader/lambert_shader.cpp
-        shader/phong_shader.h
-        shader/phong_shader.cpp
         shader/observer.h
         shader/observer.cpp
         render/scene.h
@@ -58,18 +53,14 @@ add_executable(ZPG
         render/window.cpp
         object/camera/camera.cpp
         input_handle/input_handler.cpp
-        shader/constant_shader.cpp
-        shader/constant_shader.h
-        shader/lambert_shader.cpp
-        shader/lambert_shader.h
-        shader/phong_shader.cpp
-        shader/phong_shader.h
         shader/observer.cpp
         shader/observer.h
         object/light/light.cpp
         object/light/light.h
-        shader/blinn_shader.cpp
-        shader/blinn_shader.h
+        shader/shader_wrapper.h
+        shader/shader_wrapper.cpp
+        object/material.cpp
+        object/material.h
 
 )
 

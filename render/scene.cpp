@@ -8,9 +8,9 @@
 #include "../object/transform/translation.h"
 #include "../object/transform/rotation.h"
 #include "../object/transform/scale.h"
-#include "../shader/lambert_shader.h"
-#include "../shader/phong_shader.h"
-#include "../shader/blinn_shader.h"
+#include "../object/light/light.h"
+#include "../shader/shader_wrapper.h"
+#include "../object/material.h"
 
 
 Scene Scene::add_object(const Renderable_object &object) {
@@ -120,62 +120,68 @@ void Scene::set_inputs() {
 
 void Scene::set_scene() {
 
+    std::shared_ptr<Material> default_material = std::make_shared<Material>();
     this->camera = std::make_shared<Camera>();
     std::shared_ptr<Light> light = std::make_shared<Light>();
-    auto lightoperations = std::make_shared<Transforms::Transform_node>()->add({
-                                                                                       std::make_shared<Transforms::Translation>(5, 0, 0),
-                                                                                       std::make_shared<Transforms::Rotation>(0.0001, 0, 1, 0),
-                                                                                       std::make_shared<Transforms::Translation>(-5, -0, 0),
-                                                                               }
-    );
-    light->set_transform_operations(lightoperations);
 
-    std::shared_ptr<Base_shader> shader = std::make_shared<Lambert_shader>(camera, light, "../shader/vertex_shader/lambert.vert", "../shader/fragment_shader/lambert.frag");
-    std::shared_ptr<Observer> observer_shader = std::static_pointer_cast<Observer>(shader);
-    camera->attach(observer_shader);
-    camera->notify();
     set_inputs();
 
-    std::shared_ptr<Base_shader> phong = std::make_shared<Phong_shader>(camera, light, "../shader/vertex_shader/phong.vert", "../shader/fragment_shader/phong.frag");
+    std::shared_ptr<Base_shader> flat = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/constant.frag");
+    std::shared_ptr<Observer> observer_flat = std::static_pointer_cast<Observer>(flat);
+    camera->attach(observer_flat);
+    camera->notify();
+
+    std::shared_ptr<Base_shader> lambert = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/lambert.frag");
+    std::shared_ptr<Observer> observer_lambert = std::static_pointer_cast<Observer>(lambert);
+    camera->attach(observer_lambert);
+    camera->notify();
+
+
+    std::shared_ptr<Base_shader> phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
     std::shared_ptr<Observer> observer_phong = std::static_pointer_cast<Observer>(phong);
     camera->attach(observer_phong);
     camera->notify();
 
-    std::shared_ptr<Base_shader> blinn = std::make_shared<Blinn_shader>(camera, light, "../shader/vertex_shader/blinn.vert", "../shader/fragment_shader/blinn.frag");
+    std::shared_ptr<Base_shader> blinn = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/blinn.frag");
     std::shared_ptr<Observer> observer_blinn = std::static_pointer_cast<Observer>(blinn);
     camera->attach(observer_blinn);
     camera->notify();
 
 
-    Renderable_object sphere = Renderable_object(Mesh("../resources/models/sphere.obj"), shader).set_name("sphere").set_transform_operations(
+#include "../resources/models/models_2023/Models/sphere.h"
+
+//#include "../resources/models/models_2023/Models/tree.h"
+
+    Renderable_object sphere = Renderable_object(Mesh(sphere_vec), lambert).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(1, 1, 0)
-            ), false);
+                    std::make_shared<Transforms::Translation>(0, 2, 0)
+            ), false).set_material(default_material);
     add_object(sphere);
 
-    Renderable_object sphere2 = Renderable_object(Mesh("../resources/models/sphere.obj"), phong).set_name("sphere").set_transform_operations(
+    Renderable_object sphere2 = Renderable_object(Mesh(sphere_vec), phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(1, -1, 0)
-            ), false);
+                    std::make_shared<Transforms::Translation>(2, -2, 0)
+            ), false).set_material(default_material);
     add_object(sphere2);
 
-    Renderable_object sphere3 = Renderable_object(Mesh("../resources/models/sphere.obj"), blinn).set_name("sphere").set_transform_operations(
+    Renderable_object sphere3 = Renderable_object(Mesh(sphere_vec), blinn).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(-1, 1, 0)
-            ), false);
+                    std::make_shared<Transforms::Translation>(-2, 2, 0)
+            ), false).set_material(default_material);
     add_object(sphere3);
 
-    Renderable_object sphere4 = Renderable_object(Mesh("../resources/models/sphere.obj"), shader).set_name("sphere").set_transform_operations(
+    Renderable_object sphere4 = Renderable_object(Mesh(sphere_vec), flat).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(-1, -1, 0)
-            ), false);
-    sphere4.set_transform_operations(lightoperations, true);
+                    std::make_shared<Transforms::Translation>(-2, -2, 0)
+            ), false).set_material(default_material);
     add_object(sphere4);
 
 
 
+    //Renderable_object pyramid = Renderable_object(Mesh(sphere_vec), shader).set_name("koule");
+
     //Renderable_object suzie4k = Renderable_object(Mesh("../resources/models/suzi.obj"), ).set_name("opice4k");
-    Renderable_object suzie4k = Renderable_object(Mesh("../resources/models/suzi.obj"), shader).set_name("opice4k");
+    Renderable_object suzie4k = Renderable_object(Mesh("../resources/models/suzi.obj"), lambert).set_name("opice4k").set_material(default_material);
 
     suzie4k.set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add({
@@ -190,7 +196,7 @@ void Scene::set_scene() {
                                                                                          }), true);
     add_object(suzie4k);//todo remake api from add_object so i dont have to call add_object
 
-    Renderable_object grid_down = Renderable_object(Mesh("../resources/models/grid.obj"), shader).set_name("grid_down");
+    Renderable_object grid_down = Renderable_object(Mesh("../resources/models/grid.obj"), lambert).set_name("grid_down").set_material(default_material);
     grid_down.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
                                                                                                    std::make_shared<Transforms::Translation>(0, -2, 0),
                                                                                                    std::make_shared<Transforms::Scale>(1.5),
@@ -198,14 +204,14 @@ void Scene::set_scene() {
     add_object(grid_down);
 
 
-    Renderable_object grid_up = Renderable_object(Mesh("../resources/models/grid.obj"), shader).set_name("grid_up");
+    Renderable_object grid_up = Renderable_object(Mesh("../resources/models/grid.obj"), lambert).set_name("grid_up").set_material(default_material);
     grid_up.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
                                                                                                  std::make_shared<Transforms::Translation>(0, 2, 0),
                                                                                                  std::make_shared<Transforms::Scale>(1.5),
                                                                                          }), false);
     add_object(grid_up);
 
-    Renderable_object rat = Renderable_object(Mesh("../resources/models/rat.obj"), shader).set_name("rat");
+    Renderable_object rat = Renderable_object(Mesh("../resources/models/rat.obj"), lambert).set_name("rat").set_material(default_material);
     rat.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
             std::make_shared<Transforms::Scale>(0.7)
     ), false);

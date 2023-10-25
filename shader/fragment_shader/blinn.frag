@@ -6,8 +6,8 @@ in vec3 worldNormal;
 uniform vec3 cameraPosition;
 uniform vec3 lightPosition;
 uniform vec4 lightColor;
-//uniform vec4 meshColor;
-vec4 meshColor = vec4(1.0, 0.0, 0.0, 1.0);
+uniform vec4 meshColor;
+//vec4 meshColor = vec4(0.385, 0.647, 0.812, 1.0);
 
 out vec4 fragColor;
 

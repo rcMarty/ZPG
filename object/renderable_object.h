@@ -10,6 +10,7 @@
 #include <glm/glm.hpp>
 #include <functional>
 #include "transform/transform_node.h"
+#include "material.h"
 
 
 typedef GLuint Shader_ID;
@@ -21,6 +22,8 @@ private:
     std::shared_ptr<Base_shader> shader;
     glm::mat4 Matrix = glm::mat4(1.0f);
     std::shared_ptr<Transforms::Transform> transform_operations;
+    std::shared_ptr<Material> material;
+
     bool animated = false;
     //Shader_ID shader;
 
@@ -30,7 +33,7 @@ public:
 
     Renderable_object() = default;
 
-    Renderable_object(Mesh mesh, std::shared_ptr<Base_shader> &shader);
+    Renderable_object(Mesh mesh, std::shared_ptr<Base_shader> shader);
 
     void init();
 
@@ -42,6 +45,8 @@ public:
 
     //void set_variable(std::string variable, glm::mat4 value);
     Renderable_object set_shader(std::shared_ptr<Base_shader> shader);
+
+    Renderable_object set_material(std::shared_ptr<Material> material);
 
     Renderable_object set_mesh(const Mesh &mesh);
 

@@ -28,7 +28,6 @@ public:
 
     Scene(std::shared_ptr<input::Input_handler> input_handler, std::shared_ptr<GLFWwindow> glfWwindow) : input_handler(input_handler), window(glfWwindow) {};
 
-
     Scene add_object(const Renderable_object &object);
 
     Renderable_object find_object(const std::string &name);

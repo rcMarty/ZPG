@@ -22,37 +22,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="added callbacks for input handling&#10;working movement of camera&#10;&#10;added readme">
-      <change afterPath="$PROJECT_DIR$/object/light/light.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/light/light.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/blinn_shader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/blinn_shader.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/constant_shader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/constant_shader.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/lambert_shader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/lambert_shader.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/observer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/observer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/phong_shader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/phong_shader.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/blinn.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/constant.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/lambert.vert" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/phong.vert" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/material.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/object/material.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/model.vert" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camera/camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/camera/camera.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/camera/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/camera/camera.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/light/light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/light/light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/mesh.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/mesh.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/mesh.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/mesh.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/renderable_object.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/renderable_object.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/renderable_object.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/flat.frag" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/base_shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/base_shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/blinn_shader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/blinn_shader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/constant_shader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/constant_shader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/lambert_shader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/lambert_shader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/phong_shader.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/phong_shader.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/blinn.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/constant.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/flat_v3.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/lambert.vert" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/vertex_shader/phong.vert" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +64,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="113443" />
+    <option name="totalTimeSeconds" value="122824" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -120,27 +121,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/rc_marty/5_Semestr/ZPG&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;,
-    &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "git-widget-placeholder": "Light-and-refactoring",
+    "last_opened_file_path": "/home/rc_marty/5_Semestr/ZPG",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "actions.on.save",
+    "structure.view.defaults.are.configured": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/object/light" />
@@ -148,9 +149,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
@@ -158,7 +159,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -229,6 +230,12 @@
       <workItem from="1698090165152" duration="1043000" />
       <workItem from="1698093472933" duration="3844000" />
       <workItem from="1698099834089" duration="2000" />
+      <workItem from="1698137798381" duration="5801000" />
+      <workItem from="1698245375489" duration="5815000" />
+      <workItem from="1698255855789" duration="6000" />
+      <workItem from="1698255868120" duration="2907000" />
+      <workItem from="1698258776377" duration="10000" />
+      <workItem from="1698258793862" duration="2461000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
