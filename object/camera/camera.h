@@ -57,7 +57,7 @@ public:
     glm::vec3 get_position();
 
 
-    void attach(std::shared_ptr<Observer> &observer);
+    void attach(std::shared_ptr<Observer> observer);
 
     void notify();
 

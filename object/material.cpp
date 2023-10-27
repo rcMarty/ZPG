@@ -44,3 +44,10 @@ void Material::set_variables(std::shared_ptr<Base_shader> shader) {
 //    uniform float specularStrength;
 //    uniform int specularPower;
 }
+
+Material::Material(glm::vec4 color, glm::vec4 ambient, float specularStrength, int specularPower) {
+    this->color = color;
+    this->ambient = ambient;
+    this->specularStrength = specularStrength;
+    this->specularPower = specularPower;
+}

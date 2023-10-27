@@ -8,7 +8,7 @@
 #include "glm/gtx/rotate_vector.hpp"
 
 
-void Camera::attach(std::shared_ptr<Observer> &observer) {
+void Camera::attach(std::shared_ptr<Observer> observer) {
     this->observers.push_back(observer);
 }
 
@@ -75,7 +75,12 @@ void Camera::go_vertical(float distance) {
     //printf("[DEBUG] go_vertical eye: %f, %f, %f\n", eye.x, eye.y, eye.z);
 }
 
-void Camera::look_mouse(double x, double y) {
+void Camera::look_mouse(double data_x, double data_y) {
+    double x = data_x - last_x;
+    double y = last_y - data_y;
+
+    last_x = data_x;
+    last_y = data_y;
 
     x *= mouse_sensitivity;
     y *= mouse_sensitivity;
@@ -92,7 +97,8 @@ void Camera::look_mouse(double x, double y) {
     front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     front.y = sin(glm::radians(pitch));
     front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
-    target = glm::normalize(front);
+    this->target = glm::normalize(front);
+
 
     this->notify();
 }

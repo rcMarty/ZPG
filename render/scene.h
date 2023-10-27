@@ -17,9 +17,6 @@ private:
     std::shared_ptr<Camera> camera;
     std::shared_ptr<GLFWwindow> window;
 
-
-    void set_scene();
-
     void set_inputs();
 
 
@@ -36,6 +33,10 @@ public:
 
     void render();
 
+    void set_debug_scene();
 
+    void set_phong_scene();
+
+    void set_rotation_scene();
 };
 

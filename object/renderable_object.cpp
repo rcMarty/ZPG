@@ -26,12 +26,17 @@ void Renderable_object::init() {
 
 void Renderable_object::render() {
     shader->use_shader();
+    if (move != nullptr)
+        shader->set_variable("modelMatrix", move(Matrix));
 
-    if (animated)
+    else if (animated) {
         Matrix = transform_operations->get_matrix(Matrix);
+        shader->set_variable("modelMatrix", Matrix);
+    } else
+        shader->set_variable("modelMatrix", Matrix);
 
     material->set_variables(shader);
-    shader->set_variable("modelMatrix", Matrix);
+
     shader->update();
     mesh->render();
 
@@ -63,6 +68,11 @@ Renderable_object::set_transform_operations(std::shared_ptr<Transforms::Transfor
 
 Renderable_object Renderable_object::set_material(std::shared_ptr<Material> material) {
     this->material = material;
+    return *this;
+}
+
+Renderable_object Renderable_object::set_move(std::function<glm::mat4(glm::mat4)> transformations) {
+    this->move = transformations;
     return *this;
 }
 

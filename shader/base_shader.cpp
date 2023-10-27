@@ -11,8 +11,8 @@ const char *Base_shader::load_shader(const std::string &vertex_shader_path) {
     std::ifstream file(vertex_shader_path);
     //check if file exists
     if (!file.is_open()) {
-        fprintf(stderr, "Could not open file %s\n", vertex_shader_path.c_str());
-        return nullptr;
+        //fprintf(stderr, "Could not open file %s\n", vertex_shader_path.c_str());
+        throw std::runtime_error("Could not open shader file " + vertex_shader_path);
     }
     std::string str;
     std::string file_contents;

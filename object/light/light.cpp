@@ -28,3 +28,8 @@ void Light::update() {
     }
 
 }
+
+Light::Light(glm::vec4 light_color, glm::vec3 light_position) {
+    this->light_color = light_color;
+    this->light_position = light_position;
+}

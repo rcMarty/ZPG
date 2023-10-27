@@ -21,6 +21,8 @@ public:
 
     Material() = default;
 
+    Material(glm::vec4 color, glm::vec4 ambient, float specularStrength, int specularPower);
+
     Material(glm::vec4 ambient, glm::vec4 diffuse, glm::vec4 specular, float shininess);
 
     Material set_color(glm::vec4 color);

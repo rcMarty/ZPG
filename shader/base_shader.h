@@ -17,7 +17,7 @@
 class Camera;
 
 class Base_shader : public Observer {
-protected:
+private:
     GLint shader_id;
 
     static const char *load_shader(const std::string &vertex_shader_path);

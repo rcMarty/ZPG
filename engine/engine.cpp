@@ -47,7 +47,7 @@ void Engine::init() {
     this->input_handler = std::make_shared<input::Input_handler>();
     glfwSetWindowUserPointer(window.get(), this->input_handler.get());
 
-
+    // set callback for focusing and unfocusing mouse
     input_handler->subscribe([&](input::Key_event_data data) {
         static bool locked_cursor = false;
         if (data.key == GLFW_KEY_SPACE && data.action == GLFW_PRESS) {
@@ -63,9 +63,6 @@ void Engine::init() {
             }
         }
     });
-
-
-
 
 
     // start GLEW extension handler
@@ -87,18 +84,61 @@ void Engine::init() {
     glfwGetFramebufferSize(window.get(), &width, &height);
     glViewport(0, 0, width, height);
 
+    auto debug_scene = std::make_shared<Scene>(input_handler, window);
+    debug_scene->set_debug_scene();
+    this->scene.push_back(debug_scene);
 
-    this->scene = std::make_shared<Scene>(input_handler, window);
-    scene->init();
+
+    auto phong_scene = std::make_shared<Scene>(input_handler, window);
+    phong_scene->set_phong_scene();
+    this->scene.push_back(phong_scene);
+
+
+    auto rotation_scene = std::make_shared<Scene>(input_handler, window);
+    rotation_scene->set_rotation_scene();
+    this->scene.push_back(rotation_scene);
+
+
+//    auto rotation_scene = std::make_shared<Scene>(input_handler, window);
+//    rotation_scene->set_debug_scene();
+//    this->scene.push_back(debug_scene);
+//
+//
+//    auto debug_scene = std::make_shared<Scene>(input_handler, window);
+//    debug_scene->set_debug_scene();
+//    this->scene.push_back(debug_scene);
+//
+//
+//    auto debug_scene = std::make_shared<Scene>(input_handler, window);
+//    debug_scene->set_debug_scene();
+//    this->scene.push_back(debug_scene);
+//
+//
+//    auto debug_scene = std::make_shared<Scene>(input_handler, window);
+//    debug_scene->set_debug_scene();
+//    this->scene.push_back(debug_scene);
+
+
+    for (auto &i: scene) {
+        i->init();
+    }
+    //subscribe on tab switch scene
+    input_handler->subscribe([&](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_TAB && data.action == GLFW_PRESS) {
+            printf("[DEBUG] tab pressed\n");
+            current_scene = (current_scene + 1) % scene.size();
+        }
+    });
+
 }
 
 void Engine::run() {
-
+    current_scene = 2;
 
     while (!glfwWindowShouldClose(window.get())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        this->scene->render();
+        this->scene[current_scene]->render();
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display
         glfwSwapBuffers(window.get());

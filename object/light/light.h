@@ -11,8 +11,9 @@
 #include <memory>
 #include "../../shader/observer.h"
 #include "../transform/transform.h"
+#include "../renderable_object.h"
 
-class Light {
+class Light : Renderable_object, Observer {
     glm::vec4 light_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     glm::vec3 light_position = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::mat4 matrix = glm::mat4(1.0f);
@@ -20,6 +21,10 @@ class Light {
 
 
 public:
+
+    Light() = default;
+
+    Light(glm::vec4 light_color, glm::vec3 light_position);
 
     glm::vec4 get_color() const;
 

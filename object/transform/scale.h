@@ -22,7 +22,7 @@ namespace Transforms {
 
         Scale() : scale(1, 1, 1) {}
 
-        
+
         Scale set_scale(float x, float y, float z) {
             scale = glm::vec3(x, y, z);
             return *this;

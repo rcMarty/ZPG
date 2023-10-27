@@ -34,7 +34,6 @@ set(SOURCE_FILES
         object/camera/camera.h
         object/camera/camera.cpp
         input_handle/input_handler.h
-        input_handle/input_handler.cpp
         engine/engine.h
         engine/engine.cpp
         main.cpp
@@ -52,7 +51,6 @@ add_executable(ZPG
         object/renderable_object.cpp
         render/window.cpp
         object/camera/camera.cpp
-        input_handle/input_handler.cpp
         shader/observer.cpp
         shader/observer.h
         object/light/light.cpp
