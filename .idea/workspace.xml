@@ -21,16 +21,10 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="added more scenes&#10;bugfix of transformations, camera, light">
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/bad_phong.frag" afterDir="false" />
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="ready for consultation i guess">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/camera.gif" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/models/plain.h" beforeDir="false" afterPath="$PROJECT_DIR$/resources/models/plain.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +35,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="154406" />
+    <option name="totalTimeSeconds" value="154424" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -222,7 +216,7 @@
       <workItem from="1698573330245" duration="1257000" />
       <workItem from="1698574594252" duration="1854000" />
       <workItem from="1698598602203" duration="14233000" />
-      <workItem from="1698618636281" duration="1000" />
+      <workItem from="1698618636281" duration="541000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -344,7 +338,23 @@
       <option name="project" value="LOCAL" />
       <updated>1698439283889</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="ready for consultation i guess">
+      <option name="closed" value="true" />
+      <created>1698618781647</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1698618781647</updated>
+    </task>
+    <task id="LOCAL-00017" summary="ready for consultation i guess">
+      <option name="closed" value="true" />
+      <created>1698618887582</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1698618887582</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -411,7 +421,8 @@
     <MESSAGE value="little bit of refactoring&#10;added material&#10;restructurated shaders&#10;&#10;Took 2 hours 40 minutes" />
     <MESSAGE value="added resizing of window" />
     <MESSAGE value="added more scenes&#10;bugfix of transformations, camera, light" />
-    <option name="LAST_COMMIT_MESSAGE" value="added more scenes&#10;bugfix of transformations, camera, light" />
+    <MESSAGE value="ready for consultation i guess" />
+    <option name="LAST_COMMIT_MESSAGE" value="ready for consultation i guess" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

@@ -461,7 +461,7 @@ void Scene::set_rotation_scene() {
                         std::make_shared<Transforms::Translation>(1.5, 0, 0),
                         std::make_shared<Transforms::Scale>(0.1),
                 }));
-        y += 4;
+        y += 3.5;
         return transf->get_matrix(m);
     };
     moon1.set_move(moon1_move);
@@ -487,6 +487,7 @@ void Scene::set_check_phong_scene() {
     std::shared_ptr<Light> light = std::make_shared<Light>();
 
     set_inputs();
+
 
     std::shared_ptr<Base_shader> phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
     std::shared_ptr<Observer> observer_phong = std::static_pointer_cast<Observer>(phong);
