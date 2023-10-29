@@ -38,5 +38,7 @@ public:
     void set_phong_scene();
 
     void set_rotation_scene();
+
+    void set_check_phong_scene();
 };
 

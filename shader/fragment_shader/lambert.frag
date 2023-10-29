@@ -38,7 +38,9 @@ void main() {
     vec3 lightVector = normalize(lightPosition - worldPosition);
 
     float diff = max(dot(lightVector, worldNormal), 0);
-    vec4 diffuse = diff * lightColor;
+
+    float attenuation = 1.0 / (1.0 + 0.1 * pow(length(lightPosition - worldPosition), 2));
+    vec4 diffuse = diff * lightColor * attenuation;
 
     fragColor = (ambientColor + diffuse) * meshColor;
 }

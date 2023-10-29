@@ -99,6 +99,10 @@ void Engine::init() {
     this->scene.push_back(rotation_scene);
 
 
+    auto check_scene = std::make_shared<Scene>(input_handler, window);
+    check_scene->set_check_phong_scene();
+    this->scene.push_back(check_scene);
+
 //    auto rotation_scene = std::make_shared<Scene>(input_handler, window);
 //    rotation_scene->set_debug_scene();
 //    this->scene.push_back(debug_scene);
@@ -133,12 +137,13 @@ void Engine::init() {
 }
 
 void Engine::run() {
-    current_scene = 2;
+    current_scene = 0;
 
     while (!glfwWindowShouldClose(window.get())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         this->scene[current_scene]->render();
+
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display
         glfwSwapBuffers(window.get());
