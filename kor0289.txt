@@ -1,0 +1,115 @@
+Základy počítačové grafiky 2023/2024
+
+Jméno a příjmení: Martin Korotwitschka
+Login: kor0289
+
+V několika větách popište kde máte ve zdrojovém kódu danou věc (třída, řádek), jak funguje a jaké má výhody/nevýhody. Splněno nechte, jen pokud je vše splněno a funkční, jinak nesplněno. 
+
+
+1. Třída ShaderProgram
+----------------------
+  a) splněno
+     Popis: Ve třídě Base_shader na řádku 21 (.h soubor), gettery a settery nemám 
+
+  b) splněno 
+     Popis: Ve třídě Base_shader na řádku 35 a na řádku 37 (.h soubor)
+
+  c) splněno 
+     Popis: Ve třídě Base_shader na řádku 41 - 49 (.h soubor). Pokusí se najít uniform proměnnou podle vstupního stringu a pokud najde tak ji nastaví na value
+
+  d) splněno
+    //Konkrétní shadery bude možné načítat z textových souboru (např. phongVertexShader.glsl). Pokud jste použili mnou dodaný ShaderLoader, jak jste jej použili?
+     Popis: Ve třídě Base_shader je privátní statická funkce `load_shader` na načtení souboru do `const char *`. Tohle pole charů se poté předává do compile_shader kde se zkompilují jednotlivé shadery a nakonec se předají funkci link_shader která vrátí finální shader. 
+     Za mě to má výhodu že nejde použít špatně resp nejde použít mimo Base_shader
+
+
+2. Třída DrawableModel
+----------------------
+  a) splněno
+     Popis: Třída Renderable_object
+
+
+3. Transformace
+----------------------
+  a) splněno
+     Popis: Používám statické a dynamické transformace
+     Staické se udělají jen jednou při vytváření objektu a dynamické dělám každým snímkem v lambda funkci.
+
+  b) splněno
+     Popis: scene.cpp řádek 174 (dynamická transformace která vychází z transformované matice)
+
+  c) splněno
+     Popis: Dělám za pomocí lambda funkce scene.cpp řádek 441
+
+  d) splněno
+     Popis: transformace se vytváří za pomocí kompozitu a dají se uložit a znovu použít ve staické transformaci a nebo když se vychází z předchozí transformace
+
+
+
+4. Třída Camera
+----------------------
+  a) splněno 
+     Popis: Třída Camera je Subject má v sobě seznam observerů (nyní jsou zde pouze shadery) a ty upozorní na změnu své polohy či targetu když se kamera updatuje (Třída Input_handler). 
+     Třída Input_handler používá GLEW callbacky a je taktéž implementován observer patternem a je Subject. Díky glfwGetWindowUserPointer(window) se dostanu v tom callbacku do třídy Input_handler a můžu notifynout všechny subscribery.
+     Drží v sobě seznam funkcí pro každý callback a když se nějaký provede tak provede všechny funkce které jsou subscribnuté k tomuto callbacku.
+     Cokoli se může subscribnout na jakýkoli z callbacků a s vrácenými informacemi si může dělat co se mu zrovna hodí. Třída Camera subscribuje ve třídě Scene na řádcích 45-121
+     Na pohyb se používá callback key_callback a subscriber je kamera se svými pohyby plus pro upravení fow a aspect_ratia
+
+
+  b) splněno
+     Popis: Stějně jako v bodě a, navíc callback na vypnutí a zapnutí focusu myši na mezerníku - třída Engine řádky 50-65
+
+  c) splněno
+     Popis: Třída Camera má v sobě seznam Observerů. Když se kamera updatuje tak upozorní všechny shadery (Observery) že se změnila. Ty si pak getnou to co je zajímá z té kamery ( get_projection_matrix a get_view_matrix )
+     A nastaví si svoje Uniformy 
+
+
+5. Třída Light
+----------------------
+  a) nesplněno 
+     Popis: světlo není přes observer protože mi přijde zbytečné používat observer když máme renderovací smyčku a budeme mít více světel.
+     světlo má útlum 
+     shaderwrapper ví o světlu a updatuje ho každým framem ikdyž není dynamické
+
+  b) splněno
+     Popis: ano když udělám světlo jinak na jiných pozicích s jinou barvou tak se tato změna projeví v shaderu scene.cpp řádek 137
+
+6. Třída Material
+----------------------
+  a) splněno
+     Popis: používám a nastavuji ambientní světlo, specular strength (pro barvu světla když se na objekt svítí přímo) specular power (ta mocnina pro odraz)
+
+
+
+Testovací scény  
+
+1) Základní test Phongova osvětlovacího modelu.
+----------------------
+  splněno 
+  Popis: druhá scéna
+
+2) Test na rotaci a jeji skládání. 
+----------------------
+  splněno
+  Popis: třetí scéna
+  země kolem slunce, a kolem slunce obíhá měsíc, oběžná dráha je nakloněná
+
+3) Test na ořezání světla, které nemůže dopadnou na plochu.
+----------------------
+  splněno
+  Popis: čtvrtá scéna, dvě kuličky na kterých jde krásně vidět rozdíl, používá dva různé fragment shadery
+
+4) Test na změnu velikosti obrazovky. 
+----------------------
+  splněno
+  Popis: callback na resize, observer, callback v třídě Input_handler řádek 116 
+  subscribuje camera v scene.cpp třeba na řádku 483 a kamera si poté přenastaví fov a ratio
+
+5) Testování na více objektů a použití více shaderu ve scéně (procházení lesa). 
+----------------------
+  splněno
+  Popis: 
+  použity všechny shadery
+  nejen 100 low poly stromů s náhodnou pozicí a rotací, 100 krys s náhodnou pozicí a rotací
+  celkově verts cca 12M
+
