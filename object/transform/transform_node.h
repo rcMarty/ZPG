@@ -17,7 +17,7 @@ namespace Transforms {
     public:
 
         std::shared_ptr<Transform_node> add(std::shared_ptr<Transform> child) {
-            
+
             this->children.push_back(child);
             return std::make_shared<Transform_node>(*this);
         }
@@ -29,7 +29,7 @@ namespace Transforms {
         }
 
         virtual glm::mat4x4 get_matrix(glm::mat4x4 input_matrix) override {
-            for (auto child: children) {
+            for (const auto &child: children) {
                 //printf("[DEBUG] Transform_node: _____________________________________\n");
                 //printf("[DEBUG] BEFORE Matrix:\n%s\n", print_matrix(input_matrix).c_str());
                 input_matrix = child->get_matrix(input_matrix);

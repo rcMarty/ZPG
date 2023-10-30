@@ -18,17 +18,47 @@ endif ()
 
 set(OUTPUT_DIR "${CMAKE_BINARY_DIR}")
 
+#file(GLOB_RECURSE ZPG_src "src/*.cpp" "src/*.h")
+
+set(SOURCE_FILES
+        shader/observer.h
+        shader/observer.cpp
+        render/scene.h
+        render/scene.cpp
+        render/window.h
+        render/window.cpp
+        object/mesh.h
+        object/mesh.cpp
+        object/renderable_object.h
+        object/renderable_object.cpp
+        object/camera/camera.h
+        object/camera/camera.cpp
+        input_handle/input_handler.h
+        engine/engine.h
+        engine/engine.cpp
+        main.cpp
+
+
+)
+
 
 add_executable(ZPG
         main.cpp
         engine/engine.cpp
-        shader/shader.cpp
+        shader/base_shader.cpp
         render/scene.cpp
         object/mesh.cpp
         object/renderable_object.cpp
         render/window.cpp
-        camera/camera.cpp
-        input_handle/input_handler.cpp
+        object/camera/camera.cpp
+        shader/observer.cpp
+        shader/observer.h
+        object/light/light.cpp
+        object/light/light.h
+        shader/shader_wrapper.h
+        shader/shader_wrapper.cpp
+        object/material.cpp
+        object/material.h
 
 )
 

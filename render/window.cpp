@@ -4,10 +4,10 @@
 
 #include "window.h"
 
-Window::Window(int width, int height, std::string name) {
+Window::Window(int width, int height, const std::string &name) {
     this->width = width;
     this->height = height;
-    this->title = std::move(name);
+    this->title = name;
 }
 
 

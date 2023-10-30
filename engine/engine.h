@@ -18,7 +18,8 @@ protected:
     //shared pointer na okno
     std::shared_ptr<GLFWwindow> window;
     std::shared_ptr<input::Input_handler> input_handler;
-    std::shared_ptr<Scene> scene;
+    std::vector<std::shared_ptr<Scene>> scene;
+    int current_scene = 0;
     //shared pointer na shader
     //shared pointer na kameru
     //shared pointer na světlo

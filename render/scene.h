@@ -17,9 +17,6 @@ private:
     std::shared_ptr<Camera> camera;
     std::shared_ptr<GLFWwindow> window;
 
-
-    void set_scene();
-
     void set_inputs();
 
 
@@ -27,7 +24,6 @@ public:
     Scene() = delete;
 
     Scene(std::shared_ptr<input::Input_handler> input_handler, std::shared_ptr<GLFWwindow> glfWwindow) : input_handler(input_handler), window(glfWwindow) {};
-
 
     Scene add_object(const Renderable_object &object);
 
@@ -37,6 +33,12 @@ public:
 
     void render();
 
+    void set_debug_scene();
 
+    void set_phong_scene();
+
+    void set_rotation_scene();
+
+    void set_check_phong_scene();
 };
 
