@@ -22,84 +22,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="ready for consultation i guess">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ZPG.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace-MartyPCLinux.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OPICE.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/engine/engine.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/input_handle/input_handler.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_2.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_3a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_3b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_4a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_4b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_5a.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kor0289_5b.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/light.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/light_epilepsy.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/monky.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/camera/camera.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/camera/camera.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/light/light.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/light/light.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/material.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/material.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/mesh.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/mesh.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/renderable_object.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/renderable_object.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/rotation.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/scale.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/transform.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/transform_node.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object/transform/translation.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rectangle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/render/window.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/render/window.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/backpack.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/grid.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/m4.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/models_2023.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/plain.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/plant.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/pyramid.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/rat.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/sphere.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/sphere.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/square.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/suzi.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/suzi_flat.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/suzi_smooth.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/tree.obj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/models/triangle.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/base_shader.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/base_shader.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/bad_phong.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/flat_v3.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/observer.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/observer.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/shader_wrapper.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/shader_wrapper.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/model.vert" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/light/light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/light/light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/shader_wrapper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader_wrapper.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +39,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="154660" />
+    <option name="totalTimeSeconds" value="155830" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -291,7 +220,10 @@
       <workItem from="1698573330245" duration="1257000" />
       <workItem from="1698574594252" duration="1854000" />
       <workItem from="1698598602203" duration="14233000" />
-      <workItem from="1698618636281" duration="1203000" />
+      <workItem from="1698618636281" duration="1848000" />
+      <workItem from="1698697745879" duration="599000" />
+      <workItem from="1698700668564" duration="2543000" />
+      <workItem from="1698781833260" duration="1443000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -437,7 +369,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698619214978</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="ready for consultation i guess">
+      <option name="closed" value="true" />
+      <created>1698619872860</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1698619872860</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

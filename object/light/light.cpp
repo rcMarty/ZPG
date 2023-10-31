@@ -12,6 +12,7 @@ glm::vec3 Light::get_position() const {
     return light_position;
 }
 
+
 Light Light::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations) {
     this->transform_operations = transform_operations;
     matrix = transform_operations->get_matrix(matrix);
@@ -32,4 +33,8 @@ void Light::update() {
 Light::Light(glm::vec4 light_color, glm::vec3 light_position) {
     this->light_color = light_color;
     this->light_position = light_position;
+}
+
+glm::vec3 Light::get_attenuation() const {
+    return light_attenuation;
 }

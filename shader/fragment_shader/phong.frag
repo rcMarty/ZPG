@@ -6,6 +6,8 @@ in vec3 worldNormal;
 uniform vec3 cameraPosition;
 uniform vec3 lightPosition;
 uniform vec4 lightColor;
+uniform vec3 lightAttenuation;
+
 
 //material things
 uniform vec4 meshColor;
@@ -38,7 +40,7 @@ void main() {
     float diff = max(dot(lightVector, worldNormal), 0);
 
 
-    float attenuation = 1.0 / (1.0 + 0.1 * pow(length(lightPosition - worldPosition), 2));
+    float attenuation = 1.0 / (lightAttenuation.x + lightAttenuation.y * length(lightPosition - worldPosition) + lightAttenuation.z * pow(length(lightPosition - worldPosition), 2));
 
     vec4 diffuse = diff * lightColor * attenuation;
 
