@@ -21,10 +21,6 @@ private:
 
     std::shared_ptr<Transforms::Transform> transform_operations;
     std::shared_ptr<Material> material;
-    std::function<glm::mat4(glm::mat4)> move = nullptr;
-
-
-    bool animated = false;
 
 public:
     std::string name;
@@ -37,13 +33,11 @@ public:
 
     void init();
 
-    void render();
+    void render(double delta_time);
 
     Renderable_object set_name(std::string name);
 
-    Renderable_object set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool animated);
-
-    Renderable_object set_move(std::function<glm::mat4(glm::mat4)> transformations);
+    Renderable_object set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr = false);
 
     // void set_variable(std::string variable, glm::mat4 value);
 

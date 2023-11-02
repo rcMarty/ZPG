@@ -24,14 +24,14 @@ void Renderable_object::init() {
     mesh->init();
 }
 
-void Renderable_object::render() {
-    shader->use_shader();
-    if (move != nullptr)
-        shader->set_variable("modelMatrix", move(Matrix));
+void Renderable_object::render(double delta_t) {
 
-    else if (animated) {
-        Matrix = transform_operations->get_matrix(Matrix);
-        shader->set_variable("modelMatrix", Matrix);
+    shader->use_shader();
+    if (transform_operations) {
+        transform_operations->tick(delta_t);
+        auto mat = transform_operations->get_matrix(Matrix);
+        //printf("[DEBUG] Renderable_object: %s,Matrix:\n%s\n", this->name.c_str(), transform_operations->print_matrix(mat).c_str());
+        shader->set_variable("modelMatrix", mat);
     } else
         shader->set_variable("modelMatrix", Matrix);
 
@@ -59,10 +59,10 @@ Renderable_object Renderable_object::set_mesh(const Mesh &input_mesh) {
 }
 
 Renderable_object
-Renderable_object::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool animated) {
+Renderable_object::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr) {
     this->transform_operations = transform_operations;
-    this->animated = animated;
-    Matrix = transform_operations->get_matrix(Matrix);
+    if (static_tr)
+        Matrix = transform_operations->get_matrix(Matrix);
     return *this;
 }
 
@@ -71,10 +71,6 @@ Renderable_object Renderable_object::set_material(std::shared_ptr<Material> mate
     return *this;
 }
 
-Renderable_object Renderable_object::set_move(std::function<glm::mat4(glm::mat4)> transformations) {
-    this->move = transformations;
-    return *this;
-}
 
 
 

@@ -20,6 +20,9 @@ protected:
     std::shared_ptr<input::Input_handler> input_handler;
     std::vector<std::shared_ptr<Scene>> scene;
     int current_scene = 0;
+
+    clock_t delta_time = 0.0;
+    clock_t last_frame = 0.0;
     //shared pointer na shader
     //shared pointer na kameru
     //shared pointer na světlo

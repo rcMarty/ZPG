@@ -13,6 +13,7 @@
 #include "../input_handle/input_handler.h"
 #include <memory>
 #include <vector>
+#include "time.h"
 
 static void error_callback(int error, const char *description) { fputs(description, stderr); }
 
@@ -103,25 +104,6 @@ void Engine::init() {
     check_scene->set_check_phong_scene();
     this->scene.push_back(check_scene);
 
-//    auto rotation_scene = std::make_shared<Scene>(input_handler, window);
-//    rotation_scene->set_debug_scene();
-//    this->scene.push_back(debug_scene);
-//
-//
-//    auto debug_scene = std::make_shared<Scene>(input_handler, window);
-//    debug_scene->set_debug_scene();
-//    this->scene.push_back(debug_scene);
-//
-//
-//    auto debug_scene = std::make_shared<Scene>(input_handler, window);
-//    debug_scene->set_debug_scene();
-//    this->scene.push_back(debug_scene);
-//
-//
-//    auto debug_scene = std::make_shared<Scene>(input_handler, window);
-//    debug_scene->set_debug_scene();
-//    this->scene.push_back(debug_scene);
-
 
     for (auto &i: scene) {
         i->init();
@@ -139,10 +121,13 @@ void Engine::init() {
 void Engine::run() {
     current_scene = 0;
 
+
     while (!glfwWindowShouldClose(window.get())) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        this->scene[current_scene]->render();
+        //printf("[DEBUG] FPS %f\n", fps);
+
+        this->scene[current_scene]->render(1.0);
 
         glfwPollEvents();
         // put the stuff we’ve been drawing onto the display

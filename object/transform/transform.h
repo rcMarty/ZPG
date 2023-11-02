@@ -16,6 +16,8 @@ namespace Transforms {
     public:
         virtual glm::mat4x4 get_matrix(glm::mat4x4 input_matrix) = 0;
 
+        virtual void tick(float delta_time) = 0;
+
         std::string print_matrix(glm::mat4x4 input_matrix) {
             std::string output = "";
             for (size_t i = 0; i < 4; i++) {

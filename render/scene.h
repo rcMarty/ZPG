@@ -31,7 +31,7 @@ public:
 
     void init();
 
-    void render();
+    void render(double delta_time);
 
     void set_debug_scene();
 

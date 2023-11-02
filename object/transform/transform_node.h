@@ -16,16 +16,16 @@ namespace Transforms {
 
     public:
 
-        std::shared_ptr<Transform_node> add(std::shared_ptr<Transform> child) {
-
-            this->children.push_back(child);
+        std::shared_ptr<Transform_node> add(std::vector<std::shared_ptr<Transform>> child) {
+            this->children.insert(children.end(), child.begin(), child.end());
             return std::make_shared<Transform_node>(*this);
         }
 
-        std::shared_ptr<Transform_node> add(std::vector<std::shared_ptr<Transform>> child) {
+        virtual void tick(float delta_time) override {
 
-            this->children.insert(children.end(), child.begin(), child.end());
-            return std::make_shared<Transform_node>(*this);
+            for (const auto &child: children) {
+                child->tick(delta_time);
+            }
         }
 
         virtual glm::mat4x4 get_matrix(glm::mat4x4 input_matrix) override {

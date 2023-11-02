@@ -28,9 +28,9 @@ void Scene::init() {
     }
 }
 
-void Scene::render() {
+void Scene::render(double delta_time) {
     for (auto &object: objects) {
-        object.render();
+        object.render(delta_time);
     }
 }
 
@@ -134,7 +134,7 @@ void Scene::set_debug_scene() {
         printf("[DEBUG] aspect ratio: %f\n", (float) data.width / (float) data.height);
     });
     // glm::vec4(1, 1, 0.5, 1), glm::vec3(0, -5, 0)
-    std::shared_ptr<Light> light = std::make_shared<Light>(glm::vec4(1, 0, 0, 1), glm::vec3(0, -5, 0));
+    std::shared_ptr<Light> light = std::make_shared<Light>(glm::vec4(1, 0, 0, 1), glm::vec3(0, 0, 0));
 
     set_inputs();
 
@@ -167,26 +167,26 @@ void Scene::set_debug_scene() {
     Renderable_object sphere = Renderable_object(sphere_mesh, lambert).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add({
                                                                         std::make_shared<Transforms::Translation>(0, 2, 0),
-                                                                        std::make_shared<Transforms::Scale>(0.1)}
-            ), false).set_material(default_material);
+                                                                }
+            ), true).set_material(default_material);
     add_object(sphere);
 
     Renderable_object sphere2 = Renderable_object(sphere_mesh, phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(0.001, 0, 0)
+                    {std::make_shared<Transforms::Translation>(0, -2, 0)}
             ), true).set_material(default_material);
     add_object(sphere2);
 
     Renderable_object sphere3 = Renderable_object(sphere_mesh, blinn).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(-2, 2, 0)
-            ), false).set_material(default_material);
+                    {std::make_shared<Transforms::Translation>(-2, 2, 0)}
+            ), true).set_material(default_material);
     add_object(sphere3);
 
     Renderable_object sphere4 = Renderable_object(sphere_mesh, flat).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(-2, -2, 0)
-            ), false).set_material(default_material);
+                    {std::make_shared<Transforms::Translation>(-2, -2, 0)}
+            ), true).set_material(default_material);
     add_object(sphere4);
 
     //random number generator
@@ -204,16 +204,29 @@ void Scene::set_debug_scene() {
     Renderable_object suzie4k = Renderable_object(suzi_mesh, lambert).set_name("opice4k").set_material(default_material);
 
     suzie4k.set_transform_operations(
-            std::make_shared<Transforms::Transform_node>()->add({
-                                                                        std::make_shared<Transforms::Translation>(0, 0, 0),
-                                                                        std::make_shared<Transforms::Rotation>(0, 0, 1, 0),
-                                                                }), false);
+            std::make_shared<Transforms::Transform_node>()->add(
+                    {
+                            std::make_shared<Transforms::Translation>(0, 0, 0),
+                            std::make_shared<Transforms::Rotation>(0, 0, 1, 0),
+                    }
+            ), true);
     auto rotate = std::make_shared<Transforms::Transform_node>()->add({
-                                                                              std::make_shared<Transforms::Translation>(-2, 0, 0),
-                                                                              std::make_shared<Transforms::Rotation>(5, 0, 1, 0),
+                                                                              std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
+                                                                                  return angle + 0.1f;
+                                                                              }),
                                                                               std::make_shared<Transforms::Translation>(2, 0, 0),
+                                                                              std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
+                                                                                  return angle + 0.05f;
+                                                                              }),
+                                                                              std::make_shared<Transforms::Scale>(0.1)->set_dynamic_function([](glm::vec3 scale) {
+                                                                                  static float x = 0.0f;
+                                                                                  printf("[DEBUG] scale: %f\n", x);
+                                                                                  x = std::fmod(x, 90.0f);
+                                                                                  x = x + 0.01f;
+                                                                                  return glm::vec3((sin(x) + 1) * 0.5);
+                                                                              }),
                                                                       });
-    suzie4k.set_transform_operations(rotate, true);
+    suzie4k.set_transform_operations(rotate);
     add_object(suzie4k);//todo remake api from add_object so i dont have to call add_object
 
     auto grid_mesh = Mesh("../resources/models/grid.obj");
@@ -222,7 +235,7 @@ void Scene::set_debug_scene() {
     grid_down.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
                                                                                                    std::make_shared<Transforms::Translation>(0, -2, 0),
                                                                                                    std::make_shared<Transforms::Scale>(1.5),
-                                                                                           }), false);
+                                                                                           }), true);
     add_object(grid_down);
 
 
@@ -230,67 +243,41 @@ void Scene::set_debug_scene() {
     grid_up.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
                                                                                                  std::make_shared<Transforms::Translation>(0, 2, 0),
                                                                                                  std::make_shared<Transforms::Scale>(1.5),
-                                                                                         }), false);
+                                                                                         }), true);
     add_object(grid_up);
 
     auto rat_mesh = Mesh("../resources/models/rat.obj");
 
     Renderable_object rat = Renderable_object(rat_mesh, lambert).set_name("rat").set_material(default_material);
     rat.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
-            std::make_shared<Transforms::Scale>(1.5)
-    ), false);
+            {std::make_shared<Transforms::Scale>(1.5)}
+    ), true);
 
+    auto rat_move = std::make_shared<Transforms::Transform_node>()->add(
+            {
+                    std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
+                        return angle + 0.1f;
+                    }),
+                    std::make_shared<Transforms::Translation>(0, 2, 0),
+            });
 
-    rat.set_move([&](glm::mat4 m) {
-        static float x = 0.0f;
-        x = std::fmod(x, 360.0f);
-
-        auto tranformation = std::make_shared<Transforms::Transform_node>()->add({
-                                                                                         std::make_shared<Transforms::Rotation>(x, 0, 1, 0),
-                                                                                         std::make_shared<Transforms::Translation>(4, 0, 0),
-
-                                                                                 });
-        x = x + 0.5f;
-        return tranformation->get_matrix(m);
-
-    });
-    add_object(rat);
+    add_object(rat.set_transform_operations(rat_move));
 
 
     Renderable_object rattatulie = Renderable_object(rat_mesh, phong).set_name("rattatulie").set_material(default_material);
     rattatulie.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
-            std::make_shared<Transforms::Scale>(0.7)
-    ), false);
+            {std::make_shared<Transforms::Scale>(0.7)}
+    ), true);
 
+    auto rattatulie_move = std::make_shared<Transforms::Transform_node>()->add(
+            {
+                    rat_move,
+                    std::make_shared<Transforms::Rotation>(90, 0, 0, 1)->set_dynamic_function([](float angle) {
+                        return angle + 0.1f;
+                    }),
+                    std::make_shared<Transforms::Translation>(0, 0, 2),
+            });
 
-    rattatulie.set_move([&](glm::mat4 m) {
-
-        static float x = 0.0f;
-        static float xx = 0.0f;
-        x = std::fmod(x, 360.0f);
-        xx = std::fmod(xx, 360.0f);
-
-
-        auto tranformation = std::make_shared<Transforms::Transform_node>()->add(
-                {
-                        std::make_shared<Transforms::Rotation>(x, 0, 1, 0),
-                        std::make_shared<Transforms::Translation>(4, 0, 0),
-
-                });
-        x = x + 0.5f;
-
-        tranformation->add(
-                {
-                        std::make_shared<Transforms::Rotation>(xx, 0, 0, 1),
-                        std::make_shared<Transforms::Translation>(0, 1, 0),
-
-                });
-
-        xx = xx + 10.f;
-
-        return tranformation->get_matrix(m);
-
-    });
     add_object(rattatulie);
 
 
@@ -302,7 +289,7 @@ void Scene::set_debug_scene() {
             .set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
                                                                                                   std::make_shared<Transforms::Translation>(0, -10, 0),
                                                                                                   std::make_shared<Transforms::Scale>(50),
-                                                                                          }), false);
+                                                                                          }));
     add_object(plain_obj);
 
     printf("[DEBUG] TREEEEEEEEEEEEEEEEEEE\n");
@@ -323,7 +310,7 @@ void Scene::set_debug_scene() {
                                                                             std::make_shared<Transforms::Rotation>(angle_x, 1, 0, 0),
                                                                             std::make_shared<Transforms::Rotation>(angle_y, 0, 1, 0),
                                                                             std::make_shared<Transforms::Rotation>(angle_z, 0, 0, 1),
-                                                                    }), false).set_material(tree_material);
+                                                                    })).set_material(tree_material);
         add_object(tree);
     }
     //bushes
@@ -338,17 +325,18 @@ void Scene::set_debug_scene() {
         int position_z = position(gen);
         Renderable_object bush = Renderable_object(bush_mesh, lambert).set_name("bush" + std::to_string(i)).set_transform_operations(
                         std::make_shared<Transforms::Transform_node>()->add(
-                                std::make_shared<Transforms::Translation>(position_x, -10, position_z)
-                        ), false)
+                                {std::make_shared<Transforms::Translation>(position_x, -10, position_z)}
+                        ))
                 .set_material(bush_material);
 
         add_object(bush);
     }
 
-
 }
 
 void Scene::set_phong_scene() {
+
+
     std::shared_ptr<Material> default_material = std::make_shared<Material>();
 
     this->camera = std::make_shared<Camera>();
@@ -367,27 +355,27 @@ void Scene::set_phong_scene() {
 
 
     Renderable_object sphere = Renderable_object(Mesh(sphere_vec), phong).set_name("sphere").set_transform_operations(
-            std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(2, 2, 0)
-            ), false).set_material(default_material);
+            std::make_shared<Transforms::Transform_node>()->add({
+                                                                        std::make_shared<Transforms::Translation>(2, 2, 0)}
+            ), true).set_material(default_material);
     add_object(sphere);
 
     Renderable_object sphere2 = Renderable_object(Mesh(sphere_vec), phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(2, -2, 0)
-            ), false).set_material(default_material);
+                    {std::make_shared<Transforms::Translation>(2, -2, 0)}
+            ), true).set_material(default_material);
     add_object(sphere2);
 
     Renderable_object sphere3 = Renderable_object(Mesh(sphere_vec), phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(-2, 2, 0)
-            ), false).set_material(default_material);
+                    {std::make_shared<Transforms::Translation>(-2, 2, 0)}
+            ), true).set_material(default_material);
     add_object(sphere3);
 
     Renderable_object sphere4 = Renderable_object(Mesh(sphere_vec), phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(-2, -2, 0)
-            ), false).set_material(default_material);
+                    {std::make_shared<Transforms::Translation>(-2, -2, 0)}
+            ), true).set_material(default_material);
     add_object(sphere4);
 
 
@@ -411,69 +399,67 @@ void Scene::set_rotation_scene() {
 
     //glm::vec4 color, glm::vec4 ambient, float specularStrength, int specularPower              yellow = rgb(255,255,204)
     Renderable_object sun = Renderable_object(Mesh(sphere_vec), phong).set_name("sun").set_material(
-            std::make_shared<Material>(glm::vec4(0.7f, 0.1f, 0.8f, 1.0f), glm::vec4(0.2f, 0.2f, 0.05f, 1.0f), 0.9f, 256));
+                    std::make_shared<Material>(glm::vec4(0.7f, 0.1f, 0.8f, 1.0f), glm::vec4(0.2f, 0.2f, 0.05f, 1.0f), 0.9f, 256))
+            .set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
+                    {
+                            std::make_shared<Transforms::Scale>(1.8)
+                    }
+            ), true)
+            .set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
+                    {
+                            std::make_shared<Transforms::Translation>(0, 0, 0)->set_dynamic_function([](glm::vec3 transfor) {
+                                //make it moving up and down
+                                static float x = 0.0f;
+                                x = std::fmod(x, 360.0f);
+                                x = x + 0.01f;
+                                return glm::vec3(transfor.x, sin(transfor.y + x + 2) * 0.9f, transfor.z);
+                            }),
+                    }
+            ));
     add_object(sun);
 
     Renderable_object earth = Renderable_object(Mesh(sphere_vec), phong).set_name("earth").set_material(
             std::make_shared<Material>(glm::vec4(0.1f, 0.1f, 0.8f, 1.0f), glm::vec4(0.1f, 0.1f, 0.15f, 1.0f), 0.6f, 32));
 
-    auto earth_move = [](glm::mat4 m) {
-        static float x = 0.0f;
-        x = std::fmod(x, 360.0f);
-        auto transf = std::make_shared<Transforms::Transform_node>()->add(
-                {
-                        std::make_shared<Transforms::Rotation>(30, 0, 0, 1),
-                        std::make_shared<Transforms::Rotation>(x, 0, 1, 0),
-                        std::make_shared<Transforms::Translation>(3, 0, 0),
+    std::shared_ptr<Transforms::Transform_node> earth_move = std::make_shared<Transforms::Transform_node>()->add(
+            {
+                    std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
+                        return angle + 0.01f;
+                    }),
+                    std::make_shared<Transforms::Translation>(4, 0, 0),
+                    std::make_shared<Transforms::Scale>(0.5),
+            }
+    );
 
-                        std::make_shared<Transforms::Scale>(0.5),
-
-                });
-        x++;
-        return transf->get_matrix(m);
-    };
-    earth.set_move(earth_move);
+    earth.set_transform_operations(earth_move);
     add_object(earth);
 
     Renderable_object moon1 = Renderable_object(Mesh(sphere_vec), phong).set_name("moon")
             .set_material(std::make_shared<Material>(glm::vec4(0.8f, 0.7f, 0.8f, 1.0f), glm::vec4(0.1f, 0.1f, 0.1f, 1.0f), 0.75f, 64));
 
-    auto moon1_move = [&](glm::mat4 m) {
-        static float x = 0.0f;
-        x = std::fmod(x, 360.0f);
-        auto transf = std::make_shared<Transforms::Transform_node>()->add(
-                {
-                        std::make_shared<Transforms::Rotation>(30, 0, 0, 1),
-                        std::make_shared<Transforms::Rotation>(x, 0, 1, 0),
-                        std::make_shared<Transforms::Translation>(3, 0, 0),
-                        std::make_shared<Transforms::Scale>(0.5),
-
-
-                });
-        x++;
-
-        static float y = 0.0f;
-        y = std::fmod(y, 360.0f);
-        transf->add(std::make_shared<Transforms::Transform_node>()->add(
-                {
-                        std::make_shared<Transforms::Rotation>(89, 0, 0, 1),
-                        std::make_shared<Transforms::Rotation>(y, 0, 1, 0),
-                        std::make_shared<Transforms::Translation>(1.5, 0, 0),
-                        std::make_shared<Transforms::Scale>(0.1),
-                }));
-        y += 3.5;
-        return transf->get_matrix(m);
-    };
-    moon1.set_move(moon1_move);
+    std::shared_ptr<Transforms::Transform_node> moon1_move = std::make_shared<Transforms::Transform_node>()->add(
+            {
+                    earth_move,
+                    std::make_shared<Transforms::Rotation>(0.5, 0, 1, 0)->set_dynamic_function([](float angle) {
+                        return angle + 0.1f;
+                    }),
+                    std::make_shared<Transforms::Translation>(3, 0, 0),
+                    std::make_shared<Transforms::Scale>(0.1)
+            }
+    );
+    moon1.set_transform_operations(moon1_move);
     add_object(moon1);
 
+    //generate plain
 
 }
 
 void Scene::set_check_phong_scene() {
-//    Test na ořezání světla, které nemůže dopadnou na plochu (úhel mezi normálou a vektorem ke světlu je mimo rozsah <-90,90>).
-//    Scéna obsahuje jednu kulovou plochu, která je na přímce mezi světlem a kamerou.
-//            Použijeme postupně dvě varianty Phongova shaderu, které mají mocninu u zrcadlové složky nastavenou na h=1. U jednoho bude kontrola na úhel mezi světlem a normálou a u druhého nebude (V jednom případě by mělo k přesahu dojít a ve druhém nikoli.).
+
+
+    //    Test na ořezání světla, které nemůže dopadnou na plochu (úhel mezi normálou a vektorem ke světlu je mimo rozsah <-90,90>).
+    //    Scéna obsahuje jednu kulovou plochu, která je na přímce mezi světlem a kamerou.
+    //            Použijeme postupně dvě varianty Phongova shaderu, které mají mocninu u zrcadlové složky nastavenou na h=1. U jednoho bude kontrola na úhel mezi světlem a normálou a u druhého nebude (V jednom případě by mělo k přesahu dojít a ve druhém nikoli.).
 
     //Material(glm::vec4 color, glm::vec4 ambient, float specularStrength, int specularPower);
     std::shared_ptr<Material> default_material = std::make_shared<Material>();
@@ -500,15 +486,17 @@ void Scene::set_check_phong_scene() {
     camera->notify();
 
     Renderable_object sphere = Renderable_object(Mesh(sphere_vec), phong).set_name("sphere").set_transform_operations(
-            std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(0, 2, 0)
-            ), false).set_material(default_material);
+            std::make_shared<Transforms::Transform_node>()->add({
+                                                                        std::make_shared<Transforms::Translation>(0, 2, 0)
+                                                                }
+            ), true).set_material(default_material);
     add_object(sphere);
 
     Renderable_object sphere2 = Renderable_object(Mesh(sphere_vec), bad_phong).set_name("sphere").set_transform_operations(
-            std::make_shared<Transforms::Transform_node>()->add(
-                    std::make_shared<Transforms::Translation>(0, -2, 0)
-            ), false).set_material(default_material);
+            std::make_shared<Transforms::Transform_node>()->add({
+                                                                        std::make_shared<Transforms::Translation>(0, -2, 0)
+                                                                }
+            ), true).set_material(default_material);
     add_object(sphere2);
 
 }
