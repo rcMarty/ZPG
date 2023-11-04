@@ -34,15 +34,20 @@ Material Material::set_specular_power(int specularPower) {
 
 void Material::set_variables(std::shared_ptr<Base_shader> shader) {
 
-    shader->set_variable("ambientColor", ambient);
-    shader->set_variable("meshColor", color);
-    shader->set_variable("specularStrength", specularStrength);
-    shader->set_variable("specularPower", specularPower);
+//    struct Material {
+//        vec4 meshColor;
+//        vec4 ambientColor;
+//        float specularStrength;
+//        int specularPower;
+//    };
 
-//    uniform vec4 meshColor;
-//    uniform vec4 ambientColor;
-//    uniform float specularStrength;
-//    uniform int specularPower;
+//  uniform Material material;
+
+    shader->set_variable("material.ambientColor", ambient);
+    shader->set_variable("material.meshColor", color);
+    shader->set_variable("material.specularStrength", specularStrength);
+    shader->set_variable("material.specularPower", specularPower);
+
 }
 
 Material::Material(glm::vec4 color, glm::vec4 ambient, float specularStrength, int specularPower) {

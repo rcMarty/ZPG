@@ -53,12 +53,22 @@ add_executable(ZPG
         object/camera/camera.cpp
         shader/observer.cpp
         shader/observer.h
-        object/light/light.cpp
-        object/light/light.h
+        object/light/point_light.cpp
+        object/light/point_light.h
         shader/shader_wrapper.h
         shader/shader_wrapper.cpp
         object/material.cpp
         object/material.h
+        object/light/light_wrapper.cpp
+        object/light/light_wrapper.h
+        object/light/directional_light.cpp
+        object/light/directional_light.h
+        object/light/spot_light.cpp
+        object/light/spot_light.h
+        object/light/light.cpp
+        object/light/light.h
+        object/transformable_object.cpp
+        object/transformable_object.h
 
 )
 

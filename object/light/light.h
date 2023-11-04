@@ -1,9 +1,10 @@
 //
-// Created by rc_marty on 21.10.23.
+// Created by rc_marty on 3.11.23.
 //
 
 #pragma once
 
+#include "../renderable_object.h"
 #include <glm/vec4.hpp>
 #include <glm/mat4x4.hpp>
 #include <glm/vec3.hpp>
@@ -12,30 +13,34 @@
 #include "../../shader/observer.h"
 #include "../transform/transform.h"
 #include "../renderable_object.h"
+#include <variant>
 
-class Light : Renderable_object, Observer {
+//enum for light types
+//const int directional = 0;
+//const int point = 1;
+//const int spot = 2;
+
+enum class Light_type {
+    DIRECTIONAL_LIGHT = 0,
+    POINT_LIGHT = 1,
+    SPOT_LIGHT = 2
+};
+
+class Light : public Renderable_object {
+
+protected:
     glm::vec4 light_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-    glm::vec3 light_position = glm::vec3(0.0f, 0.0f, 0.0f);
-    glm::vec3 light_attenuation = glm::vec3(0.9f, 0.0f, 0.01f);
-    glm::mat4 matrix = glm::mat4(1.0f);
-    std::shared_ptr<Transforms::Transform> transform_operations;
-
-
+    bool has_object = false;
 public:
-
     Light() = default;
 
-    Light(glm::vec4 light_color, glm::vec3 light_position);
+    Light(glm::vec4 light_color) : light_color(light_color) {};
 
-    glm::vec4 get_color() const;
+    virtual void render(double delta_time);
 
-    glm::vec3 get_position() const;
+    virtual std::unordered_map<std::string, std::variant<glm::mat4, glm::vec4, glm::vec3, float, int>> get_variables() = 0;
 
-    glm::vec3 get_attenuation() const;
-
-    void update();
-
-    Light set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations);
+    void set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr = false);
 
 };
 

@@ -87,73 +87,73 @@ Base_shader::Base_shader(const std::string &vertex_shader_path, const std::strin
     printf("[DEBUG] Linked shader %d\n", shader_id);
 }
 
-void Base_shader::set_variable(std::string variable, glm::mat4 matrix) {
-
-    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
-    if (idUniform == -1) {
-        //fprintf(stderr, "Could not bind MAT4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
-        return;
-    }
-    glUniformMatrix4fv(idUniform, 1, GL_FALSE, &matrix[0][0]);
-
-}
-
-void Base_shader::set_variable(std::string variable, glm::vec4 vec) {
-
-    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
-    if (idUniform == -1) {
-        //fprintf(stderr, "Could not bind VEC4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
-        return;
-    }
-    glUniform4f(idUniform, vec.x, vec.y, vec.z, vec.w);
-    //printf("[DEBUG] Set variable %s\n", variable.c_str());
-    //printf("[DEBUG] Set variable %s to %f %f %f %f\n", variable.c_str(), vec.x, vec.y, vec.z, vec.w);
-}
-
 
 void Base_shader::use_shader() {
     //printf("[DEBUG] Using shader: %d\n", shader_id);
     glUseProgram(shader_id);
 }
 
-void Base_shader::set_variable(std::string variable, glm::vec3 value) {
-    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
-    if (idUniform == -1) {
-        //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
-        return;
-    }
-    glUniform3f(idUniform, value.x, value.y, value.z);
-    //printf("[DEBUG] Set variable %s\n", variable.c_str());
-    //printf("[DEBUG] Set variable %s to %f %f %f\n", variable.c_str(), value.x, value.y, value.z);
-
-}
-
-void Base_shader::set_variable(std::string variable, float value) {
-    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
-    if (idUniform == -1) {
-        //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
-        return;
-    }
-    glUniform1f(idUniform, value);
-    //printf("[DEBUG] Set variable %s\n", variable.c_str());
-    //printf("[DEBUG] Set variable %s to %f %f %f\n", variable.c_str(), value.x, value.y, value.z);
-}
 
 void Base_shader::unuse_shader() {
     glUseProgram(0);
 }
 
-void Base_shader::set_variable(std::string variable, int value) {
+bool Base_shader::set_variable(std::string variable, int value) {
     GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
     if (idUniform == -1) {
         //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
-        return;
+        return false;
     }
     glUniform1i(idUniform, value);
     //printf("[DEBUG] Set variable %s\n", variable.c_str());
     //printf("[DEBUG] Set variable %s to %f %f %f\n", variable.c_str(), value.x, value.y, value.z);
+    return true;
 }
 
+bool Base_shader::set_variable(std::string variable, float value) {
+    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
+    if (idUniform == -1) {
+        //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        return false;
+    }
+    glUniform1f(idUniform, value);
+    //printf("[DEBUG] Set variable %s\n", variable.c_str());
+    //printf("[DEBUG] Set variable %s to %f %f %f\n", variable.c_str(), value.x, value.y, value.z);
+    return true;
+}
 
+bool Base_shader::set_variable(std::string variable, glm::vec3 value) {
+    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
+    if (idUniform == -1) {
+        //fprintf(stderr, "Could not bind VEC3 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        return false;
+    }
+    glUniform3f(idUniform, value.x, value.y, value.z);
+    //printf("[DEBUG] Set variable %s\n", variable.c_str());
+    //printf("[DEBUG] Set variable %s to %f %f %f\n", variable.c_str(), value.x, value.y, value.z);
+    return true;
+}
 
+bool Base_shader::set_variable(std::string variable, glm::vec4 vec) {
 
+    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
+    if (idUniform == -1) {
+        //fprintf(stderr, "Could not bind VEC4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        return false;
+    }
+    glUniform4f(idUniform, vec.x, vec.y, vec.z, vec.w);
+    //printf("[DEBUG] Set variable %s\n", variable.c_str());
+    //printf("[DEBUG] Set variable %s to %f %f %f %f\n", variable.c_str(), vec.x, vec.y, vec.z, vec.w);
+    return true;
+}
+
+bool Base_shader::set_variable(std::string variable, glm::mat4 matrix) {
+
+    GLint idUniform = glGetUniformLocation(shader_id, variable.c_str());
+    if (idUniform == -1) {
+        //fprintf(stderr, "Could not bind MAT4 uniform \"%s\" in shader %d\n", variable.c_str(), shader_id);
+        return false;
+    }
+    glUniformMatrix4fv(idUniform, 1, GL_FALSE, &matrix[0][0]);
+    return true;
+}

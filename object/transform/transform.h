@@ -18,7 +18,7 @@ namespace Transforms {
 
         virtual void tick(float delta_time) = 0;
 
-        std::string print_matrix(glm::mat4x4 input_matrix) {
+        static std::string print_matrix(glm::mat4x4 input_matrix) {
             std::string output = "";
             for (size_t i = 0; i < 4; i++) {
                 output += std::to_string(input_matrix[i][0]) + " " + std::to_string(input_matrix[i][1]) + " " +

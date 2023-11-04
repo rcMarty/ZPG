@@ -8,11 +8,13 @@
 #include <vector>
 #include "../object/renderable_object.h"
 #include "../input_handle/input_handler.h"
+#include "../object/light/light_wrapper.h"
 
 class Scene {
 private:
 
-    std::vector<Renderable_object> objects;
+    std::vector<std::shared_ptr<Renderable_object>> objects;
+    std::vector<std::shared_ptr<Light_wrapper>> lights;
     std::shared_ptr<input::Input_handler> input_handler;
     std::shared_ptr<Camera> camera;
     std::shared_ptr<GLFWwindow> window;
@@ -25,9 +27,11 @@ public:
 
     Scene(std::shared_ptr<input::Input_handler> input_handler, std::shared_ptr<GLFWwindow> glfWwindow) : input_handler(input_handler), window(glfWwindow) {};
 
-    Scene add_object(const Renderable_object &object);
+    Scene add_object(std::shared_ptr<Renderable_object> object);
 
-    Renderable_object find_object(const std::string &name);
+    Scene add_object(std::shared_ptr<Light_wrapper> object);
+
+    std::shared_ptr<Renderable_object> find_object(const std::string &name);
 
     void init();
 

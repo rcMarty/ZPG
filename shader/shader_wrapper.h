@@ -4,26 +4,21 @@
 #pragma once
 
 #include "base_shader.h"
-#include "../object/light/light.h"
+#include "../object/light/light_wrapper.h"
 
 class Shader_wrapper : public Base_shader {
-    //    uniform mat4 model;
-    //    uniform mat4 view;
-    //    uniform mat4 projection;
-    //    uniform vec4 lightColor;
-    //    uniform vec4 lightPosition;
 
 protected:
     std::shared_ptr<Camera> camera;
 
     void update_camera();
 
-    std::shared_ptr<Light> light;
+    std::shared_ptr<Light_wrapper> light;
 
     void update_light();
 
 public:
-    Shader_wrapper(std::shared_ptr<Camera> camera_ptr, std::shared_ptr<Light> light, const std::string &vertex_shader_path, const std::string &fragment_shader_path);
+    Shader_wrapper(std::shared_ptr<Camera> camera_ptr, std::shared_ptr<Light_wrapper> light, const std::string &vertex_shader_path, const std::string &fragment_shader_path);
 
     virtual ~Shader_wrapper() = default;
 
@@ -31,5 +26,5 @@ public:
 
     void set_camera(std::shared_ptr<Camera> camera);
 
-    void set_light(std::shared_ptr<Light> light);
+    void set_light(std::shared_ptr<Light_wrapper> light);
 };

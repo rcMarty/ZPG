@@ -38,13 +38,13 @@ public:
 
     virtual void update() override = 0;
 
-    void set_variable(std::string variable, glm::mat4 value);
+    bool set_variable(std::string variable, glm::mat4 value);
 
-    void set_variable(std::string variable, glm::vec4 value);
+    bool set_variable(std::string variable, glm::vec4 value);
 
-    void set_variable(std::string variable, glm::vec3 value);
+    bool set_variable(std::string variable, glm::vec3 value);
 
-    void set_variable(std::string variable, float value);
+    bool set_variable(std::string variable, float value);
 
-    void set_variable(std::string variable, int value);
+    bool set_variable(std::string variable, int value);
 };

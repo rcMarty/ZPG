@@ -10,6 +10,7 @@
 
 void Camera::attach(std::shared_ptr<Observer> observer) {
     this->observers.push_back(observer);
+    this->observers.back()->update();
 }
 
 void Camera::notify() {
