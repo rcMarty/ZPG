@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "point_light.h"
+#include "light.h"
 #include <memory>
 #include <vector>
 
@@ -14,7 +14,7 @@ private:
     std::vector<std::shared_ptr<Light>> lights;
 public:
 
-    Light_wrapper add(std::vector<std::shared_ptr<Point_light>> lights);
+    Light_wrapper add(std::vector<std::shared_ptr<Light>> lights);
 
     void render(double delta_time);
 

@@ -34,7 +34,7 @@ GLuint Base_shader::compile_shader(GLenum shaderType, const char *shaderSource) 
 
 
     GLint status;
-    glGetShaderiv(shader_ptr, GL_LINK_STATUS, &status);
+    glGetShaderiv(shader_ptr, GL_COMPILE_STATUS, &status);
     if (status == GL_FALSE) {
         GLint infoLogLength;
         glGetShaderiv(shader_ptr, GL_INFO_LOG_LENGTH, &infoLogLength);

@@ -42,5 +42,7 @@ public:
 
     void set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr = false);
 
+    void set_object(std::shared_ptr<Mesh> mesh, std::shared_ptr<Base_shader> shader, std::shared_ptr<Material> material);
+
 };
 

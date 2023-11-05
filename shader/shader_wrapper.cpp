@@ -16,12 +16,8 @@ Shader_wrapper::Shader_wrapper(std::shared_ptr<Camera> camera_ptr, std::shared_p
 }
 
 void Shader_wrapper::update_light() {
-
     use_shader();
     light->set_variables(*this);
-//    set_variable("lightColor", light->get_color());
-//    set_variable("lightPosition", light->get_position());
-//    set_variable("lightAttenuation", light->get_attenuation());
 }
 
 void Shader_wrapper::update_camera() {

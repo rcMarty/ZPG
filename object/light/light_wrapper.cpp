@@ -7,7 +7,7 @@
 #include <stdexcept>
 
 
-Light_wrapper Light_wrapper::add(std::vector<std::shared_ptr<Point_light>> lights) {
+Light_wrapper Light_wrapper::add(std::vector<std::shared_ptr<Light>> lights) {
 
     this->lights.insert(this->lights.end(), lights.begin(), lights.end());
     if (lights.size() > max_lights) {
@@ -30,7 +30,7 @@ void Light_wrapper::set_variables(Base_shader &shader) {
 
             std::string name = "lights[" + std::to_string(i) + "]." + variable.first;
 
-            //printf("[DEBUG] Setting variable %s\n", name.c_str());
+            printf("[DEBUG] Setting variable %s\n", name.c_str());
 
             if (std::holds_alternative<glm::vec4>(variable.second)) {
                 auto val = std::get<glm::vec4>(variable.second);
@@ -49,7 +49,7 @@ void Light_wrapper::set_variables(Base_shader &shader) {
         }
 
 
-        //printf("[DEBUG] setting variables %s\n", succ ? "succ" : "fail");
+//        printf("[DEBUG] setting variables %s\n", succ ? "succ" : "fail");
 //        if (!succ)
 //            fprintf(stderr, "[DEBUG] setting variables fail\n");
 
