@@ -17,11 +17,15 @@ void Spot_light::set_outer_cut_off(float outer_cut_off) {
 }
 
 void Spot_light::render(double delta_time) {
-    this->Point_light::render(delta_time);
+    if (!camera)
+        this->Point_light::render(delta_time);
 }
 
 void Spot_light::update() {
-
+    if (camera) {
+        direction = camera->get_target();
+        light_position = camera->get_position();
+    }
 }
 
 Spot_light Spot_light::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr) {
@@ -56,4 +60,8 @@ std::unordered_map<std::string, std::variant<glm::mat4, glm::vec4, glm::vec3, fl
 Spot_light Spot_light::set_object(std::shared_ptr<Mesh> mesh, std::shared_ptr<Base_shader> shader, std::shared_ptr<Material> material) {
     Light::set_object(mesh, shader, material);
     return *this;
+}
+
+void Spot_light::set_camera(std::shared_ptr<Camera> observer) {
+    this->camera = observer;
 }

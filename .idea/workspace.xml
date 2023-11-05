@@ -21,21 +21,29 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="working phong lightning&#10;only point light&#10;lights can have mesh or not&#10;lights has transformations">
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="working spotlight without updating direction&#10;&#10;shader fixed bug on intel (output is keyword)&#10;&#10;fixed shader compiler error messages&#10;&#10;Took 2 minutes">
+      <change afterPath="$PROJECT_DIR$/utils/subject.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_2.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_3a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_3b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_4a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_4b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_5a.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/kor0289_5b.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/camera/camera.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/camera/camera.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/camera/camera.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/camera/camera.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/light/light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/light_wrapper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light_wrapper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/light_wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light_wrapper.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/point_light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/point_light.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/point_light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/point_light.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/light/spot_light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/spot_light.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object/light/spot_light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/spot_light.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/base_shader.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/base_shader.h" beforeDir="false" afterPath="$PROJECT_DIR$/shader/base_shader.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/shader_wrapper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/shader/shader_wrapper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/observer.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/shader/observer.h" beforeDir="false" afterPath="$PROJECT_DIR$/utils/observer.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +54,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="200417" />
+    <option name="totalTimeSeconds" value="202632" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -138,11 +146,17 @@
       <recent name="$PROJECT_DIR$/shader/fragment_shader" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/utils" />
       <recent name="$PROJECT_DIR$/object/light" />
       <recent name="$PROJECT_DIR$/object" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -241,7 +255,7 @@
       <workItem from="1698955467524" duration="11987000" />
       <workItem from="1699011743466" duration="25553000" />
       <workItem from="1699136029718" duration="788000" />
-      <workItem from="1699214161269" duration="5913000" />
+      <workItem from="1699214161269" duration="8474000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -403,7 +417,31 @@
       <option name="project" value="LOCAL" />
       <updated>1699139399211</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="working spotlight without updating direction">
+      <option name="closed" value="true" />
+      <created>1699220593855</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1699220593855</updated>
+    </task>
+    <task id="LOCAL-00022" summary="working spotlight without updating direction&#10;&#10;shader fixed bug on intel (output is keyword)&#10; &#10;fixed shader compiler error messages">
+      <option name="closed" value="true" />
+      <created>1699220729357</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1699220729357</updated>
+    </task>
+    <task id="LOCAL-00023" summary="working spotlight without updating direction&#10;&#10;shader fixed bug on intel (output is keyword)&#10;&#10;fixed shader compiler error messages&#10;&#10;Took 2 minutes">
+      <option name="closed" value="true" />
+      <created>1699220746377</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1699220746377</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -472,7 +510,11 @@
     <MESSAGE value="added more scenes&#10;bugfix of transformations, camera, light" />
     <MESSAGE value="ready for consultation i guess" />
     <MESSAGE value="working phong lightning&#10;only point light&#10;lights can have mesh or not&#10;lights has transformations" />
-    <option name="LAST_COMMIT_MESSAGE" value="working phong lightning&#10;only point light&#10;lights can have mesh or not&#10;lights has transformations" />
+    <MESSAGE value="working spotlight without updating direction" />
+    <MESSAGE value="working spotlight without updating direction&#10;&#10;Took 1 hour 27 minutes" />
+    <MESSAGE value="working spotlight without updating direction&#10;&#10;shader fixed bug on intel (output is keyword)&#10; &#10;fixed shader compiler error messages" />
+    <MESSAGE value="working spotlight without updating direction&#10;&#10;shader fixed bug on intel (output is keyword)&#10;&#10;fixed shader compiler error messages&#10;&#10;Took 2 minutes" />
+    <option name="LAST_COMMIT_MESSAGE" value="working spotlight without updating direction&#10;&#10;shader fixed bug on intel (output is keyword)&#10;&#10;fixed shader compiler error messages&#10;&#10;Took 2 minutes" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

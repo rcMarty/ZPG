@@ -366,22 +366,25 @@ void Scene::set_phong_scene() {
 
     auto sphere_mesh = std::make_shared<Mesh>(sphere_vec);
 
-//    auto redlight = std::make_shared<Point_light>(Point_light(glm::vec4(1, 0, 0, 1), glm::vec3(4, 0, 0))
-//                                                          .set_transform_operations(
-//                                                                  std::make_shared<Transforms::Transform_node>()->add(
-//                                                                          {
-//                                                                                  std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
-//                                                                                      return angle + 0.01f;
-//                                                                                  }),
-//                                                                                  std::make_shared<Transforms::Translation>(4, 0, 0),
-//                                                                                  std::make_shared<Transforms::Scale>(0.1)
-//
-//                                                                          }
-//                                                                  )));
+    auto redlight = std::make_shared<Point_light>(Point_light(glm::vec4(1, 0, 0, 1), glm::vec3(4, 0, 0))
+                                                          .set_transform_operations(
+                                                                  std::make_shared<Transforms::Transform_node>()->add(
+                                                                          {
+                                                                                  std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
+                                                                                      return angle + 0.01f;
+                                                                                  }),
+                                                                                  std::make_shared<Transforms::Translation>(4, 0, 0),
+                                                                                  std::make_shared<Transforms::Scale>(0.1)
+
+                                                                          }
+                                                                  )));
+
+    auto flashlight = std::make_shared<Spot_light>(Spot_light(glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0), glm::vec3(0, -1, 0), 12.5f, 15.0f));
 
     std::shared_ptr<Light_wrapper> light = std::make_shared<Light_wrapper>(Light_wrapper().add(
             {
-                    //redlight,
+                    flashlight,
+                    redlight
 //                    std::make_shared<Point_light>(Point_light(glm::vec4(0, 1, 0, 1), glm::vec3(4, 0, 0))
 //                                                          .set_transform_operations(
 //                                                                  std::make_shared<Transforms::Transform_node>()->add(
@@ -393,29 +396,19 @@ void Scene::set_phong_scene() {
 //
 //                                                                          }
 //                                                                  ))),
-                    std::make_shared<Spot_light>(Spot_light(glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0), glm::vec3(0, -1, 0), 12.5f, 15.0f))
-//                                                         .set_transform_operations(
-//                                                                 std::make_shared<Transforms::Transform_node>()->add(
-//                                                                         {
-//                                                                                 std::make_shared<Transforms::Rotation>(0, 1, 0, 0)->set_dynamic_function([](float angle) {
-//                                                                                     return angle + 0.1f;
-//                                                                                 }),
-//                                                                                 std::make_shared<Transforms::Translation>(0, 1, 0),
 //
-//                                                                         }
-//                                                                 )))
 
             }));
 
 
     add_object(light);
 
-    std::shared_ptr<Base_shader> phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
-    std::shared_ptr<Observer> observer_phong = std::static_pointer_cast<Observer>(phong);
-    camera->attach(observer_phong);
+    auto phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
+    camera->attach(phong);
     camera->notify();
-
-    //redlight->set_object(sphere_mesh, phong, std::make_shared<Material>(Material(glm::vec4(1, 0, 0, 1), glm::vec4(1.f, 0.0f, 0.0f, 1.0f), 1.f, 5)));
+    camera->attach(flashlight);
+    flashlight->set_camera(camera);
+    redlight->set_object(sphere_mesh, phong, std::make_shared<Material>(Material(glm::vec4(1, 0, 0, 1), glm::vec4(1.f, 0.0f, 0.0f, 1.0f), 1.f, 5)));
 
     Renderable_object sphere = Renderable_object(sphere_mesh, phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(

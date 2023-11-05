@@ -12,7 +12,7 @@
 #include <vector>
 
 #include "../object/camera/camera.h"
-#include "observer.h"
+#include "../utils/observer.h"
 
 class Camera;
 

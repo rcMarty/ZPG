@@ -7,6 +7,8 @@
 
 class Spot_light : public Point_light, public Observer {
 protected:
+    std::shared_ptr<Camera> camera;
+
     glm::vec3 direction = glm::vec3(0.0f, 0.0f, 1.0f);
     float cut_off = glm::cos(glm::radians(12.5f));
     float outer_cut_off = glm::cos(glm::radians(15.0f));
@@ -23,6 +25,8 @@ public:
     void set_cut_off(float cut_off);
 
     void set_outer_cut_off(float outer_cut_off);
+
+    void set_camera(std::shared_ptr<Camera> observer);
 
     virtual void render(double delta_time) override;
 

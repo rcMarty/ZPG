@@ -110,3 +110,7 @@ void Camera::set_aspect_ratio(float aspect_ratio) {
     printf("[DEBUG] camera notifying aspect_ratio: %f\n", this->aspect_ratio);
     this->notify();
 }
+
+glm::vec3 Camera::get_target() {
+    return this->target;
+}

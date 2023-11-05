@@ -21,8 +21,7 @@ set(OUTPUT_DIR "${CMAKE_BINARY_DIR}")
 #file(GLOB_RECURSE ZPG_src "src/*.cpp" "src/*.h")
 
 set(SOURCE_FILES
-        shader/observer.h
-        shader/observer.cpp
+        utils/observer.h
         render/scene.h
         render/scene.cpp
         render/window.h
@@ -51,8 +50,7 @@ add_executable(ZPG
         object/renderable_object.cpp
         render/window.cpp
         object/camera/camera.cpp
-        shader/observer.cpp
-        shader/observer.h
+        utils/observer.h
         object/light/point_light.cpp
         object/light/point_light.h
         shader/shader_wrapper.h
@@ -69,6 +67,7 @@ add_executable(ZPG
         object/light/light.h
         object/transformable_object.cpp
         object/transformable_object.h
+        utils/subject.h
 
 )
 

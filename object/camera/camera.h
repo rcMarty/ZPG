@@ -7,7 +7,8 @@
 #include <memory>
 #include <glm/mat4x4.hpp>
 #include <vector>
-#include "../../shader/observer.h"
+#include "../../utils/observer.h"
+#include "../../utils/subject.h"
 
 class Observer_shader; //forward declaration
 
@@ -56,6 +57,7 @@ public:
 
     glm::vec3 get_position();
 
+    glm::vec3 get_target();
 
     void attach(std::shared_ptr<Observer> observer);
 

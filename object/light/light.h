@@ -10,7 +10,7 @@
 #include <glm/vec3.hpp>
 #include <vector>
 #include <memory>
-#include "../../shader/observer.h"
+#include "../../utils/observer.h"
 #include "../transform/transform.h"
 #include "../renderable_object.h"
 #include <variant>

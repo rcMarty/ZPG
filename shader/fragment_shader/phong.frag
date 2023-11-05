@@ -122,10 +122,6 @@ uniform lightSource lights[10];
 out vec4 fragColor;
 void main() {
 
-    //for (int index = 0; index < numberOfLights ; index ++) {
-    //finalColor += lightIntensity ;
-    //}
-
     // define an output color value
     vec4 outputColor = vec4(0.0f);
 

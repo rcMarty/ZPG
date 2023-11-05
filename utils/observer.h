@@ -1,10 +1,9 @@
 //
 // Created by rc_marty on 20.10.23.
 //
+#pragma once
 
-#ifndef ZPG_OBSERVER_H
-#define ZPG_OBSERVER_H
-
+class Subject;
 
 class Observer {
 public:
@@ -13,6 +12,3 @@ public:
     virtual void update() = 0;
 
 };
-
-
-#endif //ZPG_OBSERVER_H
