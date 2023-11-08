@@ -20,7 +20,7 @@ private:
     glm::vec3 eye = glm::vec3(0, 0, 3);
     glm::vec3 target = glm::vec3(0, 0, -1);
     glm::vec3 up = glm::vec3(0, 1, 0);
-    float fov = 90.0f;
+    float fov = 45.0f;
     float near = 0.1f;
     float far = 100.0f;
 

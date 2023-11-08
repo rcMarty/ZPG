@@ -46,22 +46,21 @@ vec4 CalcSpotLight(lightSource light, Material material)
 {
     vec3 lightVector = normalize(light.position - worldPosition);
     vec3 cameraVector = normalize(cameraPosition - worldPosition);
-
-    // checking for angle between light and normal between < -90, 90 >
-    float angle = dot(lightVector, worldNormal);
-    if (angle < 0) {
-        lightVector = vec3(0, 0, 0);
-    }
     vec3 reflectVector = reflect(-lightVector, worldNormal);
 
     float spec = pow(max(dot(cameraVector, reflectVector), 0.0), material.specularPower);
-    vec4 specular = material.specularStrength * spec * light.color;
+
+    float angle = dot(lightVector, worldNormal);
+    if (angle < 0) {
+        spec = 0;
+        //lightVector = worldNormal * -1;
+    }
+    vec4 specular = material.specularStrength * spec * light.color * material.meshColor;
 
     float diff = max(dot(lightVector, worldNormal), 0);
-
     vec4 diffuse = diff * light.color * material.meshColor;
 
-    float attenuation = 1.0;//1.0 / (light.attenuation.x + light.attenuation.y * length(light.position - worldPosition) + light.attenuation.z * pow(length(light.position - worldPosition), 2));
+    float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * length(light.position - worldPosition) + light.attenuation.z * pow(length(light.position - worldPosition), 2));
 
     //cone things
     float cutOff = cos(radians(light.cutOff));
@@ -78,36 +77,39 @@ vec4 CalcDirLight(lightSource light, Material material)
 {
     vec3 lightVector = -light.direction;
     vec3 cameraVector = normalize(cameraPosition - worldPosition);
-
     vec3 reflectVector = reflect(-lightVector, worldNormal);
+
     float spec = pow(max(dot(cameraVector, reflectVector), 0.0), material.specularPower);
-    vec4 specular = material.specularStrength * spec * light.color;
+
+    float angle = dot(lightVector, worldNormal);
+    if (angle < 0) {
+        spec = 0;
+        //lightVector = worldNormal * -1;
+    }
+    vec4 specular = material.specularStrength * spec * light.color * material.meshColor;
 
     float diff = max(dot(lightVector, worldNormal), 0);
+    vec4 diffuse = diff * light.color * material.meshColor;
 
-    float attenuation = 1.0;
-
-    vec4 diffuse = diff * light.color * attenuation;
-    return (diffuse + specular) * material.meshColor;
+    return (diffuse + specular);
 }
 
 vec4 CalcPointLight(lightSource light, Material material)
 {
     vec3 lightVector = normalize(light.position - worldPosition);
     vec3 cameraVector = normalize(cameraPosition - worldPosition);
-
-    // checking for angle between light and normal between < -90, 90 >
-    float angle = dot(lightVector, worldNormal);
-    if (angle < 0) {
-        lightVector = vec3(0, 0, 0);
-    }
     vec3 reflectVector = reflect(-lightVector, worldNormal);
 
     float spec = pow(max(dot(cameraVector, reflectVector), 0.0), material.specularPower);
-    vec4 specular = material.specularStrength * spec * light.color;
+
+    float angle = dot(lightVector, worldNormal);
+    if (angle < 0) {
+        spec = 0;
+        //lightVector = worldNormal * -1;
+    }
+    vec4 specular = material.specularStrength * spec * light.color * material.meshColor;
 
     float diff = max(dot(lightVector, worldNormal), 0);
-
     vec4 diffuse = diff * light.color * material.meshColor;
 
     float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * length(light.position - worldPosition) + light.attenuation.z * pow(length(light.position - worldPosition), 2));

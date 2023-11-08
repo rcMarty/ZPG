@@ -12,9 +12,10 @@
 #include "../object/light/point_light.h"
 #include "../shader/shader_wrapper.h"
 #include "../object/material.h"
-#include "../resources/models/models_2023/Models/sphere.h"
 #include "../resources/models/plain.h"
 #include "../object/light/spot_light.h"
+#include "../resources/models/sphere.h"
+#include "../object/light/directional_light.h"
 
 Scene Scene::add_object(std::shared_ptr<Renderable_object> object) {
     objects.push_back(object);
@@ -32,6 +33,11 @@ void Scene::init() {
     for (auto &object: objects) {
         object->init();
     }
+
+
+    //get aspect ratio from window
+    auto window = glfwGetVideoMode(glfwGetPrimaryMonitor());
+    camera->set_aspect_ratio(window->width / window->height);
 }
 
 void Scene::render(double delta_time) {
@@ -146,38 +152,45 @@ void Scene::set_debug_scene() {
     // glm::vec4(1, 1, 0.5, 1), glm::vec3(0, -5, 0)
 
     set_inputs();
-
+    auto pointlight = std::make_shared<Point_light>(Point_light(glm::vec4(1, 1, 1, 1), glm::vec3(1, -4, 1)));
+    auto dirlight = std::make_shared<Directional_light>(Directional_light(glm::vec4(1, 1, 1, 1), glm::vec3(0, -1, 0)));
+    auto flashlight = std::make_shared<Spot_light>(Spot_light(glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0), glm::vec3(0, -1, 0), 12.5f, 15.0f));
     std::shared_ptr<Light_wrapper> light = std::make_shared<Light_wrapper>(Light_wrapper().add(
-            {std::make_shared<Point_light>(glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0))
+            {
+
+                    pointlight,
+                    flashlight,
+
             }));
 
+    add_object(light);
 
-    std::shared_ptr<Base_shader> flat = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/constant.frag");
-    std::shared_ptr<Observer> observer_flat = std::static_pointer_cast<Observer>(flat);
-    camera->attach(observer_flat);
-    camera->notify();
 
-    std::shared_ptr<Base_shader> lambert = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/lambert.frag");
-    std::shared_ptr<Observer> observer_lambert = std::static_pointer_cast<Observer>(lambert);
-    camera->attach(observer_lambert);
+    auto flat = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/constant.frag");
+    camera->attach(flat);
     camera->notify();
 
 
-    std::shared_ptr<Base_shader> phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
-    std::shared_ptr<Observer> observer_phong = std::static_pointer_cast<Observer>(phong);
-    camera->attach(observer_phong);
-    camera->notify();
-
-    std::shared_ptr<Base_shader> blinn = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/blinn.frag");
-    std::shared_ptr<Observer> observer_blinn = std::static_pointer_cast<Observer>(blinn);
-    camera->attach(observer_blinn);
+    auto lambert = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/lambert.frag");
+    camera->attach(lambert);
     camera->notify();
 
 
+    auto phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
+    camera->attach(phong);
+    camera->notify();
+
+    auto blinn = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/blinn.frag");
+    camera->attach(blinn);
+    camera->notify();
 
 
-//#include "../resources/models/models_2023/Models/tree.h"
     auto sphere_mesh = std::make_shared<Mesh>(sphere_vec);
+
+    pointlight->set_object(sphere_mesh, flat, std::make_shared<Material>(Material(glm::vec4(1, 1, 1, 1), glm::vec4(1.f, 1.0f, 1.0f, 1.0f), 1.f, 5)));
+    camera->attach(flashlight);
+    flashlight->set_camera(camera);
+//#include "../resources/models/models_2023/Models/tree.h"
     Renderable_object sphere = Renderable_object(sphere_mesh, lambert).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add({
                                                                         std::make_shared<Transforms::Translation>(0, 2, 0),
@@ -236,7 +249,6 @@ void Scene::set_debug_scene() {
                                                                               }),
                                                                               std::make_shared<Transforms::Scale>(0.1)->set_dynamic_function([](glm::vec3 scale) {
                                                                                   static float x = 0.0f;
-                                                                                  printf("[DEBUG] scale: %f\n", x);
                                                                                   x = std::fmod(x, 90.0f);
                                                                                   x = x + 0.01f;
                                                                                   return glm::vec3((sin(x) + 1) * 0.5);
@@ -300,7 +312,7 @@ void Scene::set_debug_scene() {
     //HERE ARE TREES AND SO ON
 
 
-    Renderable_object plain_obj = Renderable_object(std::make_shared<Mesh>(plain), lambert).set_name("plain").set_material(default_material).set_material(
+    Renderable_object plain_obj = Renderable_object(std::make_shared<Mesh>(plain), phong).set_name("plain").set_material(default_material).set_material(
                     std::make_shared<Material>(glm::vec4(0.2f, 0.8f, 0.08f, 1.0f), glm::vec4(0.2f, 0.2f, 0.05f, 1.0f), 0.75f, 30))
             .set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
                                                                                                   std::make_shared<Transforms::Translation>(0, -10, 0),
@@ -311,7 +323,7 @@ void Scene::set_debug_scene() {
     printf("[DEBUG] TREEEEEEEEEEEEEEEEEEE\n");
 
     //trees
-    auto tree_material = std::make_shared<Material>(glm::vec4(0.5f, 0.4f, 0.1f, 1.0f), glm::vec4(0.1f, 0.05f, 0.01f, 1.0f), 0.75f, 32);
+    auto tree_material = std::make_shared<Material>(glm::vec4(0.9f, 0.8f, 0.8f, 1.0f), glm::vec4(0.1f, 0.05f, 0.01f, 1.0f), 0.75f, 32);
     auto tree_mesh = std::make_shared<Mesh>("../resources/models/tree.obj");
     for (int i = 0; i < 100; ++i) {
         float angle_x = angles(gen);
@@ -330,7 +342,7 @@ void Scene::set_debug_scene() {
         add_object(std::make_shared<Renderable_object>(tree));
     }
     //bushes
-    auto bush_material = std::make_shared<Material>(glm::vec4(0.5f, 0.4f, 0.1f, 1.0f), glm::vec4(0.1f, 0.05f, 0.01f, 1.0f), 0.75f, 32);
+    auto bush_material = std::make_shared<Material>(glm::vec4(0.5f, 1.f, 0.1f, 1.0f), glm::vec4(0.1f, 0.05f, 0.01f, 1.0f), 0.75f, 32);
     auto bush_mesh = std::make_shared<Mesh>("../resources/models/rat.obj");
     for (int i = 0; i < 100; ++i) {
         float angle_x = angles(gen);

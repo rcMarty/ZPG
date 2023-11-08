@@ -31,7 +31,7 @@ public:
 
     Point_light set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr = false);
 
-    virtual std::unordered_map<std::string, std::variant<glm::mat4, glm::vec4, glm::vec3, float, int>> get_variables();
+    std::unordered_map<std::string, std::variant<glm::mat4, glm::vec4, glm::vec3, float, int>> get_variables() override;
 
     Point_light set_object(std::shared_ptr<Mesh> mesh, std::shared_ptr<Base_shader> shader, std::shared_ptr<Material> material);
 
