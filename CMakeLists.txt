@@ -26,8 +26,8 @@ set(SOURCE_FILES
         render/scene.cpp
         render/window.h
         render/window.cpp
-        object/mesh.h
-        object/mesh.cpp
+        object/model/mesh.h
+        object/model/mesh.cpp
         object/renderable_object.h
         object/renderable_object.cpp
         object/camera/camera.h
@@ -46,7 +46,7 @@ add_executable(ZPG
         engine/engine.cpp
         shader/base_shader.cpp
         render/scene.cpp
-        object/mesh.cpp
+        object/model/mesh.cpp
         object/renderable_object.cpp
         render/window.cpp
         object/camera/camera.cpp
@@ -68,6 +68,8 @@ add_executable(ZPG
         object/transformable_object.cpp
         object/transformable_object.h
         utils/subject.h
+        object/model/texture.cpp
+        object/model/texture.h
 
 )
 
@@ -84,4 +86,12 @@ target_link_libraries(ZPG glfw)
 target_link_libraries(ZPG OpenGL::GL)
 target_link_libraries(ZPG glm)
 target_link_libraries(ZPG assimp)
+
+
+## TEST FOR HEADER FILES
+find_file(STB_IMAGE_H "stb/stb_image.h")
+if (NOT STB_IMAGE_H)
+    message(FATAL_ERROR "stb/stb_image.h not found")
+endif ()
+
 

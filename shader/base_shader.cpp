@@ -75,8 +75,8 @@ Base_shader::Base_shader(const std::string &vertex_shader_path, const std::strin
     printf("_________________________\n");
     auto vertex_shader = load_shader(vertex_shader_path);
     auto fragment_shader = load_shader(fragment_shader_path);
-    printf("vertex_shader : %s\n", vertex_shader);
-    printf("fragment_shader : %s\n", fragment_shader);
+    //printf("vertex_shader : %s\n", vertex_shader);
+    //printf("fragment_shader : %s\n", fragment_shader);
     GLuint vertex = compile_shader(GL_VERTEX_SHADER, vertex_shader);
     GLuint fragment = compile_shader(GL_FRAGMENT_SHADER, fragment_shader);
 

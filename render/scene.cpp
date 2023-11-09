@@ -457,6 +457,17 @@ void Scene::set_phong_scene() {
     add_object(std::make_shared<Renderable_object>(grid_down));
 
 
+    auto backpack = std::make_shared<Mesh>("../resources/models/backpack/backpack.obj");
+    Renderable_object backpack_obj = Renderable_object(backpack, phong).set_name("backpack").set_material(default_material).set_has_texture(true);
+    add_object(std::make_shared<Renderable_object>(backpack_obj));
+
+    auto pacman = std::make_shared<Mesh>("../resources/models/pacman/pacman.obj");
+    Renderable_object pacman_obj = Renderable_object(pacman, phong).set_name("pacman").set_material(default_material).set_has_texture(true)
+            .set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
+                    {std::make_shared<Transforms::Translation>(0, -3, 0)}
+            ), true);
+    add_object(std::make_shared<Renderable_object>(pacman_obj));
+
 }
 
 void Scene::set_rotation_scene() {

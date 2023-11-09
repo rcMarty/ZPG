@@ -27,7 +27,11 @@ struct lightSource {
     float outerCutOff;
     int type;
 };
-
+//struct Material {
+//    sampler2D diffuse;
+//    vec3      specular;
+//    float     shininess;
+//};
 
 struct Material {
     vec4 meshColor;
@@ -105,7 +109,6 @@ vec4 CalcPointLight(lightSource light, Material material)
     float angle = dot(lightVector, worldNormal);
     if (angle < 0) {
         spec = 0;
-        //lightVector = worldNormal * -1;
     }
     vec4 specular = material.specularStrength * spec * light.color * material.meshColor;
 
@@ -121,8 +124,27 @@ uniform int no_lights;
 uniform Material material;
 uniform lightSource lights[10];
 
+
+uniform sampler2D textureDiffuse;
+uniform sampler2D textureSpecular;
+uniform int hasTexture;
+
+in vec2 TexCoord;
+
+Material texMaterial;
+
 out vec4 fragColor;
 void main() {
+
+    if (hasTexture == 1) {
+        texMaterial.meshColor = texture(textureDiffuse, TexCoord);
+        texMaterial.specularStrength = texture(textureSpecular, TexCoord).r;
+        texMaterial.ambientColor = vec4(texture(textureDiffuse, TexCoord).xyz * 0.05, 1.0);
+        texMaterial.specularPower = material.specularPower;
+    }
+    else {
+        texMaterial = material;
+    }
 
     // define an output color value
     vec4 outputColor = vec4(0.0f);
@@ -130,16 +152,16 @@ void main() {
     // do the same for all point lights
     for (int i = 0; i < no_lights; i++) {
         if (lights[i].type == point) {
-            outputColor += CalcPointLight(lights[i], material);
+            outputColor += CalcPointLight(lights[i], texMaterial);
         }
         else if (lights[i].type == spot) {
-            outputColor += CalcSpotLight(lights[i], material);
+            outputColor += CalcSpotLight(lights[i], texMaterial);
         }
         else if (lights[i].type == directional) {
-            outputColor += CalcDirLight(lights[i], material);
+            outputColor += CalcDirLight(lights[i], texMaterial);
         }
     }
-    outputColor += material.ambientColor;
+    outputColor += texMaterial.ambientColor;
 
     fragColor = vec4(outputColor.xyz, 1.0);
 

@@ -18,12 +18,32 @@ void Renderable_object::init() {
         throw std::runtime_error("Material is not set");
 
 
+    if (has_texture) {
+        shader->use_shader();
+        shader->set_variable("textureDiffuse", 0); //glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0); // set it manually
+        shader->set_variable("textureSpecular", 1);
+        shader->set_variable("hasTexture", 1);
+        printf("[DEBUG] has texture\n");
+
+    } else {
+        shader->set_variable("hasTexture", 0);
+        printf("[DEBUG] has NOT texture\n");
+    }
+
     mesh->init();
+
 }
 
 void Renderable_object::render(double delta_t) {
 
     shader->use_shader();
+
+    if (has_texture) {
+        shader->set_variable("hasTexture", 1);
+    } else {
+        shader->set_variable("hasTexture", 0);
+    }
+
     if (transform_operations) {
 //        transform_operations->tick(delta_t);
 //        auto mat = transform_operations->get_matrix(Matrix);
@@ -37,7 +57,6 @@ void Renderable_object::render(double delta_t) {
 
     shader->update();
     mesh->render();
-
 
 }
 
@@ -66,6 +85,11 @@ Renderable_object Renderable_object::set_shader(std::shared_ptr<Base_shader> sha
 
 Renderable_object Renderable_object::set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr) {
     Transformable_object::set_transform_operations(transform_operations, static_tr);
+    return *this;
+}
+
+Renderable_object Renderable_object::set_has_texture(bool has_texture) {
+    this->has_texture = has_texture;
     return *this;
 }
 

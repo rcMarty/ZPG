@@ -3,7 +3,7 @@
 //
 #pragma once
 
-#include "mesh.h"
+#include "model/mesh.h"
 #include "transformable_object.h"
 #include "material.h"
 
@@ -14,6 +14,7 @@ protected:
     std::shared_ptr<Mesh> mesh;
     std::shared_ptr<Material> material;
     std::shared_ptr<Base_shader> shader;
+    bool has_texture = false;
 
 
 public:
@@ -35,6 +36,8 @@ public:
     Renderable_object set_transform_operations(std::shared_ptr<Transforms::Transform> transform_operations, bool static_tr = false);
 
     Renderable_object set_material(std::shared_ptr<Material> material);
+
+    Renderable_object set_has_texture(bool has_texture);
 
     Renderable_object set_mesh(const Mesh &mesh);
 };
