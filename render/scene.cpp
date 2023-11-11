@@ -16,6 +16,7 @@
 #include "../object/light/spot_light.h"
 #include "../resources/models/sphere.h"
 #include "../object/light/directional_light.h"
+#include "../object/skybox/sky_dome.h"
 
 Scene Scene::add_object(std::shared_ptr<Renderable_object> object) {
     objects.push_back(object);
@@ -27,6 +28,11 @@ Scene Scene::add_object(std::shared_ptr<Light_wrapper> object) {
     return *this;
 }
 
+Scene Scene::set_skybox(std::shared_ptr<Sky_box> object) {
+    sky_box = object;
+    return *this;
+}
+
 void Scene::init() {
     //set_scene();
 
@@ -34,13 +40,17 @@ void Scene::init() {
         object->init();
     }
 
-
     //get aspect ratio from window
     auto window = glfwGetVideoMode(glfwGetPrimaryMonitor());
     camera->set_aspect_ratio(window->width / window->height);
 }
 
 void Scene::render(double delta_time) {
+
+    if (sky_box)
+        sky_box->render();
+
+
     for (auto &object: objects) {
         object->render(delta_time);
     }
@@ -139,7 +149,6 @@ void Scene::set_inputs() {
 
 
 }
-
 
 void Scene::set_debug_scene() {
 
@@ -421,6 +430,20 @@ void Scene::set_phong_scene() {
     camera->attach(flashlight);
     flashlight->set_camera(camera);
     redlight->set_object(sphere_mesh, phong, std::make_shared<Material>(Material(glm::vec4(1, 0, 0, 1), glm::vec4(1.f, 0.0f, 0.0f, 1.0f), 1.f, 5)));
+
+    //make skybox and shader
+    auto skybox_shader = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/skybox.vert", "../shader/fragment_shader/skybox.frag");
+    auto files_path = files();
+    files_path.path = "../resources/skybox/baseSkybox";
+    this->sky_box = std::make_shared<Sky_box>(files_path, skybox_shader, camera);
+    //this->sky_box = std::make_shared<Sky_dome>("../resources/skybox/sky/skydome.obj", phong, camera);
+    camera->attach(sky_box);
+    camera->notify();
+
+
+//    add_object(std::make_shared<Renderable_object>(
+//            Renderable_object(std::make_shared<Mesh>("../resources/skybox/sky/skydome.obj"), phong).set_name("dome").set_material(default_material).set_has_texture(true)));
+
 
     Renderable_object sphere = Renderable_object(sphere_mesh, phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(

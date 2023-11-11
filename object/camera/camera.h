@@ -22,7 +22,7 @@ private:
     glm::vec3 up = glm::vec3(0, 1, 0);
     float fov = 45.0f;
     float near = 0.1f;
-    float far = 100.0f;
+    float far = 1000.0f;
 
     float aspect_ratio = 4.0f / 3.0f;
 

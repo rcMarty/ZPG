@@ -9,43 +9,22 @@
 #include "texture.h"
 
 
-void Mesh::claculate_indices(Mesh &mesh) {
-    int verticies_count = mesh.vertices.size() / (mesh.vertices_describe_count + mesh.color_describe_count);
+void Mesh::claculate_indices() {
+    int verticies_count = this->vertices.size() / (this->vertices_describe_count + this->color_describe_count);
     //printf("verticies count: %d\n", verticies_count);
     for (int i = 0; i < verticies_count; ++i) {
-        mesh.indices.push_back(i);
+        this->indices.push_back(i);
     }
     //printf("size of indices: %d\n", mesh.indices.size());
 }
-
 
 Mesh::Mesh(std::vector<GLfloat> vertices, uint vertices_describe_count, uint color_describe_count) {
     this->vertices = vertices;
     this->vertices_describe_count = vertices_describe_count;
     this->color_describe_count = color_describe_count;
-    Mesh::claculate_indices(*this);
+    this->claculate_indices();
 }
 
-Mesh::Mesh(const point vertices[], uint count) {
-    //convert vertices to vector
-    std::vector<GLfloat> vertices_vec;
-    printf("size of: %d\n", count);
-    printf("size of vertices: %ld\n", sizeof(vertices));
-
-    for (size_t i = 0; i < count; i++) {
-        for (float po: vertices[i].pos) {
-            vertices_vec.push_back(po);
-        }
-        for (float j: vertices[i].color) {
-            vertices_vec.push_back(j);
-        }
-    }
-    this->vertices = vertices_vec;
-    this->vertices_describe_count = 4;
-    this->color_describe_count = 4;
-
-    Mesh::claculate_indices(*this);
-}
 
 void Mesh::init() {
 //    printf("size of vertices: %d\n", vertices.size());
@@ -110,7 +89,7 @@ Mesh::Mesh(const float *vertices, uint count) {
     this->vertices_describe_count = 3;
     this->color_describe_count = 3;
 
-    Mesh::claculate_indices(*this);
+    Mesh::claculate_indices();
 
 }
 

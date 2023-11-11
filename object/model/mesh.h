@@ -8,7 +8,6 @@
 #include "GLFW/glfw3.h"
 #include "stdio.h"
 #include "stdlib.h"
-#include "../../resources/models/square.h"
 #include <memory>
 #include <vector>
 #include <string>
@@ -29,7 +28,7 @@ private:
     std::vector<GLfloat> texture_coords;
     std::vector<std::shared_ptr<Texture>> textures;
 
-    static void claculate_indices(Mesh &mesh);
+    void claculate_indices();
 
 public:
 
@@ -38,8 +37,6 @@ public:
     explicit Mesh(std::string path);
 
     Mesh(const float vertices[], uint count);
-
-    Mesh(const point vertices[], uint count);
 
     void init();
 

@@ -70,6 +70,10 @@ add_executable(ZPG
         utils/subject.h
         object/model/texture.cpp
         object/model/texture.h
+        object/skybox/sky_box.cpp
+        object/skybox/sky_box.h
+        object/skybox/sky_dome.cpp
+        object/skybox/sky_dome.h
 
 )
 

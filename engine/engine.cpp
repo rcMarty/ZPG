@@ -3,8 +3,6 @@
 //
 
 #include "engine.h"
-#include "../resources/models/square.h"
-#include "../resources/models/suzi_flat.h"
 #include "../object/model/mesh.h"
 #include "../object/renderable_object.h"
 #include "stdio.h"
