@@ -23,7 +23,7 @@ protected:
 public:
     Point_light() = default;
 
-    Point_light(glm::vec4 light_color, glm::vec3 light_position) : Light(light_color), light_position(light_position) {};
+    Point_light(glm::vec4 light_color, glm::vec3 light_position);
 
     Point_light set_light_attenuation(glm::vec3 light_attenuation);
 

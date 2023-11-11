@@ -59,10 +59,10 @@ vec4 CalcSpotLight(lightSource light, Material material)
         spec = 0;
         //lightVector = worldNormal * -1;
     }
-    vec4 specular = material.specularStrength * spec * light.color * material.meshColor;
+    vec4 specular = material.specularStrength * spec * light.color;
 
     float diff = max(dot(lightVector, worldNormal), 0);
-    vec4 diffuse = diff * light.color * material.meshColor;
+    vec4 diffuse = diff * light.color;
 
     float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * length(light.position - worldPosition) + light.attenuation.z * pow(length(light.position - worldPosition), 2));
 
@@ -73,7 +73,7 @@ vec4 CalcSpotLight(lightSource light, Material material)
     float epsilon = (cutOff - outerCutOff);
     float intensity = clamp((theta - outerCutOff) / epsilon, 0, 1);
 
-    return (diffuse * intensity + specular * intensity) * attenuation;
+    return (diffuse * intensity + specular * intensity) * material.meshColor * attenuation;
 }
 
 
@@ -81,7 +81,7 @@ vec4 CalcDirLight(lightSource light, Material material)
 {
     vec3 lightVector = -light.direction;
     vec3 cameraVector = normalize(cameraPosition - worldPosition);
-    vec3 reflectVector = reflect(-lightVector, worldNormal);
+    vec3 reflectVector = normalize(lightVector + worldNormal);
 
     float spec = pow(max(dot(cameraVector, reflectVector), 0.0), material.specularPower);
 
@@ -90,12 +90,12 @@ vec4 CalcDirLight(lightSource light, Material material)
         spec = 0;
         //lightVector = worldNormal * -1;
     }
-    vec4 specular = material.specularStrength * spec * light.color * material.meshColor;
+    vec4 specular = material.specularStrength * spec * light.color;
 
     float diff = max(dot(lightVector, worldNormal), 0);
-    vec4 diffuse = diff * light.color * material.meshColor;
+    vec4 diffuse = diff * light.color;
 
-    return (diffuse + specular);
+    return (diffuse + specular) * material.meshColor;
 }
 
 vec4 CalcPointLight(lightSource light, Material material)
@@ -110,14 +110,14 @@ vec4 CalcPointLight(lightSource light, Material material)
     if (angle < 0) {
         spec = 0;
     }
-    vec4 specular = material.specularStrength * spec * light.color * material.meshColor;
+    vec4 specular = material.specularStrength * spec * light.color;
 
     float diff = max(dot(lightVector, worldNormal), 0);
-    vec4 diffuse = diff * light.color * material.meshColor;
+    vec4 diffuse = diff * light.color;
 
     float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * length(light.position - worldPosition) + light.attenuation.z * pow(length(light.position - worldPosition), 2));
 
-    return (diffuse + specular) * attenuation;
+    return (diffuse + specular) * material.meshColor * attenuation;
 }
 
 uniform int no_lights;
@@ -134,6 +134,8 @@ in vec2 TexCoord;
 Material texMaterial;
 
 out vec4 fragColor;
+
+
 void main() {
 
     if (hasTexture == 1) {

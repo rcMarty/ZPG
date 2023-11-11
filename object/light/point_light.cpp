@@ -3,14 +3,14 @@
 //
 
 #include "point_light.h"
+#include "../transform/translation.h"
 
 
 void Point_light::render(double delta_time) {
     Light::render(delta_time);
     if (transform_operations)
         light_position = glm::vec3(Matrix_transformed[3][0], Matrix_transformed[3][1], Matrix_transformed[3][2]);
-    else
-        light_position = glm::vec3(Matrix[3][0], Matrix[3][1], Matrix[3][2]);
+
 }
 
 std::unordered_map<std::string, std::variant<glm::mat4, glm::vec4, glm::vec3, float, int>> Point_light::get_variables() {
@@ -42,4 +42,16 @@ Point_light Point_light::set_transform_operations(std::shared_ptr<Transforms::Tr
 Point_light Point_light::set_object(std::shared_ptr<Mesh> mesh, std::shared_ptr<Base_shader> shader, std::shared_ptr<Material> material) {
     Light::set_object(mesh, shader, material);
     return *this;
+}
+
+Point_light::Point_light(glm::vec4 light_color, glm::vec3 light_position) {
+    this->light_color = light_color;
+    //staic once transformation
+    this->set_transform_operations(
+            std::make_shared<Transforms::Transform_node>()->add({
+                                                                        std::make_shared<Transforms::Translation>(light_position),
+                                                                }
+            ), true);
+
+
 }

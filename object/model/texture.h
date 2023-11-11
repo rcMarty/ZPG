@@ -14,13 +14,23 @@
 
 struct files {
     std::string path;
+    std::string filename_extension = ".jpg";
     std::string object = "cube.obj";
-    std::string right = "right.jpg";
-    std::string left = "left.jpg";
-    std::string top = "top.jpg";
-    std::string bottom = "bottom.jpg";
-    std::string front = "front.jpg";
-    std::string back = "back.jpg";
+    std::string right = "right";
+    std::string left = "left";
+    std::string top = "top";
+    std::string bottom = "bottom";
+    std::string front = "front";
+    std::string back = "back";
+
+    void update_extension() {
+        right = right + filename_extension;
+        left = left + filename_extension;
+        top = top + filename_extension;
+        bottom = bottom + filename_extension;
+        front = front + filename_extension;
+        back = back + filename_extension;
+    };
 };
 
 enum TextureType {

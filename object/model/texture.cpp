@@ -10,53 +10,49 @@
 
 Texture::Texture(const std::string &path, TextureType type, GLenum gl_type) {
 
-    if (type == CUBEMAP) {
-
-        auto files_path = files();
-
-        std::vector<std::string> faces = {
-                path + "/" + files_path.right,
-                path + "/" + files_path.left,
-                path + "/" + files_path.top,
-                path + "/" + files_path.bottom,
-                path + "/" + files_path.front,
-                path + "/" + files_path.back
-        };
-
-        GLuint cubemap_texture = load_cubemap(faces);
-        printf("id of cubemap texture: %d\n", cubemap_texture);
-        printf("path: %s\n", faces[0].c_str());
-        this->id = cubemap_texture; // i guess
-
+    if (type != CUBEMAP) {
+        this->load_texture(path, type, gl_type);
         return;
     }
 
-    this->load_texture(path, type, gl_type);
+    auto files_path = files();
 
+    std::vector<std::string> faces = {
+            path + "/" + files_path.right,
+            path + "/" + files_path.left,
+            path + "/" + files_path.top,
+            path + "/" + files_path.bottom,
+            path + "/" + files_path.front,
+            path + "/" + files_path.back
+    };
+
+    GLuint cubemap_texture = load_cubemap(faces);
+    printf("id of cubemap texture: %d\n", cubemap_texture);
+    printf("path: %s\n", faces[0].c_str());
+    this->id = cubemap_texture; // i guess
 }
 
 Texture::Texture(const std::string &path, files files_path, TextureType type, GLenum gl_type) {
 
-    if (type == CUBEMAP) {
-
-        std::vector<std::string> faces = {
-                path + "/" + files_path.right,
-                path + "/" + files_path.left,
-                path + "/" + files_path.top,
-                path + "/" + files_path.bottom,
-                path + "/" + files_path.front,
-                path + "/" + files_path.back
-        };
-
-        GLuint cubemap_texture = load_cubemap(faces);
-        printf("id of cubemap texture: %d\n", cubemap_texture);
-        printf("path: %s\n", faces[0].c_str());
-        this->id = cubemap_texture; // i guess
-
+    if (type != CUBEMAP) {
+        this->load_texture(path, type, gl_type);
         return;
     }
 
-    this->load_texture(path, type, gl_type);
+
+    std::vector<std::string> faces = {
+            path + "/" + files_path.right,
+            path + "/" + files_path.left,
+            path + "/" + files_path.top,
+            path + "/" + files_path.bottom,
+            path + "/" + files_path.front,
+            path + "/" + files_path.back
+    };
+
+    GLuint cubemap_texture = load_cubemap(faces);
+    printf("id of cubemap texture: %d\n", cubemap_texture);
+    printf("path: %s\n", faces[0].c_str());
+    this->id = cubemap_texture; // i guess
 
 }
 
@@ -68,6 +64,7 @@ void Texture::bind(int slot) {
 GLenum Texture::get_gl_type() const {
     return gl_type;
 }
+
 
 void Texture::load_texture(const std::string &path, TextureType type, GLenum gl_type) {
 
@@ -95,6 +92,13 @@ void Texture::load_texture(const std::string &path, TextureType type, GLenum gl_
         printf("Failed to load texture: %s\n", path.c_str());
         exit(1);
     }
+
+    glTexParameteri(gl_type, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(gl_type, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(gl_type, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(gl_type, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+
     printf("id of texture: %d\n", this->id);
     stbi_image_free(data);
 }
@@ -108,8 +112,18 @@ GLuint Texture::load_cubemap(std::vector<std::string> faces) {
     for (unsigned int i = 0; i < faces.size(); i++) {
         unsigned char *data = stbi_load(faces[i].c_str(), &width, &height, &nrChannels, 0);
         if (data) {
+
+            GLenum gl_channel;
+            if (nrChannels == 1) {
+                gl_channel = GL_RED;
+            } else if (nrChannels == 3) {
+                gl_channel = GL_RGB;
+            } else {
+                gl_channel = GL_RGBA;
+            }
+
             glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-                         0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+                         0, GL_RGB, width, height, 0, gl_channel, GL_UNSIGNED_BYTE, data
             );
             stbi_image_free(data);
         } else {

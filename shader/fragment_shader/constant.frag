@@ -9,7 +9,28 @@
 
 uniform Material material;
 
-out vec4 color;
+uniform sampler2D textureDiffuse;
+uniform sampler2D textureSpecular;
+uniform int hasTexture;
+
+in vec2 TexCoord;
+
+Material texMaterial;
+
+out vec4 fragColor;
+
+
+
 void main() {
-    color = material.meshColor;
+
+
+    if (hasTexture == 1) {
+        texMaterial.meshColor = texture(textureDiffuse, TexCoord);
+    }
+    else {
+        texMaterial = material;
+    }
+
+
+    fragColor = texMaterial.meshColor;
 }

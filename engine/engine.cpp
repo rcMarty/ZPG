@@ -83,9 +83,9 @@ void Engine::init() {
     glfwGetFramebufferSize(window.get(), &width, &height);
     glViewport(0, 0, width, height);
 
-//    auto debug_scene = std::make_shared<Scene>(input_handler, window);
-//    debug_scene->set_debug_scene();
-//    this->scene.push_back(debug_scene);
+    auto debug_scene = std::make_shared<Scene>(input_handler, window);
+    debug_scene->set_debug_scene();
+    this->scene.push_back(debug_scene);
 
 
     auto phong_scene = std::make_shared<Scene>(input_handler, window);
@@ -93,14 +93,14 @@ void Engine::init() {
     this->scene.push_back(phong_scene);
 
 
-//    auto rotation_scene = std::make_shared<Scene>(input_handler, window);
-//    rotation_scene->set_rotation_scene();
-//    this->scene.push_back(rotation_scene);
-//
-//
-//    auto check_scene = std::make_shared<Scene>(input_handler, window);
-//    check_scene->set_check_phong_scene();
-//    this->scene.push_back(check_scene);
+    auto rotation_scene = std::make_shared<Scene>(input_handler, window);
+    rotation_scene->set_rotation_scene();
+    this->scene.push_back(rotation_scene);
+
+
+    auto check_scene = std::make_shared<Scene>(input_handler, window);
+    check_scene->set_check_phong_scene();
+    this->scene.push_back(check_scene);
 
 
     for (auto &i: scene) {

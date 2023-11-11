@@ -162,13 +162,13 @@ void Scene::set_debug_scene() {
 
     set_inputs();
     auto pointlight = std::make_shared<Point_light>(Point_light(glm::vec4(1, 1, 1, 1), glm::vec3(1, -4, 1)));
-    auto dirlight = std::make_shared<Directional_light>(Directional_light(glm::vec4(1, 1, 1, 1), glm::vec3(0, -1, 0)));
+    auto dirlight = std::make_shared<Directional_light>(Directional_light(glm::vec4(0.3, 0.3, 0.3, 1), glm::vec3(-1, -0.5, 0.75)));
     auto flashlight = std::make_shared<Spot_light>(Spot_light(glm::vec4(1, 1, 1, 1), glm::vec3(0, 0, 0), glm::vec3(0, -1, 0), 12.5f, 15.0f));
     std::shared_ptr<Light_wrapper> light = std::make_shared<Light_wrapper>(Light_wrapper().add(
             {
-
-                    pointlight,
-                    flashlight,
+                    dirlight,
+                    //                pointlight,
+                    //              flashlight,
 
             }));
 
@@ -194,6 +194,12 @@ void Scene::set_debug_scene() {
     camera->notify();
 
 
+    auto skydome_shader = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/skyobject.vert", "../shader/fragment_shader/skyobject.frag");
+    this->sky_box = std::make_shared<Sky_dome>("../resources/skybox/hq360/sky.obj", skydome_shader, camera);
+    camera->attach(sky_box);
+    camera->notify();
+
+
     auto sphere_mesh = std::make_shared<Mesh>(sphere_vec);
 
     pointlight->set_object(sphere_mesh, flat, std::make_shared<Material>(Material(glm::vec4(1, 1, 1, 1), glm::vec4(1.f, 1.0f, 1.0f, 1.0f), 1.f, 5)));
@@ -202,14 +208,14 @@ void Scene::set_debug_scene() {
 //#include "../resources/models/models_2023/Models/tree.h"
     Renderable_object sphere = Renderable_object(sphere_mesh, lambert).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add({
-                                                                        std::make_shared<Transforms::Translation>(0, 2, 0),
+                                                                        std::make_shared<Transforms::Translation>(0, 10, 0),
                                                                 }
             ), true).set_material(default_material);
     add_object(std::make_shared<Renderable_object>(sphere));
 
     Renderable_object sphere2 = Renderable_object(sphere_mesh, phong).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
-                    {std::make_shared<Transforms::Translation>(0, -2, 0)}
+                    {std::make_shared<Transforms::Translation>(-1, -2, 0)}
             ), true).set_material(default_material);
     add_object(std::make_shared<Renderable_object>(sphere2));
 
@@ -227,11 +233,6 @@ void Scene::set_debug_scene() {
             ), true).set_material(default_material);
     add_object(std::make_shared<Renderable_object>(sphere4));
 
-    //random number generator
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution<> angles(-50, 50);
-    std::uniform_real_distribution<> position(-30, 30);
 
     auto suzi_mesh = std::make_shared<Mesh>("../resources/models/suzi.obj");
 
@@ -276,13 +277,6 @@ void Scene::set_debug_scene() {
     add_object(std::make_shared<Renderable_object>(grid_down));
 
 
-    Renderable_object grid_up = Renderable_object(grid_mesh, lambert).set_name("grid_up").set_material(default_material);
-    grid_up.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
-                                                                                                 std::make_shared<Transforms::Translation>(0, 2, 0),
-                                                                                                 std::make_shared<Transforms::Scale>(1.5),
-                                                                                         }), true);
-    add_object(std::make_shared<Renderable_object>(grid_up));
-
     auto rat_mesh = std::make_shared<Mesh>("../resources/models/rat.obj");
 
     Renderable_object rat = Renderable_object(rat_mesh, lambert).set_name("rat").set_material(default_material);
@@ -319,10 +313,15 @@ void Scene::set_debug_scene() {
 
 
     //HERE ARE TREES AND SO ON
+    //random number generator
 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution<> angles(-50, 50);
+    std::uniform_real_distribution<> position(-30, 30);
 
-    Renderable_object plain_obj = Renderable_object(std::make_shared<Mesh>(plain), phong).set_name("plain").set_material(default_material).set_material(
-                    std::make_shared<Material>(glm::vec4(0.2f, 0.8f, 0.08f, 1.0f), glm::vec4(0.2f, 0.2f, 0.05f, 1.0f), 0.75f, 30))
+    Renderable_object plain_obj = Renderable_object(std::make_shared<Mesh>(plain), phong).set_name("plain").set_material(
+                    std::make_shared<Material>(glm::vec4(0.2f, 0.1f, 0.08f, 1.0f), glm::vec4(0.05f, 0.1f, 0.05f, 1.0f), 0.75f, 30))
             .set_transform_operations(std::make_shared<Transforms::Transform_node>()->add({
                                                                                                   std::make_shared<Transforms::Translation>(0, -10, 0),
                                                                                                   std::make_shared<Transforms::Scale>(50),
@@ -332,7 +331,7 @@ void Scene::set_debug_scene() {
     printf("[DEBUG] TREEEEEEEEEEEEEEEEEEE\n");
 
     //trees
-    auto tree_material = std::make_shared<Material>(glm::vec4(0.9f, 0.8f, 0.8f, 1.0f), glm::vec4(0.1f, 0.05f, 0.01f, 1.0f), 0.75f, 32);
+    auto tree_material = std::make_shared<Material>(glm::vec4(1.0f, 0.9f, 0.8f, 1.0f), glm::vec4(0.05f, 0.05f, 0.01f, 1.0f), 0.75f, 128);
     auto tree_mesh = std::make_shared<Mesh>("../resources/models/tree.obj");
     for (int i = 0; i < 100; ++i) {
         float angle_x = angles(gen);
@@ -396,7 +395,6 @@ void Scene::set_phong_scene() {
                                                                                   }),
                                                                                   std::make_shared<Transforms::Translation>(4, 0, 0),
                                                                                   std::make_shared<Transforms::Scale>(0.1)
-
                                                                           }
                                                                   )));
 
@@ -405,7 +403,7 @@ void Scene::set_phong_scene() {
     std::shared_ptr<Light_wrapper> light = std::make_shared<Light_wrapper>(Light_wrapper().add(
             {
                     flashlight,
-                    redlight
+                    redlight,
 //                    std::make_shared<Point_light>(Point_light(glm::vec4(0, 1, 0, 1), glm::vec3(4, 0, 0))
 //                                                          .set_transform_operations(
 //                                                                  std::make_shared<Transforms::Transform_node>()->add(
@@ -414,15 +412,17 @@ void Scene::set_phong_scene() {
 //                                                                                      return angle + 0.1f;
 //                                                                                  }),
 //                                                                                  std::make_shared<Transforms::Translation>(0, 1, 0),
-//
 //                                                                          }
 //                                                                  ))),
-//
+                    std::make_shared<Directional_light>(Directional_light(glm::vec4(0.3, 0.3, 0.3, 1), glm::vec3(1, -1, -2))),
 
             }));
 
 
     add_object(light);
+
+    auto blinn = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/blinn.frag");
+    camera->attach(blinn);
 
     auto phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
     camera->attach(phong);
@@ -434,25 +434,33 @@ void Scene::set_phong_scene() {
     //make skybox and shader
     auto skybox_shader = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/skybox.vert", "../shader/fragment_shader/skybox.frag");
     auto files_path = files();
-    files_path.path = "../resources/skybox/baseSkybox";
+    files_path.path = "../resources/skybox/night_skyboxes/3";
+    files_path.filename_extension = ".png";
+    files_path.update_extension();
     this->sky_box = std::make_shared<Sky_box>(files_path, skybox_shader, camera);
-    //this->sky_box = std::make_shared<Sky_dome>("../resources/skybox/sky/skydome.obj", phong, camera);
+
+
+
+    //skydome and his shader
+//    auto skydome_shader = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/skyobject.vert", "../shader/fragment_shader/skyobject.frag");
+//    this->sky_box = std::make_shared<Sky_dome>("../resources/skybox/sky/skydome.obj", skydome_shader, camera);
+
+
     camera->attach(sky_box);
     camera->notify();
-
 
 //    add_object(std::make_shared<Renderable_object>(
 //            Renderable_object(std::make_shared<Mesh>("../resources/skybox/sky/skydome.obj"), phong).set_name("dome").set_material(default_material).set_has_texture(true)));
 
 
-    Renderable_object sphere = Renderable_object(sphere_mesh, phong).set_name("sphere").set_transform_operations(
+    Renderable_object sphere = Renderable_object(sphere_mesh, blinn).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
                     {
                             std::make_shared<Transforms::Translation>(1, 1, 0)}
             ), true).set_material(default_material);
     add_object(std::make_shared<Renderable_object>(sphere));
 
-    Renderable_object sphere2 = Renderable_object(sphere_mesh, phong).set_name("sphere").set_transform_operations(
+    Renderable_object sphere2 = Renderable_object(sphere_mesh, blinn).set_name("sphere").set_transform_operations(
             std::make_shared<Transforms::Transform_node>()->add(
                     {std::make_shared<Transforms::Translation>(1, -1, 0)}
             ), true).set_material(default_material);

@@ -55,7 +55,7 @@ vec4 CalcSpotLight(lightSource light, Material material)
 
     float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * length(light.position - worldPosition) + light.attenuation.z * pow(length(light.position - worldPosition), 2));
     vec4 diffuse = diff * light.color * attenuation;
-    
+
 
     //cone things
     float cutOff = cos(radians(light.cutOff));
@@ -74,7 +74,7 @@ vec4 CalcDirLight(lightSource light, Material material)
     vec3 cameraVector = normalize(cameraPosition - worldPosition);
     vec3 halfwayVector = normalize(lightVector + cameraVector);
 
-    float spec = pow(max(dot(worldNormal, halfwayVector), 0.0), 64);
+    float spec = pow(max(dot(worldNormal, halfwayVector), 0.0), material.specularPower);
 
     // checking for angle between light and normal between < -90, 90 >
     float angle = dot(lightVector, worldNormal);
@@ -122,25 +122,44 @@ uniform Material material;
 uniform lightSource lights[10];
 
 
+uniform sampler2D textureDiffuse;
+uniform sampler2D textureSpecular;
+uniform int hasTexture;
+
+in vec2 TexCoord;
+
+Material texMaterial;
+
 out vec4 fragColor;
 
 void main() {
+
+    if (hasTexture == 1) {
+        texMaterial.meshColor = texture(textureDiffuse, TexCoord);
+        texMaterial.specularStrength = texture(textureSpecular, TexCoord).r;
+        texMaterial.ambientColor = vec4(texture(textureDiffuse, TexCoord).xyz * 0.05, 1.0);
+        texMaterial.specularPower = material.specularPower;
+    }
+    else {
+        texMaterial = material;
+    }
+
 
     vec4 outputColor = vec4(0.f);
 
     for (int i = 0; i < no_lights; i++) {
         if (lights[i].type == point) {
-            outputColor += CalcPointLight(lights[i], material);
+            outputColor += CalcPointLight(lights[i], texMaterial);
         }
         else if (lights[i].type == spot) {
-            outputColor += CalcSpotLight(lights[i], material);
+            outputColor += CalcSpotLight(lights[i], texMaterial);
         }
         else if (lights[i].type == directional) {
-            outputColor += CalcDirLight(lights[i], material);
+            outputColor += CalcDirLight(lights[i], texMaterial);
         }
     }
 
-    outputColor += material.ambientColor;
+    outputColor += texMaterial.ambientColor;
 
     fragColor = outputColor;
 }
