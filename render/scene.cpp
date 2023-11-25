@@ -10,7 +10,6 @@
 #include "../object/transform/rotation.h"
 #include "../object/transform/scale.h"
 #include "../object/light/point_light.h"
-#include "../shader/shader_wrapper.h"
 #include "../object/material.h"
 #include "../resources/models/plain.h"
 #include "../object/light/spot_light.h"
@@ -47,15 +46,19 @@ void Scene::init() {
 
 void Scene::render(double delta_time) {
 
-    if (sky_box)
+    if (sky_box) {
+        glStencilFunc(GL_ALWAYS, 0, 0xff);
         sky_box->render();
-
-
-    for (auto &object: objects) {
-        object->render(delta_time);
     }
-    for (auto &light: lights) {
-        light->render(delta_time);
+
+    for (auto i = 0; i < objects.size(); i++) {
+        glStencilFunc(GL_ALWAYS, i + 1, 0xff);
+        objects[i]->render(delta_time);
+    }
+    //auto sz = objects.size();
+    for (auto i = 0; i < lights.size(); i++) {
+        //glStencilFunc(GL_ALWAYS, sz + i, 0xff);
+        lights[i]->render(delta_time);
     }
 
 }
@@ -71,6 +74,79 @@ std::shared_ptr<Renderable_object> Scene::find_object(const std::string &name) {
 
 }
 
+void Scene::set_active() {
+    this->is_active = true;
+}
+
+void Scene::set_inactive() {
+    this->is_active = false;
+}
+
+
+std::shared_ptr<Renderable_object> Scene::get_object_at(int x, int y) {
+
+    int index;
+    glReadPixels(x, y, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &index);
+    index--;
+
+    printf("\t index: %d\n", index);
+
+    if (index < 0)
+        return nullptr;
+
+    //if(index >= objects.size())
+    //return lights[index-objects.size()] // todo set names to lights in lightwrapper
+
+    std::string name;
+    if (objects[index]->name.empty()) {
+        name = "NaN";
+    } else {
+        name = objects[index]->name;
+    }
+    auto str = name + "index: " + std::to_string(index);
+    printf("\t name: %s\n", str.c_str());
+    return objects[index];
+}
+
+void Scene::clicked_pixel(std::function<void(std::shared_ptr<Renderable_object> obj)> callback) {
+
+    if (!this->is_active)
+        return;
+
+    int width, height;
+    glfwGetWindowSize(this->window.get(), &width, &height);
+    double x, y;
+    glfwGetCursorPos(this->window.get(), &x, &y);
+
+
+    printf("[DEBUG] CLICKED ON\n");
+    printf("\t x:%f, y:%f\n", x, y);
+    unsigned char pixel[4];
+    glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
+    y = height - y;
+    printf("\t color: (%d, %d, %d, %d)\n", pixel[0], pixel[1], pixel[2], pixel[3]);
+
+    //get Z buffer
+    float depth;
+    glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+    printf("\t depth: %f\n", depth);
+
+    //get stencil buffer
+    auto obj = this->get_object_at(x, y);
+    if (obj)
+        callback(obj);
+
+    //unproject
+
+    //Můžeme vypočíst pozici v globálním souřadném systému.
+    glm::vec3 screenX = glm::vec3(x, y, depth);
+    glm::vec4 viewPort = glm::vec4(0, 0, width, height);
+    glm::vec3 pos = glm::unProject(screenX, camera->get_view_matrix(), camera->get_projection_matrix(), viewPort);
+
+    printf("\t pos: (%f, %f, %f)\n", pos.x, pos.y, pos.z);
+
+}
+
 void Scene::set_inputs() {
 
     if (input_handler == nullptr) {
@@ -82,7 +158,6 @@ void Scene::set_inputs() {
         fprintf(stderr, "[ERROR] Camera not set\n");
         return;
     }
-
 
     //todo fix more keys events down simultaneously
     input_handler->subscribe([&](input::Key_event_data data) {
@@ -138,12 +213,20 @@ void Scene::set_inputs() {
 
 
     input_handler->subscribe([&](input::Cursor_event_data data) {
-
-//        printf("[DEBUG] cursor position: %f, %f\n", data.x, data.y);
-//        printf("[DEBUG] last position: %f, %f\n", last_x, last_y);
         if (glfwGetInputMode(this->window.get(), GLFW_CURSOR) == GLFW_CURSOR_DISABLED) {
             camera->look_mouse(data.x, data.y);
             //printf("[DEBUG] camera -> lookmouse called\n");
+        }
+    });
+
+    // get clicked pixel on screen and color ...
+    input_handler->subscribe([&](input::Mouse_btn_event_data data) {
+        if (data.action == GLFW_PRESS) {
+            this->clicked_pixel([&](std::shared_ptr<Renderable_object> obj) {
+                printf("[DEBUG] clicked on object %s with index \n", obj->name.c_str());
+                obj->set_name(obj->name + " clicked");
+                obj->set_material(std::make_shared<Material>(glm::vec4(1, 1, 1, 1), glm::vec4(0.1f, 0.0f, 0.0f, 1.0f), 1.f, 5));
+            });
         }
     });
 
@@ -169,7 +252,6 @@ void Scene::set_debug_scene() {
                     dirlight,
                     //                pointlight,
                     //              flashlight,
-
             }));
 
     add_object(light);
@@ -178,20 +260,24 @@ void Scene::set_debug_scene() {
     auto flat = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/constant.frag");
     camera->attach(flat);
     camera->notify();
+    this->shaders.push_back(flat);
 
 
     auto lambert = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/lambert.frag");
     camera->attach(lambert);
     camera->notify();
+    this->shaders.push_back(lambert);
 
 
     auto phong = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/phong.frag");
     camera->attach(phong);
     camera->notify();
+    this->shaders.push_back(phong);
 
     auto blinn = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/model.vert", "../shader/fragment_shader/blinn.frag");
     camera->attach(blinn);
     camera->notify();
+    this->shaders.push_back(blinn);
 
 
     auto skydome_shader = std::make_shared<Shader_wrapper>(camera, light, "../shader/vertex_shader/skyobject.vert", "../shader/fragment_shader/skyobject.frag");
@@ -576,7 +662,21 @@ void Scene::set_rotation_scene() {
     moon1.set_transform_operations(moon1_move);
     add_object(std::make_shared<Renderable_object>(moon1));
 
-    //generate plain
+
+    std::shared_ptr<Transforms::Transform_node> earth2_move = std::make_shared<Transforms::Transform_node>()->add(
+            {
+                    std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
+                        return angle + 0.01f;
+                    }),
+                    std::make_shared<Transforms::Translation>(4, 0, 0),
+                    std::make_shared<Transforms::Scale>(0.5),
+            }
+    );
+    Renderable_object earth2 = Renderable_object(sphere_mesh, phong)
+            .set_name("earth")
+            .set_material(std::make_shared<Material>(glm::vec4(0.1f, 0.1f, 0.8f, 1.0f), glm::vec4(0.1f, 0.1f, 0.15f, 1.0f), 0.6f, 32))
+            .set_transform_operations(earth2_move);
+    add_object(std::make_shared<Renderable_object>(earth2));
 
 }
 
@@ -625,5 +725,7 @@ void Scene::set_check_phong_scene() {
     add_object(std::make_shared<Renderable_object>(sphere2));
 
 }
+
+
 
 

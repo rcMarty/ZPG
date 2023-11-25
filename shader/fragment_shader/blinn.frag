@@ -39,7 +39,6 @@ vec4 CalcSpotLight(lightSource light, Material material)
     vec3 cameraVector = normalize(cameraPosition - worldPosition);
 
     vec3 halfwayVector = normalize(lightVector + cameraVector);
-
     float spec = pow(max(dot(worldNormal, halfwayVector), 0.0), 64);
 
     // checking for angle between light and normal between < -90, 90 >
@@ -98,13 +97,12 @@ vec4 CalcPointLight(lightSource light, Material material)
 
     vec3 halfwayVector = normalize(lightVector + cameraVector);
 
-    float spec = pow(max(dot(worldNormal, halfwayVector), 0.0), 64);
+    float spec = pow(max(dot(worldNormal, halfwayVector), 0.0), material.specularPower);
 
     // checking for angle between light and normal between < -90, 90 >
     float angle = dot(lightVector, worldNormal);
     if (angle < 0) {
         spec = 0;
-        //lightVector = worldNormal * -1;
     }
 
     vec4 specular = material.specularStrength * spec * light.color;

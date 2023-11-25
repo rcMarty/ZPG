@@ -32,6 +32,8 @@ protected:
     glm::vec4 light_color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     bool has_object = false;
 public:
+    std::string name;
+
     Light() = default;
 
     Light(glm::vec4 light_color) : light_color(light_color) {};

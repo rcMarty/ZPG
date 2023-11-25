@@ -68,6 +68,8 @@ void Engine::init() {
     glewExperimental = GL_TRUE;
     glewInit();
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_STENCIL_TEST);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
     // get version info
     printf("OpenGL Version: %s\n", glGetString(GL_VERSION));
@@ -110,7 +112,9 @@ void Engine::init() {
     input_handler->subscribe([&](input::Key_event_data data) {
         if (data.key == GLFW_KEY_TAB && data.action == GLFW_PRESS) {
             printf("[DEBUG] tab pressed\n");
+            scene[current_scene]->set_inactive();
             current_scene = (current_scene + 1) % scene.size();
+            scene[current_scene]->set_active();
         }
     });
 
@@ -118,10 +122,11 @@ void Engine::init() {
 
 void Engine::run() {
     current_scene = 0;
+    scene[current_scene]->set_active();
 
 
     while (!glfwWindowShouldClose(window.get())) {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         //printf("[DEBUG] FPS %f\n", fps);
 

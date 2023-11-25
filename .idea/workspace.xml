@@ -21,54 +21,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="working skybox and hints for skydome">
-      <change afterPath="$PROJECT_DIR$/shader/fragment_shader/skyobject.frag" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shader/vertex_shader/skyobject.vert" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="added stencil buffer for checking objects on click&#10;not tested">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/point_light.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/point_light.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/light/point_light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/point_light.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/model/texture.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/object/model/texture.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/object/model/texture.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/model/texture.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object/light/light.h" beforeDir="false" afterPath="$PROJECT_DIR$/object/light/light.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/render/scene.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/models/backpack/backpack.mtl" beforeDir="false" afterPath="$PROJECT_DIR$/resources/models/backpack/backpack.mtl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/0/LS nigth 01_out_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/0/LS nigth 01_out_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/0/LS nigth 01_out_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/0/LS nigth 01_out_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/0/LS nigth 01_out_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/0/LS nigth 01_out_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/1/LS nigth 02_out_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/1/LS nigth 02_out_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/1/LS nigth 02_out_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/1/LS nigth 02_out_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/1/LS nigth 02_out_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/1/LS nigth 02_out_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/2/LS nigth 03_out_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/2/LS nigth 03_out_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/2/LS nigth 03_out_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/2/LS nigth 03_out_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/2/LS nigth 03_out_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/2/LS nigth 03_out_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/3/LS nigth 04_out_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/3/LS nigth 04_out_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/3/LS nigth 04_out_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/3/LS nigth 04_out_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/3/LS nigth 04_out_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/3/LS nigth 04_out_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/4/LS nigth 05_out_0.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/4/LS nigth 05_out_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/4/LS nigth 05_out_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/4/LS nigth 05_out_3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/4/LS nigth 05_out_4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/skybox/nightSkyboxes/4/LS nigth 05_out_5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/bad_phong.frag" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/render/scene.h" beforeDir="false" afterPath="$PROJECT_DIR$/render/scene.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/blinn.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/constant.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/lambert.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/phong.frag" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shader/fragment_shader/skybox.frag" beforeDir="false" afterPath="$PROJECT_DIR$/shader/fragment_shader/skybox.frag" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +38,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="259048" />
+    <option name="totalTimeSeconds" value="272429" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -169,7 +128,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.editor",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -191,9 +150,9 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
     <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
@@ -201,7 +160,7 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="ZPG" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="ZPG" TARGET_NAME="ZPG" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="ZPG" RUN_TARGET_NAME="ZPG">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -311,7 +270,23 @@
       <workItem from="1699566572476" duration="7515000" />
       <workItem from="1699623675437" duration="1001000" />
       <workItem from="1699632126316" duration="15158000" />
-      <workItem from="1699697404395" duration="24972000" />
+      <workItem from="1699697404395" duration="25193000" />
+      <workItem from="1699784130034" duration="2813000" />
+      <workItem from="1699865696221" duration="1442000" />
+      <workItem from="1699877272023" duration="94000" />
+      <workItem from="1699955188589" duration="2978000" />
+      <workItem from="1699963402944" duration="3259000" />
+      <workItem from="1699992277861" duration="84000" />
+      <workItem from="1700561056220" duration="184000" />
+      <workItem from="1700561256203" duration="4643000" />
+      <workItem from="1700605719044" duration="261000" />
+      <workItem from="1700605994676" duration="41000" />
+      <workItem from="1700606043650" duration="1328000" />
+      <workItem from="1700607418369" duration="339000" />
+      <workItem from="1700607765725" duration="629000" />
+      <workItem from="1700939428990" duration="2725000" />
+      <workItem from="1700942155618" duration="8000" />
+      <workItem from="1700942170672" duration="4945000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -513,7 +488,23 @@
       <option name="project" value="LOCAL" />
       <updated>1699704939532</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="bugfix of light position and real object position&#10;working skybox and skydome and everything around i guess">
+      <option name="closed" value="true" />
+      <created>1699736064703</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1699736064703</updated>
+    </task>
+    <task id="LOCAL-00027" summary="added stencil buffer for checking objects on click&#10;not tested">
+      <option name="closed" value="true" />
+      <created>1699992344744</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1699992344744</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,7 +555,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="its working" />
     <MESSAGE value="converted roughly into objects &#10;needs some cleaning and new scene class" />
     <MESSAGE value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene" />
     <MESSAGE value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene&#10;added class for window&#10;added loading .obj files" />
@@ -588,7 +578,9 @@
     <MESSAGE value="working spotlight without updating direction&#10;&#10;shader fixed bug on intel (output is keyword)&#10;&#10;fixed shader compiler error messages&#10;&#10;Took 2 minutes" />
     <MESSAGE value="working more textures (can be or not)" />
     <MESSAGE value="working skybox and hints for skydome" />
-    <option name="LAST_COMMIT_MESSAGE" value="working skybox and hints for skydome" />
+    <MESSAGE value="bugfix of light position and real object position&#10;working skybox and skydome and everything around i guess" />
+    <MESSAGE value="added stencil buffer for checking objects on click&#10;not tested" />
+    <option name="LAST_COMMIT_MESSAGE" value="added stencil buffer for checking objects on click&#10;not tested" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
