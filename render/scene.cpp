@@ -16,6 +16,7 @@
 #include "../resources/models/sphere.h"
 #include "../object/light/directional_light.h"
 #include "../object/skybox/sky_dome.h"
+#include "../object/transform/bezier_curve.h"
 
 Scene Scene::add_object(std::shared_ptr<Renderable_object> object) {
     objects.push_back(object);
@@ -366,16 +367,25 @@ void Scene::set_debug_scene() {
     auto rat_mesh = std::make_shared<Mesh>("../resources/models/rat.obj");
 
     Renderable_object rat = Renderable_object(rat_mesh, lambert).set_name("rat").set_material(default_material);
-    rat.set_transform_operations(std::make_shared<Transforms::Transform_node>()->add(
-            {std::make_shared<Transforms::Scale>(1.5)}
-    ), true);
-
     auto rat_move = std::make_shared<Transforms::Transform_node>()->add(
             {
-                    std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
-                        return angle + 0.1f;
-                    }),
-                    std::make_shared<Transforms::Translation>(0, 2, 0),
+                    std::make_shared<Transforms::Translation>(5, 0, 0),
+                    std::make_shared<Transforms::Bezier_curve>(Bezier({
+                                                                              glm::vec3(-1, 0, 0),
+                                                                              glm::vec3(-0.5, 1, 0),
+                                                                              glm::vec3(0.5, -1, 0),
+                                                                              glm::vec3(1, 0, 0), // first ^
+                                                                              glm::vec3(1.5, 1, 0),
+                                                                              glm::vec3(-3, 3, 0),
+                                                                              glm::vec3(-1, 0, 0),//second ^
+                                                                              glm::vec3(-1, 1, 0),
+                                                                              glm::vec3(0, -2, 0),
+                                                                              glm::vec3(1, 0, 0),//third ^
+                                                                              glm::vec3(2, -1, 0),
+                                                                              glm::vec3(0, -1, 0),
+                                                                              glm::vec3(1, 0, 0),//fourth ^
+                                                                      }), 0.005f),
+
             });
 
     add_object(std::make_shared<Renderable_object>(rat.set_transform_operations(rat_move)));
@@ -388,7 +398,6 @@ void Scene::set_debug_scene() {
 
     auto rattatulie_move = std::make_shared<Transforms::Transform_node>()->add(
             {
-                    rat_move,
                     std::make_shared<Transforms::Rotation>(90, 0, 0, 1)->set_dynamic_function([](float angle) {
                         return angle + 0.1f;
                     }),

@@ -74,6 +74,8 @@ add_executable(ZPG
         object/skybox/sky_box.h
         object/skybox/sky_dome.cpp
         object/skybox/sky_dome.h
+        object/transform/bezier.h
+        object/transform/bezier_curve.h
 
 )
 
