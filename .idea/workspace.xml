@@ -22,7 +22,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="bugfix of attenuation&#10;added models">
+      <change afterPath="$PROJECT_DIR$/progress.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OPICE.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/light.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/light_epilepsy.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/monky.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rectangle.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,13 +41,13 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="293017" />
+    <option name="totalTimeSeconds" value="293970" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
     <option name="naggedAbout" value="1" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Release" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -84,9 +92,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="OCResolveContextSettings">
-    <option name="configuration" value="0-Debug-ZPG" />
   </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
@@ -286,6 +291,7 @@
       <workItem from="1701731443592" duration="5171000" />
       <workItem from="1701768865462" duration="6359000" />
       <workItem from="1701800467389" duration="1059000" />
+      <workItem from="1701803460826" duration="2362000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />

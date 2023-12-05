@@ -33,23 +33,12 @@ Citation from my university:
 ## ToDo
 
 - [ ] add delta time to camera movement and other objects
-- [ ] add textures
-- [ ] refactoring of engine and scene
+- [x] add textures
 - [ ] add Debug class
 
 ## Demo
 
-<img src="rectangle.png">
-first attempt to draw objects in 3d space
-<br><br><br>
-
-<img src="monky.gif">
-attemt to do animation with perspective camera
-<br><br><br>
-
-<img src="camera.gif">
-working camera moevement
-<br><br><br>
+**_there will be link to another readme_**
 
 ## Installation
 
@@ -92,3 +81,10 @@ Camera:
 - Arrow down - rotate down
 - Arrow left - rotate left
 - Arrow right - rotate right
+
+Other:
+
+- SPACE - lock/unlock cursor
+- Mouse when cursor is locked - look around
+- B - (only debug scene) add one point into Bézier curve (one little rat on the ground)
+- R - (only debug scene) plant a spinning rat on the object
