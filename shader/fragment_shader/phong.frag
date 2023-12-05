@@ -116,6 +116,7 @@ vec4 CalcPointLight(lightSource light, Material material)
     vec4 diffuse = diff * light.color;
 
     float attenuation = 1.0 / (light.attenuation.x + light.attenuation.y * length(light.position - worldPosition) + light.attenuation.z * pow(length(light.position - worldPosition), 2));
+    //float attenuation = 5.0;
 
     return (diffuse + specular) * material.meshColor * attenuation;
 }

@@ -13,6 +13,11 @@ void Point_light::render(double delta_time) {
 
 }
 
+Point_light Point_light::set_light_attenuation(glm::vec3 light_attenuation) {
+    this->light_attenuation = light_attenuation;
+    return *this;
+}
+
 std::unordered_map<std::string, std::variant<glm::mat4, glm::vec4, glm::vec3, float, int>> Point_light::get_variables() {
     //struct lightSource {
     //    vec3 position;

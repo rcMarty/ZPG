@@ -18,7 +18,9 @@ protected:
 
 
     glm::vec3 light_position = glm::vec3(Matrix[3][0], Matrix[3][1], Matrix[3][2]);
-    glm::vec3 light_attenuation = glm::vec3(0.9f, 0.0f, 0.01f);
+    //glm::vec3 light_attenuation = glm::vec3(0.9f, 0.0f, 0.01f);
+    glm::vec3 light_attenuation = glm::vec3(.9f, 0.0f, 0.01f);
+
 
 public:
     Point_light() = default;
