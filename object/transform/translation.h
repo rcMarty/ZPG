@@ -21,13 +21,6 @@ namespace Transforms {
 
         Translation() : translation(0, 0, 0) {}
 
-        //todo mby remove idk yet
-        // definitely not without pointer
-        Translation set_translation(float x, float y, float z) {
-            translation = glm::vec3(x, y, z);
-            return *this;
-        }
-
         std::shared_ptr<Translation> set_dynamic_function(std::function<glm::vec3(glm::vec3)> dynamic_function) {
             this->dynamic_function = dynamic_function;
             return std::make_shared<Translation>(*this);
@@ -41,7 +34,6 @@ namespace Transforms {
         }
 
         virtual glm::mat4x4 get_matrix(glm::mat4x4 input_matrix) override {
-            print_matrix(input_matrix);
             return glm::translate(input_matrix, translation);
 
         }

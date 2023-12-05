@@ -49,6 +49,8 @@ public:
 
     void clicked_pixel(std::function<void(std::shared_ptr<Renderable_object> obj)> callback);
 
+    void get_clicked_point(glm::vec3 &point_3d, glm::vec3 &point_screen);
+
     void init();
 
     void render(double delta_time);

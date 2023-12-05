@@ -9,20 +9,17 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include <stdexcept>
+#include <mutex>
 
 class Bezier {
 private:
-    std::vector<glm::vec3> points;
-
-    float factorial(int n) {
-        // calculate factorial
-        return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n;
-    }
 
 public:
+    std::vector<glm::vec3> points;
+
     Bezier() = default;
 
-    Bezier(std::vector<glm::vec3> points) {
+    explicit Bezier(std::vector<glm::vec3> points) {
         if (points.size() < 4) {
             throw std::invalid_argument("Bezier curve needs at least 4 points");
         }
@@ -30,7 +27,7 @@ public:
     }
 
     void add_point(glm::vec3 point) {
-        points.push_back(point);
+        this->points.push_back(point);
     }
 
     void add_points(std::vector<glm::vec3> points) {
@@ -38,7 +35,9 @@ public:
     }
 
     int get_curves_size() {
-        return floor(points.size() / 4) + 1;
+        int n = points.size() - 1;
+        return n / (4 - 1);
+
     }
 
 
@@ -51,22 +50,13 @@ public:
         if (t >= points.size())
             throw std::invalid_argument("Bezier out of index");
 
-
-//        if (t + 3 >= points.size())
-//            index = points.size() - 4;
-
         glm::vec3 B;
 
-//        for (int i = 0; i < 4; i++) {
-//            B += points[index + i] * bernstein_polynomial(i, t);
-//        }
-
-        B.x = (1 - t) * (1 - t) * (1 - t) * points[index].x + 3 * (1 - t) * (1 - t) * t * points[index + 1].x + 3 * (1 - t) * t * t * points[index + 2].x + t * t * t * points[index + 3].x;
-        B.y = (1 - t) * (1 - t) * (1 - t) * points[index].y + 3 * (1 - t) * (1 - t) * t * points[index + 1].y + 3 * (1 - t) * t * t * points[index + 2].y + t * t * t * points[index + 3].y;
-        B.z = (1 - t) * (1 - t) * (1 - t) * points[index].z + 3 * (1 - t) * (1 - t) * t * points[index + 1].z + 3 * (1 - t) * t * t * points[index + 2].z + t * t * t * points[index + 3].z;
+        B.x = pow((1 - t), 3) * points[index].x + 3 * pow((1 - t), 2) * t * points[index + 1].x + 3 * (1 - t) * pow(t, 2) * points[index + 2].x + pow(t, 3) * points[index + 3].x;
+        B.y = pow((1 - t), 3) * points[index].y + 3 * pow((1 - t), 2) * t * points[index + 1].y + 3 * (1 - t) * pow(t, 2) * points[index + 2].y + pow(t, 3) * points[index + 3].y;
+        B.z = pow((1 - t), 3) * points[index].z + 3 * pow((1 - t), 2) * t * points[index + 1].z + 3 * (1 - t) * pow(t, 2) * points[index + 2].z + pow(t, 3) * points[index + 3].z;
 
         return B;
-
     }
 };
 

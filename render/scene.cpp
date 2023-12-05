@@ -111,6 +111,57 @@ std::shared_ptr<Renderable_object> Scene::get_object_at(int x, int y) {
 
 void Scene::clicked_pixel(std::function<void(std::shared_ptr<Renderable_object> obj)> callback) {
 
+//    if (!this->is_active)
+//        return;
+//
+//    int width, height;
+//    glfwGetWindowSize(this->window.get(), &width, &height);
+//    double x, y;
+//    glfwGetCursorPos(this->window.get(), &x, &y);
+//
+//
+//    printf("[DEBUG] CLICKED ON\n");
+//    printf("\t x:%f, y:%f\n", x, y);
+//    unsigned char pixel[4];
+//    glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
+//    y = height - y;
+//    printf("\t color: (%d, %d, %d, %d)\n", pixel[0], pixel[1], pixel[2], pixel[3]);
+//
+//    //get Z buffer
+//    float depth;
+//    glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
+//    printf("\t depth: %f\n", depth);
+//
+//    //get stencil buffer
+//    auto obj = this->get_object_at(x, y);
+//    if (obj)
+//        callback(obj);
+//
+//    //unproject
+//
+//    //Můžeme vypočíst pozici v globálním souřadném systému.
+//    glm::vec3 screenX = glm::vec3(x, y, depth);
+//    glm::vec4 viewPort = glm::vec4(0, 0, width, height);
+//    glm::vec3 pos = glm::unProject(screenX, camera->get_view_matrix(), camera->get_projection_matrix(), viewPort);
+//
+//    printf("\t pos: (%f, %f, %f)\n", pos.x, pos.y, pos.z);
+
+    if (!this->is_active)
+        return;
+
+    glm::vec3 point_3d;
+    glm::vec3 point_screen;
+
+    get_clicked_point(point_3d, point_screen);
+    printf("[DEBUG] clicked point: (%f, %f, %f)\n", point_3d.x, point_3d.y, point_3d.z);
+    auto obj = this->get_object_at(point_screen.x, point_screen.y);
+    if (obj)
+        callback(obj);
+
+}
+
+void Scene::get_clicked_point(glm::vec3 &point_3d, glm::vec3 &point_screen) {
+
     if (!this->is_active)
         return;
 
@@ -119,34 +170,30 @@ void Scene::clicked_pixel(std::function<void(std::shared_ptr<Renderable_object> 
     double x, y;
     glfwGetCursorPos(this->window.get(), &x, &y);
 
-
-    printf("[DEBUG] CLICKED ON\n");
-    printf("\t x:%f, y:%f\n", x, y);
     unsigned char pixel[4];
     glReadPixels(x, y, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, pixel);
     y = height - y;
-    printf("\t color: (%d, %d, %d, %d)\n", pixel[0], pixel[1], pixel[2], pixel[3]);
 
     //get Z buffer
     float depth;
     glReadPixels(x, y, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &depth);
-    printf("\t depth: %f\n", depth);
 
-    //get stencil buffer
-    auto obj = this->get_object_at(x, y);
-    if (obj)
-        callback(obj);
-
-    //unproject
+    point_screen = glm::vec3(x, y, depth);
 
     //Můžeme vypočíst pozici v globálním souřadném systému.
-    glm::vec3 screenX = glm::vec3(x, y, depth);
-    glm::vec4 viewPort = glm::vec4(0, 0, width, height);
-    glm::vec3 pos = glm::unProject(screenX, camera->get_view_matrix(), camera->get_projection_matrix(), viewPort);
+//    glm::vec3 screenX = glm::vec3(x, y, depth);
+//    glm::vec4 viewPort = glm::vec4(0, 0, width, height);
+//    point_3d = glm::unProject(screenX, camera->get_view_matrix(), camera->get_projection_matrix(), viewPort);
 
-    printf("\t pos: (%f, %f, %f)\n", pos.x, pos.y, pos.z);
+    glm::vec3 screenX = glm::vec3(x, y, depth);
+    glm::mat4 view = camera->get_view_matrix();
+    glm::mat4 projection = camera->get_projection_matrix();
+    glm::vec4 viewPort = glm::vec4(0, 0, width, height);
+    glm::vec3 pos = glm::unProject(screenX, view, projection, viewPort);
+    point_3d = pos;
 
 }
+
 
 void Scene::set_inputs() {
 
@@ -365,27 +412,53 @@ void Scene::set_debug_scene() {
 
 
     auto rat_mesh = std::make_shared<Mesh>("../resources/models/rat.obj");
-
     Renderable_object rat = Renderable_object(rat_mesh, lambert).set_name("rat").set_material(default_material);
+
+    auto objs = this->objects;
+
+    input_handler->subscribe([=](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_R && data.action == GLFW_PRESS) {
+            glm::vec3 point_3d;
+            glm::vec3 point_screen;
+            this->get_clicked_point(point_3d, point_screen);
+            Renderable_object obj = Renderable_object(rat_mesh, lambert).set_name("rat").set_material(default_material);
+            auto transform = std::make_shared<Transforms::Transform_node>()->add(
+                    {std::make_shared<Transforms::Translation>(point_3d),
+                     std::make_shared<Transforms::Rotation>(0, 0, 1, 0)->set_dynamic_function([](float angle) {
+                         return angle + 0.1f;
+                     })
+                    }
+            );
+            add_object(std::make_shared<Renderable_object>(obj.set_transform_operations(transform)));
+            printf("[DEBUG] clicked point: (%f, %f, %f)\n", point_3d.x, point_3d.y, point_3d.z);
+        }
+    });
+
+    auto curve1 = std::make_shared<Bezier>(std::vector<glm::vec3>({
+                                                                          glm::vec3(-1, -10, 0),
+                                                                          glm::vec3(-0.5, -10, 1),
+                                                                          glm::vec3(0.5, -10, -1),
+                                                                          glm::vec3(1, -10, 0), // first ^
+                                                                  }));
+
+    input_handler->subscribe([=](input::Key_event_data data) {
+        if (data.key == GLFW_KEY_B && data.action == GLFW_PRESS) {
+            glm::vec3 point_3d;
+            glm::vec3 point_screen;
+            this->get_clicked_point(point_3d, point_screen);
+            printf("[DEBUG] clicked point: (%f, %f, %f)\n", point_3d.x, point_3d.y, point_3d.z);
+            curve1->add_points({point_3d});
+
+            printf("[DEBUG] curve points:\n");
+            for (auto p: curve1->points) {
+                printf("\tpoint: (%f, %f, %f)\n", p.x, p.y, p.z);
+            }
+        }
+    });
+
     auto rat_move = std::make_shared<Transforms::Transform_node>()->add(
             {
-                    std::make_shared<Transforms::Translation>(5, 0, 0),
-                    std::make_shared<Transforms::Bezier_curve>(Bezier({
-                                                                              glm::vec3(-1, 0, 0),
-                                                                              glm::vec3(-0.5, 1, 0),
-                                                                              glm::vec3(0.5, -1, 0),
-                                                                              glm::vec3(1, 0, 0), // first ^
-                                                                              glm::vec3(1.5, 1, 0),
-                                                                              glm::vec3(-3, 3, 0),
-                                                                              glm::vec3(-1, 0, 0),//second ^
-                                                                              glm::vec3(-1, 1, 0),
-                                                                              glm::vec3(0, -2, 0),
-                                                                              glm::vec3(1, 0, 0),//third ^
-                                                                              glm::vec3(2, -1, 0),
-                                                                              glm::vec3(0, -1, 0),
-                                                                              glm::vec3(1, 0, 0),//fourth ^
-                                                                      }), 0.005f),
-
+                    std::make_shared<Transforms::Bezier_curve>(curve1, 0.005f),
             });
 
     add_object(std::make_shared<Renderable_object>(rat.set_transform_operations(rat_move)));
