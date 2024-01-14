@@ -21,16 +21,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="bugfix of attenuation&#10;added models">
-      <change afterPath="$PROJECT_DIR$/progress.md" afterDir="false" />
+    <list default="true" id="13c769a5-2a6e-41eb-99f0-4a5dc0ff16b9" name="Changes" comment="readme updates">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OPICE.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/light.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/light_epilepsy.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/monky.gif" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rectangle.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/engine.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/engine/engine.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +34,7 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="293970" />
+    <option name="totalTimeSeconds" value="294199" />
     <option name="idleThresholdMs" value="30000" />
     <option name="autoCountIdleSeconds" value="10" />
     <option name="gitIntegration" value="true" />
@@ -117,6 +110,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
@@ -128,7 +122,7 @@
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;structure.view.defaults.are.configured&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -291,7 +285,14 @@
       <workItem from="1701731443592" duration="5171000" />
       <workItem from="1701768865462" duration="6359000" />
       <workItem from="1701800467389" duration="1059000" />
-      <workItem from="1701803460826" duration="2362000" />
+      <workItem from="1701803460826" duration="2399000" />
+      <workItem from="1701903399010" duration="208000" />
+      <workItem from="1701940696932" duration="232000" />
+      <workItem from="1702722428464" duration="450000" />
+      <workItem from="1702722886477" duration="3386000" />
+      <workItem from="1702827612554" duration="700000" />
+      <workItem from="1702980323076" duration="5381000" />
+      <workItem from="1705274031468" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="its working">
       <option name="closed" value="true" />
@@ -525,7 +526,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701800982317</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="readme updates">
+      <option name="closed" value="true" />
+      <created>1701806845088</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1701806845088</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -576,7 +585,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="small refactoring of shaders (prob still need refactoring)&#10;added EBO&#10;added scene&#10;added class for window&#10;added loading .obj files" />
     <MESSAGE value="working after shader refactoring &#10;ready to transformation" />
     <MESSAGE value="working composite pattern for translations" />
     <MESSAGE value="observer camera" />
@@ -601,7 +609,8 @@
     <MESSAGE value="added stencil buffer for checking objects on click&#10;not tested" />
     <MESSAGE value="stencil buffer fixed and objects are changing on click" />
     <MESSAGE value="bugfix of attenuation&#10;added models" />
-    <option name="LAST_COMMIT_MESSAGE" value="bugfix of attenuation&#10;added models" />
+    <MESSAGE value="readme updates" />
+    <option name="LAST_COMMIT_MESSAGE" value="readme updates" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>

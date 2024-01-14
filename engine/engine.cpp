@@ -117,6 +117,9 @@ void Engine::init() {
             scene[current_scene]->set_active();
         }
     });
+    int MaxTextureImageUnits;
+    glGetIntegerv(GL_MAX_TEXTURE_IMAGE_UNITS, &MaxTextureImageUnits);
+    printf("[DEBUG] Engine initialized and max texture units %d\n", MaxTextureImageUnits);
 
 }
 
